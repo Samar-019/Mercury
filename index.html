@@ -65,6 +65,30 @@
         </a>
       </div>
 
+      <!-- Theme & Mode Controls -->
+      <div class="theme-controls">
+        <!-- Dark / Light / Auto Mode Switcher -->
+        <div class="mode-toggle-group" id="mode-toggle-group" title="Theme Mode: Dark / Light / Auto">
+          <button class="mode-btn active" data-mode="dark" title="Dark Mode">
+            <i data-lucide="moon" class="icon-xs"></i>
+          </button>
+          <button class="mode-btn" data-mode="light" title="Light Mode">
+            <i data-lucide="sun" class="icon-xs"></i>
+          </button>
+          <button class="mode-btn" data-mode="auto" title="System Auto Mode">
+            <i data-lucide="monitor" class="icon-xs"></i>
+          </button>
+        </div>
+
+        <!-- Color Preset Theme Palette Selector -->
+        <div class="palette-toggle-group" id="palette-toggle-group">
+          <button class="palette-btn active" data-palette="aurora" title="Aurora Neon Theme" style="--swatch: linear-gradient(135deg, #06b6d4, #a855f7)"></button>
+          <button class="palette-btn" data-palette="cyberpunk" title="Cyberpunk Neon Theme" style="--swatch: linear-gradient(135deg, #ec4899, #f59e0b)"></button>
+          <button class="palette-btn" data-palette="emerald" title="Emerald Matrix Theme" style="--swatch: linear-gradient(135deg, #10b981, #06b6d4)"></button>
+          <button class="palette-btn" data-palette="rainbow" title="Rainbow Prism Theme" style="--swatch: linear-gradient(135deg, #f43f5e, #8b5cf6)"></button>
+        </div>
+      </div>
+
       <a href="https://github.com/Samar-019/Mercury/releases/latest" class="btn btn-primary nav-cta">
         <i data-lucide="download" class="icon-sm"></i>
         <span>Get Mercury</span>

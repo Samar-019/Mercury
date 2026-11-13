@@ -19,6 +19,39 @@
   --radius-pill: 9999px;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --transition-theme: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light Mode Overrides */
+body.light-mode {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --glass-fill: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --cyan-glow: rgba(14, 165, 233, 0.25);
+}
+
+/* Theme Palette Overrides */
+body[data-palette="cyberpunk"] {
+  --cyan-accent: #f43f5e;
+  --cyan-glow: rgba(244, 63, 94, 0.45);
+  --purple-accent: #fbbf24;
+}
+
+body[data-palette="emerald"] {
+  --cyan-accent: #10b981;
+  --cyan-glow: rgba(16, 185, 129, 0.45);
+  --purple-accent: #06b6d4;
+}
+
+body[data-palette="rainbow"] {
+  --cyan-accent: #ec4899;
+  --cyan-glow: rgba(236, 72, 153, 0.45);
+  --purple-accent: #8b5cf6;
 }
 
 * {
@@ -428,6 +461,85 @@ body::before {
 
 .github-pill:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* Theme & Mode Controls in Navbar */
+.theme-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mode-toggle-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 3px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mode-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, var(--cyan-accent), var(--purple-accent));
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--cyan-glow);
+  transform: scale(1.05);
+}
+
+.palette-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+}
+
+.palette-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--swatch);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.palette-btn:hover {
+  transform: scale(1.2);
+}
+
+.palette-btn.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+.icon-xs {
+  width: 14px;
+  height: 14px;
 }
 
 /* Buttons */

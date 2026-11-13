@@ -289,3 +289,70 @@ if (playBtn) {
     lucide.createIcons();
   });
 }
+
+// -------------------------------------------------------------
+// Theme & Dark/Light/Auto Mode Controller with Transitions
+// -------------------------------------------------------------
+const modeButtons = document.querySelectorAll('.mode-btn');
+const paletteButtons = document.querySelectorAll('.palette-btn');
+
+// Mode logic: 'dark', 'light', 'auto'
+let currentMode = localStorage.getItem('mercury_theme_mode') || 'dark';
+let currentPalette = localStorage.getItem('mercury_theme_palette') || 'aurora';
+
+function applyMode(mode) {
+  currentMode = mode;
+  localStorage.setItem('mercury_theme_mode', mode);
+
+  modeButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+
+  if (mode === 'auto') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.classList.toggle('light-mode', !prefersDark);
+    document.body.classList.toggle('dark-mode', prefersDark);
+  } else if (mode === 'light') {
+    document.body.classList.add('light-mode');
+    document.body.classList.remove('dark-mode');
+  } else {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+  }
+}
+
+// Palette logic: 'aurora', 'cyberpunk', 'emerald', 'rainbow'
+function applyPalette(palette) {
+  currentPalette = palette;
+  localStorage.setItem('mercury_theme_palette', palette);
+
+  paletteButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.palette === palette);
+  });
+
+  document.body.dataset.palette = palette;
+}
+
+// Bind event listeners
+modeButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    applyMode(btn.dataset.mode);
+  });
+});
+
+paletteButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    applyPalette(btn.dataset.palette);
+  });
+});
+
+// Listen for system color scheme change if in auto mode
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (currentMode === 'auto') {
+    applyMode('auto');
+  }
+});
+
+// Initialize on page load
+applyMode(currentMode);
+applyPalette(currentPalette);
