@@ -1,9 +1,9 @@
 <div align="center">
 
-# <img src="docs/logo.svg" width="40" alt=""> MERCURY
+# <img src="docs/logo.png" width="48" style="vertical-align: middle; border-radius: 10px;" alt="Mercury Icon"> MERCURY
 
-[![Build](https://img.shields.io/github/actions/workflow/status/MaximkaCoder/Mercury/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/MaximkaCoder/Mercury/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/MaximkaCoder/Mercury?style=for-the-badge&label=release)](https://github.com/MaximkaCoder/Mercury/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/Samar-019/Mercury/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/Samar-019/Mercury/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Samar-019/Mercury?style=for-the-badge&label=release)](https://github.com/Samar-019/Mercury/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-windows-0078D4?style=for-the-badge)](#platforms)
 [![Flutter](https://img.shields.io/badge/flutter-3.47.8-02569B?style=for-the-badge)](https://flutter.dev)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge)](LICENSE)
@@ -32,8 +32,8 @@ rather than a browser tab. It also plays your own audio files.
 
 ## Download
 
-The Windows build is on the [Releases](https://github.com/MaximkaCoder/Mercury/releases/latest)
-page: unpack the zip and run `mercury.exe`. It needs Windows 10 or 11 (64-bit) and
+The Windows build is on the [Releases](https://github.com/Samar-019/Mercury/releases/latest)
+page: unpack the zip and run `mercury.exe`, or use `Mercury-Setup.exe`. It needs Windows 10 or 11 (64-bit) and
 the WebView2 Runtime, which most PCs already have. Google sign-in is not part of
 the public build yet; everything else works without an account.
 
@@ -91,28 +91,24 @@ next one comes in on its drop. All three work on tracks played through
 MERCURY's own audio player. The public build has the crossfade; Smart and Disco
 are not in it yet.
 
-Surprise me, next to Shuffle on a playlist, starts on a random song and then
-keeps choosing whichever song from that playlist mixes best into the one
-playing.
+Surprise me, next to Shuffle, starts playback on a song picked from your
+history that hasn't played in a while and that fits the current mood.
 
-No account is needed for any of this. Without one, playlists live on your
-computer and hold YouTube Music songs and local files side by side, and the
-heart keeps a song in Favorites on this device.
+Volume normalizes between tracks (EBU R128), and a five-band equalizer can
+shape the sound. Both run on tracks played through MERCURY's audio engine.
 
-Connect a Google account and MERCURY also syncs your YouTube playlists and liked
-music both ways. Adding a song to a playlist or removing it in MERCURY changes
-the playlist on YouTube. The heart saves to a playlist you choose, or to
-Liked music, which likes the song on YouTube.
+Other pieces:
 
-The rest:
-
-- Local files: MP3, M4A/AAC, FLAC, OGG, Opus and WAV, with tags and cover art.
-- Liquid Glass surfaces you can turn off, plus a performance mode for laptops
-  with integrated graphics.
-- Windows media keys and the Windows media flyout work while the window is
-  in the background.
-- An edge player: while MERCURY is in the background, a small player sits at
-  the edge of the screen with the cover, play/pause, skip and the heart.
+- Full local library: MP3, FLAC, OGG, WAV, M4A, Opus. Local albums, artists
+  and folders appear in Library; search searches local and YouTube tracks
+  together.
+- Time-synced lyrics with LRCLIB fallback and editable offsets.
+- Custom window frame with Windows 11 snap layouts, taskbar thumbnail
+  buttons (play/pause, next, previous) and Windows System Media Transport
+  Controls (SMTC) integration for hardware keys and the Windows volume flyout.
+- Keyboard shortcuts: space to play/pause, Ctrl+Right / Left to skip,
+  Ctrl+Up / Down for volume, Ctrl+K for search, Ctrl+L for lyrics, Ctrl+S for
+  the heart.
 - Dark, light and system themes; comfortable and compact density.
 
 ## How MERCURY talks to YouTube Music
@@ -186,13 +182,13 @@ audio engine and the network clients.
 Playback has a single owner:
 
 ```
-UI ── commands ──▶ PlaybackController   (queue, shuffle, repeat, radio, session)
+UI ─── commands ───▶ PlaybackController   (queue, shuffle, repeat, radio, session)
                          │
                          ▼
                    PlaybackEngine        (local audio player, or the YouTube embed)
                          │  status, position, completion
                          ▼
-                   PlaybackState ──▶ mini player, Now Playing, queue, Windows SMTC
+                   PlaybackState ───▶ mini player, Now Playing, queue, Windows SMTC
 ```
 
 Each engine reports what it can do (seek, crossfade, play in the background).
