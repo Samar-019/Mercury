@@ -429,6 +429,99 @@ function renderWebVisualizer() {
 }
 renderWebVisualizer();
 
+// -------------------------------------------------------------
+// Web Audio API Synthesizer & Sound Effects Generator
+// -------------------------------------------------------------
+let audioCtx = null;
+let isAudioSynthRunning = false;
+let ambientOsc = null;
+let ambientGain = null;
+let lfoOsc = null;
+let chordInterval = null;
+
+function initAudioContext() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioContext();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
+
+// Gentle pleasant glass tone / pop click for UI buttons
+function playUiTone(freq = 520, type = 'sine', duration = 0.12, gainLevel = 0.08) {
+  try {
+    initAudioContext();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + duration);
+
+    gain.gain.setValueAtTime(gainLevel, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (err) {
+    console.warn('Audio feedback error', err);
+  }
+}
+
+// Deep atmospheric musical synth chord sequence for the player
+const synthScale = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C Major Pentatonic chillwave
+let currentNoteIndex = 0;
+
+function startAmbientMusicSynth() {
+  if (isAudioSynthRunning) return;
+  initAudioContext();
+  isAudioSynthRunning = true;
+
+  chordInterval = setInterval(() => {
+    if (!webPlayerPlaying) return;
+    try {
+      const noteFreq = synthScale[currentNoteIndex % synthScale.length];
+      currentNoteIndex++;
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(noteFreq, audioCtx.currentTime);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+      filter.frequency.linearRampToValueAtTime(1600, audioCtx.currentTime + 0.8);
+      filter.frequency.linearRampToValueAtTime(600, audioCtx.currentTime + 2.2);
+
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 0.4);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.2);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 2.3);
+    } catch (e) {}
+  }, 1200);
+}
+
+function stopAmbientMusicSynth() {
+  isAudioSynthRunning = false;
+  if (chordInterval) {
+    clearInterval(chordInterval);
+    chordInterval = null;
+  }
+}
+
 // Play/Pause Button Logic
 const masterPlayBtn = document.getElementById('web-master-play-btn');
 const masterPlayIcon = document.getElementById('web-master-play-icon');
@@ -438,11 +531,59 @@ if (masterPlayBtn) {
     webPlayerPlaying = !webPlayerPlaying;
     if (webPlayerPlaying) {
       masterPlayBtn.innerHTML = '<i data-lucide="pause" class="icon-lg"></i>';
+      startAmbientMusicSynth();
+      playUiTone(640, 'sine', 0.2, 0.12);
     } else {
       masterPlayBtn.innerHTML = '<i data-lucide="play" class="icon-lg"></i>';
+      stopAmbientMusicSynth();
+      playUiTone(420, 'sine', 0.15, 0.08);
     }
     lucide.createIcons();
   });
+}
+
+// Bind SFX to Next / Prev / Shuffle / Repeat
+const prevBtn = document.getElementById('web-prev-btn');
+const nextBtn = document.getElementById('web-next-btn');
+const shuffleBtn = document.getElementById('web-shuffle-btn');
+const repeatBtn = document.getElementById('web-repeat-btn');
+
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    playUiTone(440, 'triangle', 0.15, 0.1);
+    playbackSeconds = Math.max(0, playbackSeconds - 15);
+  });
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    playUiTone(587.33, 'triangle', 0.15, 0.1);
+    playbackSeconds = (playbackSeconds + 15) % totalSeconds;
+  });
+}
+
+if (shuffleBtn) {
+  shuffleBtn.addEventListener('click', () => {
+    playUiTone(740, 'sine', 0.1, 0.08);
+    shuffleBtn.classList.toggle('active');
+  });
+}
+
+if (repeatBtn) {
+  repeatBtn.addEventListener('click', () => {
+    playUiTone(880, 'sine', 0.1, 0.08);
+    repeatBtn.classList.toggle('active');
+  });
+}
+
+// Start ambient tone when user clicks anywhere on player console
+const playerConsoleEl = document.querySelector('.web-player-console');
+if (playerConsoleEl) {
+  playerConsoleEl.addEventListener('click', () => {
+    if (webPlayerPlaying && !isAudioSynthRunning) {
+      startAmbientMusicSynth();
+    }
+  }, { once: true });
 }
 
 // Track Progress Timer
