@@ -1,34 +1,75 @@
 // -------------------------------------------------------------
-// Magnetic Liquid Glass Cursor System
+// Liquid Mercury Comet Particle Tail & Magnetic Cursor System
 // -------------------------------------------------------------
 const cursorDot = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
+const trailCanvas = document.getElementById('cursor-trail-canvas');
+const trailCtx = trailCanvas ? trailCanvas.getContext('2d') : null;
 
 let cursorX = window.innerWidth / 2;
 let cursorY = window.innerHeight / 2;
 let ringX = cursorX;
 let ringY = cursorY;
-let isHovering = false;
+
+function resizeTrail() {
+  if (trailCanvas) {
+    trailCanvas.width = window.innerWidth;
+    trailCanvas.height = window.innerHeight;
+  }
+}
+window.addEventListener('resize', resizeTrail);
+resizeTrail();
+
+// Trailing points history for smooth liquid ribbon
+const trailPoints = [];
+const MAX_TRAIL = 18;
 
 window.addEventListener('mousemove', (e) => {
   cursorX = e.clientX;
   cursorY = e.clientY;
 
-  // Instant update for center dot
+  // Add trail point with timestamp
+  trailPoints.push({ x: cursorX, y: cursorY, age: 0 });
+  if (trailPoints.length > MAX_TRAIL) trailPoints.shift();
+
+  // Instant update for center core dot
   if (cursorDot) {
     cursorDot.style.left = `${cursorX}px`;
     cursorDot.style.top = `${cursorY}px`;
   }
 });
 
-// Smooth Lerp animation for trailing ring (fluid magnetic feel)
+// Smooth Lerp animation for trailing ring & ribbon draw
 function renderCursor() {
-  ringX += (cursorX - ringX) * 0.16;
-  ringY += (cursorY - ringY) * 0.16;
+  ringX += (cursorX - ringX) * 0.18;
+  ringY += (cursorY - ringY) * 0.18;
 
   if (cursorRing) {
     cursorRing.style.left = `${ringX}px`;
     cursorRing.style.top = `${ringY}px`;
+  }
+
+  // Draw smooth liquid mercury ribbon tail
+  if (trailCtx && trailCanvas) {
+    trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+    if (trailPoints.length > 2) {
+      for (let i = 0; i < trailPoints.length - 1; i++) {
+        trailPoints[i].age += 1;
+        const pt = trailPoints[i];
+        const nextPt = trailPoints[i + 1];
+        const progress = i / trailPoints.length;
+        const radius = progress * 4.5;
+        const alpha = progress * 0.45;
+
+        trailCtx.beginPath();
+        trailCtx.arc(pt.x, pt.y, Math.max(0.5, radius), 0, Math.PI * 2);
+        trailCtx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+        trailCtx.shadowBlur = 8;
+        trailCtx.shadowColor = '#38bdf8';
+        trailCtx.fill();
+      }
+    }
   }
 
   requestAnimationFrame(renderCursor);
@@ -54,15 +95,19 @@ function bindCursorHovers() {
 bindCursorHovers();
 
 // -------------------------------------------------------------
-// Interactive 3D Card Tilt on Mouse Move
+// Interactive Spotlight Tracking & 3D Card Tilt on Mouse Move
 // -------------------------------------------------------------
-const cards = document.querySelectorAll('.bento-card, .showcase-window');
-cards.forEach(card => {
+const interactiveCards = document.querySelectorAll('.bento-card, .showcase-window, .sound-strip, .download-banner');
+interactiveCards.forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
+    // Pass coordinates to CSS variable for radial dynamic spotlight
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     

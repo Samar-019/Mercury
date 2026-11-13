@@ -41,60 +41,101 @@ a, button, input, .glass-panel, .spatial-badge {
   cursor: none !important;
 }
 
-/* Custom Magnetic Glow Cursor Elements */
+/* Custom Fluid Liquid Mercury Cursor */
 #cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  background-color: #38bdf8;
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle, #ffffff 15%, #38bdf8 85%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+  box-shadow: 0 0 16px #38bdf8, 0 0 32px rgba(56, 189, 248, 0.7);
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
               height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.2s ease,
-              opacity 0.2s ease;
-  box-shadow: 0 0 14px #38bdf8, 0 0 28px rgba(56, 189, 248, 0.5);
+              box-shadow 0.2s ease;
 }
 
 #cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(56, 189, 248, 0.65);
-  background: rgba(56, 189, 248, 0.05);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(56, 189, 248, 0.55);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.02) 75%);
+  backdrop-filter: blur(4px) saturate(200%);
+  -webkit-backdrop-filter: blur(4px) saturate(200%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.2);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
               height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.3s ease, 
-              background-color 0.3s ease,
-              transform 0.1s ease-out;
+              background 0.3s ease,
+              box-shadow 0.3s ease;
 }
 
-/* Cursor Hover State */
+/* Ambient trailing canvas for fluid comet tail */
+#cursor-trail-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99997;
+}
+
+/* Cursor Hovering Active Interactive Element */
 body.cursor-hover #cursor-dot {
-  width: 14px;
-  height: 14px;
-  background-color: #ffffff;
-  box-shadow: 0 0 20px #ffffff;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  box-shadow: 0 0 24px #ffffff, 0 0 45px rgba(56, 189, 248, 0.8);
 }
 
 body.cursor-hover #cursor-ring {
-  width: 58px;
-  height: 58px;
-  border-color: rgba(255, 255, 255, 0.85);
-  background: rgba(56, 189, 248, 0.18);
-  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+  width: 66px;
+  height: 66px;
+  border-color: rgba(255, 255, 255, 0.9);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(168, 85, 247, 0.15) 80%);
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), inset 0 0 15px rgba(255, 255, 255, 0.35);
+}
+
+/* Smooth Spotlight Glow follows cursor over cards */
+.bento-card, .showcase-window, .sound-strip, .download-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card::before, .showcase-window::before, .download-banner::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, -200px);
+  left: var(--mouse-x, -200px);
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0.03) 45%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.bento-card:hover::before, .showcase-window:hover::before, .download-banner:hover::before {
+  opacity: 1;
+}
+
+.bento-card > *, .showcase-window > * {
+  position: relative;
+  z-index: 1;
 }
 
 body.cursor-clicking #cursor-ring {
