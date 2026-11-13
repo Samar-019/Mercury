@@ -8,6 +8,7 @@
 
 # MERCURY
 
+[![Website](https://img.shields.io/badge/website-live-38bdf8?style=for-the-badge&logo=googlechrome&logoColor=white)](https://samar-019.github.io/Mercury/)
 [![Build](https://img.shields.io/github/actions/workflow/status/Samar-019/Mercury/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/Samar-019/Mercury/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/Samar-019/Mercury?style=for-the-badge&label=release)](https://github.com/Samar-019/Mercury/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-windows-0078D4?style=for-the-badge)](#platforms)
