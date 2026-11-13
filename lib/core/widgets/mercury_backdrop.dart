@@ -33,6 +33,66 @@ class MercuryBackdrop extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           ColoredBox(color: c.background),
+          // Rainbow & Aurora Borealis Ambient Canvas Flow
+          if (dark) ...[
+            // Aurora Orb 1: Cyan-Blue electric flow
+            Positioned(
+              top: -100,
+              left: -80,
+              width: 500,
+              height: 500,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFF06B6D4).withValues(alpha: 0.12),
+                      const Color(0xFF3B82F6).withValues(alpha: 0.05),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Aurora Orb 2: Neon Purple-Pink flow
+            Positioned(
+              top: 140,
+              right: -100,
+              width: 550,
+              height: 550,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFA855F7).withValues(alpha: 0.10),
+                      const Color(0xFFEC4899).withValues(alpha: 0.04),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Aurora Orb 3: Emerald Ambient shimmer
+            Positioned(
+              bottom: -60,
+              left: 120,
+              width: 480,
+              height: 480,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFF10B981).withValues(alpha: 0.08),
+                      const Color(0xFF06B6D4).withValues(alpha: 0.03),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
           if (fx.highlights)
             DecoratedBox(
               decoration: BoxDecoration(
