@@ -41,44 +41,59 @@ a, button, input, .glass-panel, .spatial-badge {
   cursor: none !important;
 }
 
-/* Custom Fluid Liquid Mercury Cursor */
+/* Custom Rainbow Prism Liquid Cursor */
 #cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 9px;
-  height: 9px;
-  background: radial-gradient(circle, #ffffff 15%, #38bdf8 85%);
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 16px #38bdf8, 0 0 32px rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 16px #38bdf8, 0 0 30px #f43f5e, 0 0 45px #a855f7;
+  animation: rainbow-pulse-dot 4s linear infinite;
   transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s ease;
+              height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rainbow-pulse-dot {
+  0% { box-shadow: 0 0 16px #f43f5e, 0 0 32px #fbbf24; }
+  25% { box-shadow: 0 0 16px #fbbf24, 0 0 32px #10b981; }
+  50% { box-shadow: 0 0 16px #10b981, 0 0 32px #38bdf8; }
+  75% { box-shadow: 0 0 16px #38bdf8, 0 0 32px #a855f7; }
+  100% { box-shadow: 0 0 16px #f43f5e, 0 0 32px #fbbf24; }
 }
 
 #cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 44px;
-  height: 44px;
-  border: 1.5px solid rgba(56, 189, 248, 0.55);
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.02) 75%);
-  backdrop-filter: blur(4px) saturate(200%);
-  -webkit-backdrop-filter: blur(4px) saturate(200%);
+  width: 48px;
+  height: 48px;
+  border: 2px solid transparent;
   border-radius: 50%;
+  background-image: linear-gradient(rgba(18, 18, 23, 0.3), rgba(18, 18, 23, 0.3)), 
+                    conic-gradient(from 0deg, #f43f5e, #fbbf24, #10b981, #38bdf8, #a855f7, #f43f5e);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  backdrop-filter: blur(5px) saturate(220%);
+  -webkit-backdrop-filter: blur(5px) saturate(220%);
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: spin-rainbow 6s linear infinite;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.3s ease, 
-              background 0.3s ease,
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s ease;
+}
+
+@keyframes spin-rainbow {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Ambient trailing canvas for fluid comet tail */
@@ -94,18 +109,42 @@ a, button, input, .glass-panel, .spatial-badge {
 
 /* Cursor Hovering Active Interactive Element */
 body.cursor-hover #cursor-dot {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: #ffffff;
-  box-shadow: 0 0 24px #ffffff, 0 0 45px rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 25px #ffffff, 0 0 50px #38bdf8;
 }
 
 body.cursor-hover #cursor-ring {
-  width: 66px;
-  height: 66px;
-  border-color: rgba(255, 255, 255, 0.9);
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(168, 85, 247, 0.15) 80%);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), inset 0 0 15px rgba(255, 255, 255, 0.35);
+  width: 74px;
+  height: 74px;
+  box-shadow: 0 0 45px rgba(244, 63, 94, 0.4), 0 0 60px rgba(56, 189, 248, 0.4);
+}
+
+/* Rainbow Animated Gradient Glow Borders on Hovered Cards */
+.bento-card:hover {
+  border-color: transparent;
+  background-image: linear-gradient(var(--glass-fill), var(--glass-fill)), 
+                    conic-gradient(from 0deg, #f43f5e, #fbbf24, #10b981, #38bdf8, #a855f7, #f43f5e);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 
+              0 0 35px -5px rgba(56, 189, 248, 0.35);
+}
+
+/* Rainbow Heading Shimmer Text */
+.gradient-text {
+  background: linear-gradient(135deg, #f43f5e 0%, #fbbf24 25%, #10b981 50%, #38bdf8 75%, #a855f7 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-shimmer 8s ease infinite alternate;
+}
+
+@keyframes rainbow-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Smooth Spotlight Glow follows cursor over cards */
