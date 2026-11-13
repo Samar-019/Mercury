@@ -18,6 +18,8 @@ analyzer:
 
 linter:
   rules:
+    # 80-char limit causes unnecessary wrapping in desktop app code
+    lines_longer_than_80_chars: false
     # Application code, not a published library.
     public_member_api_docs: false
     # freezed's `const factory X(...) = _X;` pattern requires the type name.
