@@ -30,7 +30,7 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
-  <link rel="stylesheet" href="style.css?v=2.1">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body class="dark-mode">
 
@@ -172,6 +172,122 @@
           </div>
           <div class="bars-container" id="equalizer-bars">
             <!-- 32 animated equalizer bars populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Web Music Player Interactive Experience Section -->
+    <section id="experience" class="player-experience-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="feature-tag rainbow-badge">INTERACTIVE DESKTOP &amp; WEB PREVIEW</div>
+          <h2 class="section-title">Experience Mercury Live In Your Browser</h2>
+          <p class="section-subtitle">A fully interactive molten liquid-glass music console featuring synchronized real-time lyrics, live audio spectrum, and reactive neon aurora ambiance.</p>
+        </div>
+
+        <div class="web-player-console glass-panel neon-glow-box">
+          <!-- Top Window Control Bar -->
+          <div class="player-top-bar">
+            <div class="window-dots">
+              <span class="dot close"></span>
+              <span class="dot minimize"></span>
+              <span class="dot maximize"></span>
+            </div>
+            <div class="player-tabs">
+              <button class="player-tab-btn active" data-tab="live-player"><i data-lucide="play" class="icon-xs"></i> Live Web Player</button>
+              <button class="player-tab-btn" data-tab="app-preview"><i data-lucide="monitor" class="icon-xs"></i> 4K App Showcase</button>
+              <button class="player-tab-btn" data-tab="lyrics-view"><i data-lucide="mic" class="icon-xs"></i> Karaoke Lyrics</button>
+            </div>
+            <div class="audio-quality-badge">
+              <span class="quality-dot"></span>
+              <span>24-bit / 96kHz Lossless</span>
+            </div>
+          </div>
+
+          <!-- Main Player Body Grid -->
+          <div class="web-player-grid" id="live-player-view">
+            <!-- Left: Floating Holographic Album Artwork -->
+            <div class="player-artwork-column">
+              <div class="album-art-wrap aurora-glow-halo">
+                <img src="preview-player.jpg" alt="Mercury Music Player UI" class="album-art-img" id="web-album-art">
+                <div class="album-spin-ring"></div>
+                <div class="vinyl-indicator">
+                  <i data-lucide="disc" class="spinning-vinyl"></i>
+                </div>
+              </div>
+              <div class="track-details">
+                <h3 class="track-title" id="web-track-title">Cybernetic Aurora</h3>
+                <p class="track-artist" id="web-track-artist">Mercury Liquid Ensemble &bull; Ambient Dimensions</p>
+                <div class="track-tags">
+                  <span class="pill-tag cyan">Spatial Binaural</span>
+                  <span class="pill-tag purple">FLAC Master</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Controls & Realtime Reactive Waves -->
+            <div class="player-controls-column">
+              <!-- Live Equalizer Visualizer Spectrum Canvas -->
+              <div class="visualizer-wrapper glass-panel">
+                <canvas id="web-player-visualizer"></canvas>
+                <div class="visualizer-overlay-stats">
+                  <span class="stat-badge"><i data-lucide="activity" class="icon-xs"></i> 60 FPS FLUID</span>
+                  <span class="stat-badge"><i data-lucide="volume-2" class="icon-xs"></i> SPATIAL ROOM 3D</span>
+                </div>
+              </div>
+
+              <!-- Real-time Interactive Scrub Progress Bar -->
+              <div class="scrub-container">
+                <div class="time-readout">
+                  <span id="current-time">1:24</span>
+                  <span id="total-time">3:48</span>
+                </div>
+                <div class="progress-bar-wrap" id="web-progress-wrap">
+                  <div class="progress-bar-fill" id="web-progress-fill" style="width: 36%;"></div>
+                  <div class="progress-bar-glow-handle" style="left: 36%;"></div>
+                </div>
+              </div>
+
+              <!-- Interactive Media Player Action Buttons -->
+              <div class="media-controls-row">
+                <button class="ctrl-btn sub-btn" id="web-shuffle-btn" title="Shuffle"><i data-lucide="shuffle" class="icon-sm"></i></button>
+                <button class="ctrl-btn sub-btn" id="web-prev-btn" title="Previous Track"><i data-lucide="skip-back" class="icon-md"></i></button>
+                <button class="ctrl-btn main-play-btn neon-pulse-btn" id="web-master-play-btn" title="Play / Pause">
+                  <i data-lucide="pause" id="web-master-play-icon" class="icon-lg"></i>
+                </button>
+                <button class="ctrl-btn sub-btn" id="web-next-btn" title="Next Track"><i data-lucide="skip-forward" class="icon-md"></i></button>
+                <button class="ctrl-btn sub-btn" id="web-repeat-btn" title="Loop Track"><i data-lucide="repeat" class="icon-sm"></i></button>
+              </div>
+
+              <!-- Live Karaoke Floating Lyrics Stream -->
+              <div class="interactive-lyrics-capsule glass-panel">
+                <div class="lyric-stream-line prev-line">"Drifting across liquid starlight horizons..."</div>
+                <div class="lyric-stream-line active-line glow-text"><i data-lucide="sparkles" class="icon-xs"></i> "Feel the neon pulse awaken inside the sound"</div>
+                <div class="lyric-stream-line next-line">"Where music breathes through pure liquid glass..."</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Tab 2: 4K App Showcase Gallery -->
+          <div class="web-player-gallery-view hidden" id="app-preview-view">
+            <div class="gallery-item-full">
+              <img src="mercury_preview.gif" alt="Mercury 4K Desktop Preview" class="gallery-full-img glass-panel">
+              <div class="gallery-caption">
+                <h4>Mercury Ultra-HD Cinematic Tour</h4>
+                <p>Real-time rendering of transparent frosted acrylic panes, molten chrome sliders, and synchronized responsive album glows.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Tab 3: Fullscreen Karaoke View -->
+          <div class="web-player-lyrics-view hidden" id="lyrics-view-view">
+            <div class="karaoke-stage glass-panel">
+              <div class="stage-line line-1">Into the deep aurora sea</div>
+              <div class="stage-line line-2">Resonance unfolds effortlessly</div>
+              <div class="stage-line line-3 active-sing">Neon frequencies singing high &bull; 60 FPS Flow</div>
+              <div class="stage-line line-4">Less interface, infinitely more music.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -371,7 +487,7 @@
     </div>
   </footer>
 
-  <script src="app.js?v=2.1"></script>
+  <script src="app.js?v=2.2"></script>
   <script>
     // Initialize Lucide icons
     lucide.createIcons();

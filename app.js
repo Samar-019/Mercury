@@ -356,3 +356,125 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 // Initialize on page load
 applyMode(currentMode);
 applyPalette(currentPalette);
+
+// -------------------------------------------------------------
+// Interactive Web Music Player Console Logic
+// -------------------------------------------------------------
+const playerTabs = document.querySelectorAll('.player-tab-btn');
+const livePlayerView = document.getElementById('live-player-view');
+const appPreviewView = document.getElementById('app-preview-view');
+const lyricsViewView = document.getElementById('lyrics-view-view');
+
+playerTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    playerTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    const targetTab = tab.dataset.tab;
+    if (livePlayerView) livePlayerView.classList.toggle('hidden', targetTab !== 'live-player');
+    if (appPreviewView) appPreviewView.classList.toggle('hidden', targetTab !== 'app-preview');
+    if (lyricsViewView) lyricsViewView.classList.toggle('hidden', targetTab !== 'lyrics-view');
+  });
+});
+
+// Web Player Audio Spectrum Canvas
+const webVisCanvas = document.getElementById('web-player-visualizer');
+const webVisCtx = webVisCanvas ? webVisCanvas.getContext('2d') : null;
+let webPlayerPlaying = true;
+let playbackSeconds = 84;
+const totalSeconds = 228;
+
+function resizeWebVis() {
+  if (webVisCanvas) {
+    webVisCanvas.width = webVisCanvas.parentElement.clientWidth;
+    webVisCanvas.height = webVisCanvas.parentElement.clientHeight;
+  }
+}
+window.addEventListener('resize', resizeWebVis);
+resizeWebVis();
+
+function renderWebVisualizer() {
+  if (!webVisCtx || !webVisCanvas) return;
+  webVisCtx.clearRect(0, 0, webVisCanvas.width, webVisCanvas.height);
+
+  const width = webVisCanvas.width;
+  const height = webVisCanvas.height;
+  const barCount = 48;
+  const barWidth = width / barCount - 3;
+  const time = Date.now() * 0.004;
+
+  for (let i = 0; i < barCount; i++) {
+    let barHeight = 4;
+    if (webPlayerPlaying) {
+      const freq = Math.sin(time + i * 0.2) * Math.cos(time * 0.7 - i * 0.15);
+      barHeight = Math.max(6, Math.abs(freq) * (height * 0.8));
+    }
+
+    const x = i * (barWidth + 3);
+    const y = height - barHeight;
+
+    // Rainbow Aurora gradient based on frequency & position
+    const grad = webVisCtx.createLinearGradient(x, height, x, y);
+    grad.addColorStop(0, '#06b6d4');
+    grad.addColorStop(0.5, '#a855f7');
+    grad.addColorStop(1, '#ec4899');
+
+    webVisCtx.fillStyle = grad;
+    webVisCtx.beginPath();
+    webVisCtx.roundRect(x, y, barWidth, barHeight, [4, 4, 0, 0]);
+    webVisCtx.fill();
+  }
+
+  requestAnimationFrame(renderWebVisualizer);
+}
+renderWebVisualizer();
+
+// Play/Pause Button Logic
+const masterPlayBtn = document.getElementById('web-master-play-btn');
+const masterPlayIcon = document.getElementById('web-master-play-icon');
+
+if (masterPlayBtn) {
+  masterPlayBtn.addEventListener('click', () => {
+    webPlayerPlaying = !webPlayerPlaying;
+    if (webPlayerPlaying) {
+      masterPlayBtn.innerHTML = '<i data-lucide="pause" class="icon-lg"></i>';
+    } else {
+      masterPlayBtn.innerHTML = '<i data-lucide="play" class="icon-lg"></i>';
+    }
+    lucide.createIcons();
+  });
+}
+
+// Track Progress Timer
+setInterval(() => {
+  if (!webPlayerPlaying) return;
+  playbackSeconds = (playbackSeconds + 1) % totalSeconds;
+  
+  const min = Math.floor(playbackSeconds / 60);
+  const sec = String(playbackSeconds % 60).padStart(2, '0');
+  const curTimeEl = document.getElementById('current-time');
+  if (curTimeEl) curTimeEl.textContent = `${min}:${sec}`;
+
+  const pct = (playbackSeconds / totalSeconds) * 100;
+  const fillEl = document.getElementById('web-progress-fill');
+  const handleEl = document.querySelector('.progress-bar-glow-handle');
+  if (fillEl) fillEl.style.width = `${pct}%`;
+  if (handleEl) handleEl.style.left = `${pct}%`;
+}, 1000);
+
+// Interactive Scrub Bar click
+const progressWrap = document.getElementById('web-progress-wrap');
+if (progressWrap) {
+  progressWrap.addEventListener('click', (e) => {
+    const rect = progressWrap.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    playbackSeconds = Math.floor(ratio * totalSeconds);
+    
+    const pct = ratio * 100;
+    const fillEl = document.getElementById('web-progress-fill');
+    const handleEl = document.querySelector('.progress-bar-glow-handle');
+    if (fillEl) fillEl.style.width = `${pct}%`;
+    if (handleEl) handleEl.style.left = `${pct}%`;
+  });
+}
