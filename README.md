@@ -2,7 +2,7 @@
 
 <img src="docs/banner.gif" width="100%" style="border-radius: 12px; margin-bottom: 16px;" alt="Mercury Hero Banner">
 
-# <img src="docs/logo.gif" width="26" height="26" style="vertical-align: middle; border-radius: 6px; margin-right: 6px;" alt="Mercury Icon"> MERCURY
+# <img src="docs/logo.gif" width="20" height="20" style="vertical-align: middle; border-radius: 4px; margin-right: 6px;" alt="Mercury Icon"> MERCURY
 
 [![Build](https://img.shields.io/github/actions/workflow/status/Samar-019/Mercury/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/Samar-019/Mercury/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/Samar-019/Mercury?style=for-the-badge&label=release)](https://github.com/Samar-019/Mercury/releases/latest)
