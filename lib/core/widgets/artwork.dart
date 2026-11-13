@@ -1,0 +1,200 @@
+import 'dart:io';
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noir/app/theme/design_tokens.dart';
+import 'package:noir/features/artwork/application/artwork_providers.dart';
+import 'package:noir/features/artwork/domain/art_urls.dart';
+import 'package:noir/features/youtube/presentation/youtube_cover.dart';
+
+export 'package:noir/features/artwork/domain/art_urls.dart' show isRemoteImage;
+
+/// Square artwork decoded at display size × device pixel ratio
+/// (`cacheWidth`) to keep memory and decode time proportional to what is on
+/// screen. Missing or broken artwork falls back to a quiet placeholder.
+///
+/// Remote artwork is fetched at the size shown: YouTube Music art
+/// (googleusercontent) is re-requested at the matching size, and YouTube
+/// video thumbnails become a [YouTubeCover] (real album art when YouTube
+/// Music has it).
+class Artwork extends StatelessWidget {
+  const Artwork({
+    required this.path,
+    required this.size,
+    this.radius = NoirRadii.sm,
+    this.icon = Icons.music_note_rounded,
+    this.semanticLabel,
+    super.key,
+  });
+
+  /// Local file path or http(s) URL.
+  final String? path;
+  final double size;
+  final double radius;
+  final IconData icon;
+  final String? semanticLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final placeholder = _Placeholder(size: size, icon: icon);
+    final source = path;
+    final px = size * dpr;
+    final videoId = source == null ? null : youtubeThumbnailVideoId(source);
+    if (videoId != null) {
+      return YouTubeCover(
+        videoId: videoId,
+        size: size,
+        radius: radius,
+        semanticLabel: semanticLabel,
+        placeholder: placeholder,
+      );
+    }
+    final googleArt = source != null && isGoogleArt(source);
+    final image = source == null
+        ? placeholder
+        : isRemoteImage(source)
+        ? Image.network(
+            googleArt ? resizeGoogleArt(source, px) : source,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+            // Google art is square. Other images (YouTube thumbnails) are
+            // wide: decoded by height they still cover the square once
+            // cropped, instead of being decoded whole (up to 1280×720 for
+            // a 48 px row).
+            cacheWidth: googleArt ? artBucket(px) : null,
+            cacheHeight: googleArt ? null : artBucket(px),
+            gaplessPlayback: true,
+            semanticLabel: semanticLabel,
+            errorBuilder: (_, _, _) => placeholder,
+          )
+        : Image.file(
+            File(source),
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+            cacheWidth: px.ceil(),
+            gaplessPlayback: true,
+            semanticLabel: semanticLabel,
+            errorBuilder: (_, _, _) => placeholder,
+          );
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: SizedBox.square(dimension: size, child: image),
+    );
+  }
+}
+
+/// Decodes what an [Artwork] of [size] first paints for [path] into the
+/// image cache, so a swap to it can show at once instead of loading. Never
+/// throws; completes when the image is ready or has failed.
+Future<void> precacheArtwork(
+  BuildContext context,
+  String? path,
+  double size,
+) async {
+  if (path == null) return;
+  final dpr = MediaQuery.devicePixelRatioOf(context);
+  final px = size * dpr;
+  // The same images, at the same decode sizes (cache keys), as [Artwork]
+  // and [YouTubeCover] request.
+  final ImageProvider image;
+  final videoId = youtubeThumbnailVideoId(path);
+  if (videoId != null) {
+    final art = ProviderScope.containerOf(
+      context,
+      listen: false,
+    ).read(resolvedArtProvider(videoId))?.squareUrl(px);
+    if (art != null) {
+      image = ResizeImage.resizeIfNeeded(
+        artBucket(px),
+        null,
+        NetworkImage(art),
+      );
+    } else {
+      final frame = youtubeFrame(px);
+      final width = frame.width * size / frame.square;
+      image = ResizeImage.resizeIfNeeded(
+        math.min(frame.width, (width * dpr).ceil()),
+        null,
+        NetworkImage(youtubeFrameUrl(videoId, frame)),
+      );
+    }
+  } else if (!isRemoteImage(path)) {
+    image = ResizeImage.resizeIfNeeded(px.ceil(), null, FileImage(File(path)));
+  } else if (isGoogleArt(path)) {
+    image = ResizeImage.resizeIfNeeded(
+      artBucket(px),
+      null,
+      NetworkImage(resizeGoogleArt(path, px)),
+    );
+  } else {
+    image = ResizeImage.resizeIfNeeded(null, artBucket(px), NetworkImage(path));
+  }
+  await precacheImage(image, context, onError: (_, _) {});
+}
+
+/// 2×2 collage of up to four covers, as used for playlists.
+class ArtworkCollage extends StatelessWidget {
+  const ArtworkCollage({
+    required this.paths,
+    required this.size,
+    this.radius = NoirRadii.sm,
+    super.key,
+  });
+
+  final List<String> paths;
+  final double size;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    if (paths.length < 4) {
+      return Artwork(
+        path: paths.firstOrNull,
+        size: size,
+        radius: radius,
+        icon: Icons.queue_music_rounded,
+      );
+    }
+    final half = size / 2;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: SizedBox.square(
+        dimension: size,
+        child: Wrap(
+          children: [
+            for (final p in paths.take(4))
+              Artwork(path: p, size: half, radius: 0),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Placeholder extends StatelessWidget {
+  const _Placeholder({required this.size, required this.icon});
+
+  final double size;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.noir;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [c.surfaceElevated, c.backgroundSecondary],
+        ),
+      ),
+      child: Center(
+        child: Icon(icon, size: size * 0.36, color: c.textTertiary),
+      ),
+    );
+  }
+}
