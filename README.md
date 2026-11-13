@@ -28,9 +28,13 @@ YouTube Data API for your account. What changes is the app around it: a
 native interface that answers the moment you click, built for a computer
 rather than a browser tab. It also plays your own audio files.
 
-![MERCURY on Windows: Home, Now Playing with synced lyrics, an album, a playlist on this PC, the light theme](docs/screenshots/mercury.jpg)
+<div align="center">
 
-<sub>Screenshots from the Windows build with a fresh profile.</sub>
+<img src="docs/screenshots/mercury_preview.gif" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="MERCURY App UI Preview Tour">
+
+<sub>Live Interactive Walkthrough: Home Feed, Synced Karaoke Lyrics, Now Playing & Liquid Glass Audio Engine</sub>
+
+</div>
 
 ## Download
 
