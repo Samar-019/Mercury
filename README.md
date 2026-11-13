@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="docs/logo.png" width="48" style="vertical-align: middle; border-radius: 10px;" alt="Mercury Icon"> MERCURY
+# <img src="docs/logo.gif" width="34" height="34" style="vertical-align: middle; border-radius: 8px; margin-right: 6px;" alt="Mercury Icon"> MERCURY
 
 [![Build](https://img.shields.io/github/actions/workflow/status/Samar-019/Mercury/ci.yml?branch=main&style=for-the-badge&label=build)](https://github.com/Samar-019/Mercury/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/Samar-019/Mercury?style=for-the-badge&label=release)](https://github.com/Samar-019/Mercury/releases/latest)
