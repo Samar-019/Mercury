@@ -1,3 +1,82 @@
+// -------------------------------------------------------------
+// Magnetic Liquid Glass Cursor System
+// -------------------------------------------------------------
+const cursorDot = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+
+let cursorX = window.innerWidth / 2;
+let cursorY = window.innerHeight / 2;
+let ringX = cursorX;
+let ringY = cursorY;
+let isHovering = false;
+
+window.addEventListener('mousemove', (e) => {
+  cursorX = e.clientX;
+  cursorY = e.clientY;
+
+  // Instant update for center dot
+  if (cursorDot) {
+    cursorDot.style.left = `${cursorX}px`;
+    cursorDot.style.top = `${cursorY}px`;
+  }
+});
+
+// Smooth Lerp animation for trailing ring (fluid magnetic feel)
+function renderCursor() {
+  ringX += (cursorX - ringX) * 0.16;
+  ringY += (cursorY - ringY) * 0.16;
+
+  if (cursorRing) {
+    cursorRing.style.left = `${ringX}px`;
+    cursorRing.style.top = `${ringY}px`;
+  }
+
+  requestAnimationFrame(renderCursor);
+}
+renderCursor();
+
+// Mouse down / up click effects
+window.addEventListener('mousedown', () => document.body.classList.add('cursor-clicking'));
+window.addEventListener('mouseup', () => document.body.classList.remove('cursor-clicking'));
+
+// Interactive hover bindings on clickable & glass items
+function bindCursorHovers() {
+  const hoverables = document.querySelectorAll('a, button, .bento-card, .spatial-badge, .showcase-window');
+  hoverables.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      document.body.classList.add('cursor-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-hover');
+    });
+  });
+}
+bindCursorHovers();
+
+// -------------------------------------------------------------
+// Interactive 3D Card Tilt on Mouse Move
+// -------------------------------------------------------------
+const cards = document.querySelectorAll('.bento-card, .showcase-window');
+cards.forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -6; // tilt up/down
+    const rotateY = ((x - centerX) / centerX) * 6;  // tilt left/right
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+  });
+});
+
 // Ambient Canvas 60fps Particle & Wave Field
 const canvas = document.getElementById('ambient-canvas');
 const ctx = canvas.getContext('2d');

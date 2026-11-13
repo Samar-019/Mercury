@@ -34,6 +34,118 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  cursor: none; /* enable custom liquid glass cursor */
+}
+
+a, button, input, .glass-panel, .spatial-badge {
+  cursor: none !important;
+}
+
+/* Custom Magnetic Glow Cursor Elements */
+#cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              opacity 0.2s ease;
+  box-shadow: 0 0 14px #38bdf8, 0 0 28px rgba(56, 189, 248, 0.5);
+}
+
+#cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(56, 189, 248, 0.65);
+  background: rgba(56, 189, 248, 0.05);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              background-color 0.3s ease,
+              transform 0.1s ease-out;
+}
+
+/* Cursor Hover State */
+body.cursor-hover #cursor-dot {
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px #ffffff;
+}
+
+body.cursor-hover #cursor-ring {
+  width: 58px;
+  height: 58px;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(56, 189, 248, 0.18);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+}
+
+body.cursor-clicking #cursor-ring {
+  transform: translate(-50%, -50%) scale(0.85);
+  background: rgba(56, 189, 248, 0.3);
+}
+
+/* Floating interactive UI elements */
+.animate-float {
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Dynamic Interactive Tilt on Bento Cards */
+.bento-card {
+  perspective: 1000px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s ease, 
+              box-shadow 0.25s ease;
+}
+
+.bento-card:hover {
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 
+              0 0 35px -5px rgba(56, 189, 248, 0.2);
+}
+
+/* Shimmer Light Reflection Sweep */
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.35), 
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: btn-shimmer 3.5s infinite ease-in-out;
+}
+
+@keyframes btn-shimmer {
+  0% { left: -100%; }
+  35%, 100% { left: 180%; }
 }
 
 /* Ambient Canvas Background */
