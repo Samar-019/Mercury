@@ -49,26 +49,25 @@ function renderCursor() {
     cursorRing.style.top = `${ringY}px`;
   }
 
-  // Draw smooth liquid rainbow chromatic ribbon tail
+  // Draw smooth rainbow neon aurora ribbon tail
   if (trailCtx && trailCanvas) {
     trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
 
-    const now = Date.now() * 0.15;
     if (trailPoints.length > 2) {
       for (let i = 0; i < trailPoints.length - 1; i++) {
         trailPoints[i].age += 1;
         const pt = trailPoints[i];
         const progress = i / trailPoints.length;
-        const radius = progress * 6.5;
-        const alpha = progress * 0.75;
+        const radius = progress * 5.5;
+        const alpha = progress * 0.6;
 
-        // Dynamic 360-degree rainbow hue calculation
-        const hue = (now + i * 14) % 360;
+        // Dynamic Rainbow HSL hue transition along cursor trail
+        const hue = (Date.now() * 0.15 + i * 16) % 360;
 
         trailCtx.beginPath();
         trailCtx.arc(pt.x, pt.y, Math.max(0.8, radius), 0, Math.PI * 2);
         trailCtx.fillStyle = `hsla(${hue}, 95%, 65%, ${alpha})`;
-        trailCtx.shadowBlur = 12;
+        trailCtx.shadowBlur = 14;
         trailCtx.shadowColor = `hsl(${hue}, 100%, 60%)`;
         trailCtx.fill();
       }
