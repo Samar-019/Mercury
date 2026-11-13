@@ -16,18 +16,18 @@
 #include <string>
 
 // The edge player: a small always-on-top window docked to an edge of a
-// monitor while NOIR is in the background, on whichever virtual desktop
+// monitor while MERCURY is in the background, on whichever virtual desktop
 // is shown, over full-screen remote desktops too.
 // Its outer side reaches past the screen edge, so the player seems to come
 // out from behind it. It runs its own Flutter engine ("edgePlayerMain" in
 // lib/main.dart).
 //
-// App -> native ("noir/edge"): "update" with the playback state, the side
+// App -> native ("mercury/edge"): "update" with the playback state, the side
 // and where the player was last dropped; forwarded to the view.
 // Native -> app: "command" (from the view, unchanged) and "moved" after a
 // drag ({side, anchorX, anchorY} in physical screen pixels).
 //
-// View -> native ("noir/edge_view"): "ready"; "command"; "region" (the
+// View -> native ("mercury/edge_view"): "ready"; "command"; "region" (the
 // rectangle to clip the window to, logical pixels; empty when the player has
 // slid away; "glass" while more than the line shows); "dragStart", "dragUpdate", "dragEnd" {centerX, centerY, depth}
 // (the player's middle in window coordinates and how deep it is).
@@ -105,7 +105,7 @@ class EdgePlayer {
   std::string side_ = "right";
   // The player's middle where it was last dropped, physical screen pixels.
   std::optional<POINT> anchor_;
-  // NOIR is in the background and something is loaded to play.
+  // MERCURY is in the background and something is loaded to play.
   bool wanted_ = false;
   // Another app fills the screen (a game, a video, a presentation); a
   // remote desktop doesn't count, being where the user works.

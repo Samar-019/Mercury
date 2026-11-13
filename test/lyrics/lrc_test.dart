@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
 
 Duration ms(int v) => Duration(milliseconds: v);
 

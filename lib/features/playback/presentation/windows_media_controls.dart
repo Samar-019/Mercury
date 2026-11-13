@@ -3,17 +3,17 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/features/playback/application/media_commands.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/playback/application/media_commands.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Implemented by the Windows runner (windows/runner/smtc_bridge.cpp).
-const smtcChannel = MethodChannel('noir/smtc');
+const smtcChannel = MethodChannel('mercury/smtc');
 
-/// Connects NOIR to Windows' System Media Transport Controls: the media
+/// Connects MERCURY to Windows' System Media Transport Controls: the media
 /// flyout shows the current track, and media keys work while the window is
 /// unfocused or minimized. Like the mobile media session it only mirrors
 /// state and forwards commands. Never throws: without SMTC, playback simply

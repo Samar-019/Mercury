@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 /// Where Now Playing wants the video (global coordinates), or null.
 final videoSlotProvider = NotifierProvider<_VideoSlot, Rect?>(_VideoSlot.new);
@@ -84,14 +84,14 @@ class _YouTubeVideoLayerState extends ConsumerState<YouTubeVideoLayer> {
     final rect = hidden
         ? const Rect.fromLTWH(0, 0, 2, 2)
         : slot ?? _miniRect(size);
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
 
     return Stack(
       children: [
         AnimatedPositioned.fromRect(
           rect: isYouTube ? rect : Rect.fromLTWH(size.width, 0, 2, 2),
-          duration: fx.motion(NoirMotion.medium),
-          curve: NoirMotion.standard,
+          duration: fx.motion(MercuryMotion.medium),
+          curve: MercuryMotion.standard,
           // Offstage alone leaves the spinner spinning, redrawing the whole
           // window every frame while nothing from YouTube plays.
           child: TickerMode(
@@ -162,7 +162,7 @@ class _MiniBar extends ConsumerWidget {
     final ctrl = ref.read(playbackProvider.notifier);
     final t = Theme.of(context).textTheme;
     return GlassSurface(
-      borderRadius: NoirRadii.mdAll,
+      borderRadius: MercuryRadii.mdAll,
       fillOpacity: 2.5,
       padding: const EdgeInsets.only(left: 12, right: 4),
       child: SizedBox(
@@ -174,10 +174,10 @@ class _MiniBar extends ConsumerWidget {
                 s.current?.track.title ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: t.labelMedium?.copyWith(color: context.noir.textPrimary),
+                style: t.labelMedium?.copyWith(color: context.mercury.textPrimary),
               ),
             ),
-            NoirIconButton(
+            MercuryIconButton(
               icon: s.isPlaying
                   ? Icons.pause_rounded
                   : Icons.play_arrow_rounded,
@@ -185,7 +185,7 @@ class _MiniBar extends ConsumerWidget {
               size: 18,
               onPressed: () => unawaited(ctrl.togglePlayPause()),
             ),
-            NoirIconButton(
+            MercuryIconButton(
               icon: Icons.open_in_full_rounded,
               tooltip: 'Open player',
               size: 16,

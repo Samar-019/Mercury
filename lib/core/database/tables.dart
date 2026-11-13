@@ -20,7 +20,7 @@ class Tracks extends Table {
   BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
 }
 
-/// Folders the user granted NOIR access to; rescanned on demand.
+/// Folders the user granted MERCURY access to; rescanned on demand.
 class LibraryFolders extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get path => text().unique()();
@@ -69,7 +69,7 @@ class FavoriteSongs extends Table {
   Set<Column<Object>> get primaryKey => {id};
 }
 
-/// Plays started inside NOIR. Stays on this device.
+/// Plays started inside MERCURY. Stays on this device.
 class PlayHistory extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get trackId =>
@@ -145,7 +145,7 @@ class YtPlaylistItems extends Table {
 
   /// `playlistItems` resource id, needed to remove the entry on YouTube.
   /// Null for rows cached before schema v4 until the playlist changes and
-  /// is downloaded again (NOIR then looks the id up when removing).
+  /// is downloaded again (MERCURY then looks the id up when removing).
   TextColumn get itemId => text().nullable()();
 
   @override

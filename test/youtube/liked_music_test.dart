@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/playback/application/unplayable_tracks.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/playback/application/unplayable_tracks.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
 
 import '../helpers/pump_app.dart';
 import '../helpers/test_database.dart';

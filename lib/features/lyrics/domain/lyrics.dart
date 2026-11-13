@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Lyrics for one track, with the service they came from (for attribution).
 sealed class Lyrics {

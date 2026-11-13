@@ -6,13 +6,13 @@ Phase 5 before the UI advertises them.
 
 ## Summary
 
-NOIR can connect a Google account, read the user's YouTube channel, playlists, playlist
+MERCURY can connect a Google account, read the user's YouTube channel, playlists, playlist
 items, liked videos and subscriptions, and play YouTube videos through the official
-embedded player. NOIR **cannot** provide a YouTube Music library, audio-only YouTube
+embedded player. MERCURY **cannot** provide a YouTube Music library, audio-only YouTube
 playback, background/screen-off YouTube playback, or offline YouTube content: there is
 no official API for the first, and YouTube's Developer Policies prohibit the others.
 
-For YouTube content NOIR is therefore a *visual* music player: the video stays visible
+For YouTube content MERCURY is therefore a *visual* music player: the video stays visible
 (at least 200×200 px, no overlays) while it plays. Full audio-player features (background
 playback, media notifications, crossfade, offline) apply to local files only.
 
@@ -31,17 +31,17 @@ playback, media notifications, crossfade, offline) apply to local files only.
 | YouTube Music "Liked music" (`LM`) | **None.** `LM` is a YouTube Music-internal list; the Data API documents only the channel's `likes` playlist (`LL`, all liked videos). Not tested live | — | — | Approximated by filtering liked videos |
 | Video category | `snippet.categoryId` in `videos.list part=snippet` (no extra cost: same call as details/likes) | `youtube.readonly` | Uploader-chosen | Stored per video; drives the music filter |
 | Change detection | Conditional requests: send the response `etag` as `If-None-Match`, get `304 Not Modified`. The docs say every request costs at least 1 unit, so a 304 is not free, just tiny. Not tested live | — | — | Opening a YouTube page re-checks it at most every 30 s |
-| Watch history | **No** (`watchHistoryNotAccessible`) | — | — | Not implemented. NOIR keeps its own local play history |
+| Watch history | **No** (`watchHistoryNotAccessible`) | — | — | Not implemented. MERCURY keeps its own local play history |
 | Subscriptions | `subscriptions.list mine=true` (1 unit) | `youtube.readonly` | — | Optional "Channels" view. Phase 5 |
 | Read playback state | IFrame Player API events (`onStateChange`, `getCurrentTime`) | none | OS WebView must send an HTTP Referer (else **Error 153**) | Player events drive `PlaybackState` |
 | Control playback | IFrame Player API (`playVideo`, `pauseVideo`, `seekTo`, `loadVideoById`) | none | Player ≥ 200×200 px, no overlays, no modifications | Play/pause/seek/next/prev via the player API |
 | Background playback | **Prohibited** (Developer Policies III.I.9) | — | All platforms | `supportsBackgroundPlayback = false`; pause when the player is hidden or the app is minimized |
 | Audio-only playback | **Prohibited** (III.I.7) | — | All platforms | Video always visible in Now Playing for YouTube items |
 | Offline / download | **Prohibited** (III.E.1.b) | — | All platforms | Not implemented |
-| Queue management | No dedicated API. Advancing on state `0` (ended) with `loadVideoById` is documented player usage; no clause forbids it | none | Autoplay only when > 50 % of the player is visible | Local NOIR queue; clearly labeled as not a YouTube playlist |
+| Queue management | No dedicated API. Advancing on state `0` (ended) with `loadVideoById` is documented player usage; no clause forbids it | none | Autoplay only when > 50 % of the player is visible | Local MERCURY queue; clearly labeled as not a YouTube playlist |
 | Add / remove playlist items | `playlistItems.insert` / `playlistItems.delete` (**50 units each**; removing a row cached before item ids were stored first costs 1 unit for `playlistItems.list videoId=…`) | `youtube` (or `youtube.force-ssl`), requested incrementally on the first heart / target choice | Must be clearly user-initiated (III.C.2) | The heart on YouTube songs saves to / removes from one user-chosen playlist. Optimistic, reverted on error; one request in flight per video (double taps ignored); writes are never retried automatically (a retry could add the video twice). ~100 hearts/day fit in the default quota |
 | Reorder playlist items | `playlistItems.update` (50 units) | `youtube` | — | Not implemented |
-| Create playlist | `playlists.insert` (50 units) | `youtube` | — | "Create new playlist…" in the save-target picker; private by default, name defaults to "NOIR Likes" |
+| Create playlist | `playlists.insert` (50 units) | `youtube` | — | "Create new playlist…" in the save-target picker; private by default, name defaults to "MERCURY Likes" |
 | Like / rate videos | `videos.rate` (50 units) | `youtube` | — | **Never called.** The heart is a playlist save, not a YouTube like |
 
 Default quota: 10,000 units/day for regular methods plus the separate 100/day
@@ -49,7 +49,7 @@ Default quota: 10,000 units/day for regular methods plus the separate 100/day
 
 ## Liked music filter
 
-The Data API returns every liked video. NOIR's "Liked music" view keeps a video when
+The Data API returns every liked video. MERCURY's "Liked music" view keeps a video when
 any of these hold (`isMusicVideo`, `lib/features/youtube/domain/music_filter.dart`):
 
 - `snippet.categoryId == "10"` (Music);
@@ -84,8 +84,8 @@ Failures keep the cached list and show a toast. The Library's YouTube section ca
 ## Data rules
 
 - Stored API data must be refreshed or deleted within 30 days.
-- After the user disconnects inside NOIR, account data is deleted within 7 days
-  (NOIR deletes it immediately).
+- After the user disconnects inside MERCURY, account data is deleted within 7 days
+  (MERCURY deletes it immediately).
 - Display a link to the YouTube Terms of Service; the privacy policy links the Google
   Privacy Policy and explains revocation at https://myaccount.google.com/permissions.
 - YouTube must be clearly attributed as the source of content.
@@ -131,11 +131,11 @@ Testing mode: max 100 test users; authorizations expire after 7 days.
    Note: YouTube Music's `LM` ("Liked music") list is not part of the Data API at all.
 7. Does the API answer `If-None-Match` with 304 for `playlists.list id=…` and
    `videos.list myRating=like`, and which etag form (quoted or not) does it accept?
-   NOIR sends the body `etag` wrapped in quotes; without 304 a check still costs 1 unit
+   MERCURY sends the body `etag` wrapped in quotes; without 304 a check still costs 1 unit
    and writes nothing when the playlist etag is unchanged.
 3. Is `youtube.readonly` classified sensitive in the Cloud Console Data Access screen?
 4. Does the Desktop token exchange succeed without `client_secret`?
-5. Does a minimized desktop window count as a background player? NOIR assumes yes and pauses.
+5. Does a minimized desktop window count as a background player? MERCURY assumes yes and pauses.
 6. ~~Windows embed identity~~ — **verified 2026-10-24**: WebView2 virtual host mapping to
-   `https://app.noir.player` plays without Error 153; the no-origin control reproduces
+   `https://app.mercury.player` plays without Error 153; the no-origin control reproduces
    Error 153. See `docs/spikes/yt-embed.md`. Android/iOS/macOS embed still unverified.

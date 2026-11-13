@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/features/discover/presentation/ytm_artist_screen.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/search/application/music_search_controller.dart';
-import 'package:noir/features/search/application/search_controller.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/track_menu.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/features/discover/presentation/ytm_artist_screen.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/search/application/music_search_controller.dart';
+import 'package:mercury/features/search/application/search_controller.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/track_menu.dart';
 
 /// "Artist", "Album · Daft Punk · 2013", … under a YouTube Music item.
 String ytmSubtitle(YtmItem item) => switch (item) {

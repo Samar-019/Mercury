@@ -2,23 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// "Not interested" and "Don't recommend `artist`" for a YouTube song's
 /// menu; empty for local files.
-List<NoirMenuItem<String>> dislikeMenuItems(Track track) => [
+List<MercuryMenuItem<String>> dislikeMenuItems(Track track) => [
   if (track.source == MediaSource.youtube) ...[
-    const NoirMenuItem(
+    const MercuryMenuItem(
       'dislike',
       'Not interested',
       icon: Icons.thumb_down_alt_outlined,
     ),
     if (track.artist case final artist? when artist.isNotEmpty)
-      NoirMenuItem(
+      MercuryMenuItem(
         'block artist',
         "Don't recommend $artist",
         icon: Icons.block_rounded,
@@ -41,7 +41,7 @@ Future<void> runDislikeAction(
       final artist = track.artist!;
       await ctrl.blockArtist(artist, playing: track);
       if (context.mounted) {
-        showToast(context, "NOIR won't recommend $artist");
+        showToast(context, "MERCURY won't recommend $artist");
       }
   }
 }
@@ -75,7 +75,7 @@ class DislikeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (track.source != MediaSource.youtube) return const SizedBox.shrink();
-    return NoirIconButton(
+    return MercuryIconButton(
       icon: Icons.thumb_down_alt_outlined,
       tooltip: 'Not interested',
       size: size,

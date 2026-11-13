@@ -1,17 +1,17 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
 
-/// One action in a [showNoirMenu] menu.
+/// One action in a [showMercuryMenu] menu.
 @immutable
-class NoirMenuItem<T> {
-  const NoirMenuItem(this.value, this.label, {this.icon, this.checked = false});
+class MercuryMenuItem<T> {
+  const MercuryMenuItem(this.value, this.label, {this.icon, this.checked = false});
 
   final T value;
   final String label;
@@ -21,53 +21,53 @@ class NoirMenuItem<T> {
   final bool checked;
 }
 
-/// NOIR's context menu: a small elevated panel next to [anchor] (global
+/// MERCURY's context menu: a small elevated panel next to [anchor] (global
 /// coordinates; a zero-size rect for a pointer position) that fades and
-/// scales in; on a phone, a [showNoirSheet]. Returns the chosen value, or
+/// scales in; on a phone, a [showMercurySheet]. Returns the chosen value, or
 /// null when dismissed.
-Future<T?> showNoirMenu<T>(
+Future<T?> showMercuryMenu<T>(
   BuildContext context, {
   required Rect anchor,
-  required List<NoirMenuItem<T>> items,
+  required List<MercuryMenuItem<T>> items,
 }) {
   if (FormFactor.touch) {
-    return showNoirSheet<T>(
+    return showMercurySheet<T>(
       context,
       label: 'Close menu',
       child: _MenuPanel<T>(items: items, sheet: true),
     );
   }
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   return Navigator.of(context, rootNavigator: true).push(
     _MenuRoute<T>(
       anchor: anchor,
       panel: _MenuPanel<T>(items: items),
-      duration: fx.motion(NoirMotion.medium),
-      reverseDuration: fx.motion(NoirMotion.fast),
+      duration: fx.motion(MercuryMotion.medium),
+      reverseDuration: fx.motion(MercuryMotion.fast),
     ),
   );
 }
 
-/// A panel of any [child] shown next to [anchor] the way [showNoirMenu]
+/// A panel of any [child] shown next to [anchor] the way [showMercuryMenu]
 /// shows a menu, on the same glass. Pop the route to close it.
-Future<void> showNoirPopover(
+Future<void> showMercuryPopover(
   BuildContext context, {
   required Rect anchor,
   required Widget child,
 }) {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   return Navigator.of(context, rootNavigator: true).push(
     _MenuRoute<void>(
       anchor: anchor,
       panel: GlassSurface(
-        borderRadius: NoirRadii.mdAll,
+        borderRadius: MercuryRadii.mdAll,
         floating: true,
         shadow: 0.6,
         fillOpacity: 4,
         child: Material(type: MaterialType.transparency, child: child),
       ),
-      duration: fx.motion(NoirMotion.medium),
-      reverseDuration: fx.motion(NoirMotion.fast),
+      duration: fx.motion(MercuryMotion.medium),
+      reverseDuration: fx.motion(MercuryMotion.fast),
     ),
   );
 }
@@ -75,18 +75,18 @@ Future<void> showNoirPopover(
 /// A phone's menu: an opaque sheet up from the bottom, timed like the queue
 /// sheet (a popover fading in over glass stuttered there). [label] names
 /// the barrier that closes it. Pop the route to close it.
-Future<T?> showNoirSheet<T>(
+Future<T?> showMercurySheet<T>(
   BuildContext context, {
   required Widget child,
   required String label,
 }) {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   return showGeneralDialog<T>(
     context: context,
     barrierDismissible: true,
     barrierLabel: label,
     barrierColor: Colors.black.withValues(alpha: 0.3),
-    transitionDuration: fx.motion(NoirMotion.slow),
+    transitionDuration: fx.motion(MercuryMotion.slow),
     pageBuilder: (context, _, _) => Align(
       alignment: Alignment.bottomCenter,
       child: ConstrainedBox(
@@ -94,15 +94,15 @@ Future<T?> showNoirSheet<T>(
           maxHeight: MediaQuery.sizeOf(context).height * 0.85,
         ),
         child: Material(
-          color: context.noir.background,
+          color: context.mercury.background,
           borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(NoirRadii.xl),
+            top: Radius.circular(MercuryRadii.xl),
           ),
           clipBehavior: Clip.antiAlias,
           child: SafeArea(
             top: false,
             child: Padding(
-              padding: const EdgeInsets.only(top: NoirSpacing.sm),
+              padding: const EdgeInsets.only(top: MercurySpacing.sm),
               child: child,
             ),
           ),
@@ -113,7 +113,7 @@ Future<T?> showNoirSheet<T>(
       position: Tween(begin: const Offset(0, 1), end: Offset.zero).animate(
         CurvedAnimation(
           parent: animation,
-          curve: NoirMotion.emphasized,
+          curve: MercuryMotion.emphasized,
           reverseCurve: Curves.easeInCubic,
         ),
       ),
@@ -122,9 +122,9 @@ Future<T?> showNoirSheet<T>(
   );
 }
 
-/// Icon button that opens a [showNoirMenu] below itself.
-class NoirMenuButton<T> extends StatelessWidget {
-  const NoirMenuButton({
+/// Icon button that opens a [showMercuryMenu] below itself.
+class MercuryMenuButton<T> extends StatelessWidget {
+  const MercuryMenuButton({
     required this.icon,
     required this.tooltip,
     required this.items,
@@ -134,18 +134,18 @@ class NoirMenuButton<T> extends StatelessWidget {
 
   final IconData icon;
   final String tooltip;
-  final List<NoirMenuItem<T>> Function() items;
+  final List<MercuryMenuItem<T>> Function() items;
   final ValueChanged<T> onSelected;
 
   @override
   Widget build(BuildContext context) {
-    return NoirIconButton(
+    return MercuryIconButton(
       icon: icon,
       tooltip: tooltip,
       onPressed: () async {
         final box = context.findRenderObject()! as RenderBox;
         final anchor = box.localToGlobal(Offset.zero) & box.size;
-        final value = await showNoirMenu<T>(
+        final value = await showMercuryMenu<T>(
           context,
           anchor: anchor,
           items: items(),
@@ -192,8 +192,8 @@ class _MenuRoute<T> extends PopupRoute<T> {
   ) {
     final curved = CurvedAnimation(
       parent: animation,
-      curve: NoirMotion.standard,
-      reverseCurve: NoirMotion.exit,
+      curve: MercuryMotion.standard,
+      reverseCurve: MercuryMotion.exit,
     );
     return CustomSingleChildLayout(
       delegate: _MenuLayout(anchor),
@@ -245,18 +245,18 @@ class _MenuLayout extends SingleChildLayoutDelegate {
 class _MenuPanel<T> extends StatelessWidget {
   const _MenuPanel({required this.items, this.sheet = false});
 
-  final List<NoirMenuItem<T>> items;
+  final List<MercuryMenuItem<T>> items;
 
-  /// In a [showNoirSheet]: full width, opaque, rows sized for fingers.
+  /// In a [showMercurySheet]: full width, opaque, rows sized for fingers.
   final bool sheet;
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final Widget list = SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: NoirSpacing.xs),
+      padding: const EdgeInsets.symmetric(vertical: MercurySpacing.xs),
       child: _width(
         Column(
           mainAxisSize: MainAxisSize.min,
@@ -271,25 +271,25 @@ class _MenuPanel<T> extends StatelessWidget {
                   onTap: () => Navigator.of(context).pop(item.value),
                   hoverColor: c.hover,
                   focusColor: c.selected,
-                  hoverDuration: fx.motion(NoirMotion.fast),
+                  hoverDuration: fx.motion(MercuryMotion.fast),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: sheet ? 52 : 40),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: NoirSpacing.lg,
-                        vertical: NoirSpacing.sm,
+                        horizontal: MercurySpacing.lg,
+                        vertical: MercurySpacing.sm,
                       ),
                       child: Row(
                         children: [
                           if (item.icon != null) ...[
                             Icon(item.icon, size: 18),
-                            const SizedBox(width: NoirSpacing.md),
+                            const SizedBox(width: MercurySpacing.md),
                           ],
                           Expanded(
                             child: Text(item.label, style: t.bodyMedium),
                           ),
                           if (item.checked) ...[
-                            const SizedBox(width: NoirSpacing.md),
+                            const SizedBox(width: MercurySpacing.md),
                             Icon(
                               Icons.check_rounded,
                               size: 18,
@@ -316,7 +316,7 @@ class _MenuPanel<T> extends StatelessWidget {
           ? list
           // Liquid Glass with a scrim, so items stay legible on clear glass.
           : GlassSurface(
-              borderRadius: NoirRadii.mdAll,
+              borderRadius: MercuryRadii.mdAll,
               floating: true,
               shadow: 0.6,
               fillOpacity: 4,

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.noir.noir"
+    namespace = "app.mercury.mercury"
     // permission_handler_android 14 requires API 37.
     compileSdk = 37
     ndkVersion = flutter.ndkVersion
@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "app.noir.player"
+        applicationId = "app.mercury.player"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

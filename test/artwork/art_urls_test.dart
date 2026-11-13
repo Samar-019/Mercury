@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
 
 void main() {
   const art = 'https://lh3.googleusercontent.com/AbC-d_E';

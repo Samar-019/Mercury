@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// YouTube videos that failed to play here for a reason of their own
 /// (removed, or the owner allows them only on YouTube).

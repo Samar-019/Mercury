@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/analysis/application/analysis_providers.dart';
-import 'package:noir/features/library/data/library_repository.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/analysis/application/analysis_providers.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
 
 import '../helpers/pump_app.dart';
 import 'analysis_queue_test.dart' show fakeAnalysis;

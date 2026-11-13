@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/presentation/load_more.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/widgets/collection_extras.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/presentation/load_more.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/widgets/collection_extras.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A YouTube Music playlist or album opened from Discover or Search.
@@ -85,7 +85,7 @@ class YtmCollectionScreen extends ConsumerWidget {
                 : () => unawaited(playback.shuffleTracks(tracks)),
             extras: ref.watch(collectionExtrasProvider)('ytm:$id', tracks),
             actions: [
-              NoirIconButton(
+              MercuryIconButton(
                 icon: Icons.open_in_new_rounded,
                 tooltip: 'Open in YouTube Music',
                 onPressed: () => unawaited(

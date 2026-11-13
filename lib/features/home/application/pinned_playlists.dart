@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
 
 enum PinKind { local, youtube, youtubeLiked, favorites }
 

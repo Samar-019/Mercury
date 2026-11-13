@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/youtube/application/youtube_pending_edits.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/youtube/application/youtube_pending_edits.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
 
 /// Refreshes of single YouTube pages in flight, and the last failure of each.
 @immutable
@@ -27,7 +27,7 @@ final youTubeRefreshProvider =
     );
 
 /// Brings one playlist (or the likes) up to date when its page is opened
-/// (or NOIR comes back to the foreground with it open), so changes made on
+/// (or MERCURY comes back to the foreground with it open), so changes made on
 /// YouTube show up without waiting for the next full sync — which a page
 /// never waits for.
 ///

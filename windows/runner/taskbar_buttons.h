@@ -5,7 +5,7 @@
 #include <shobjidl.h>
 #include <wrl/client.h>
 
-// Previous / play-pause / next under NOIR's taskbar thumbnail (the preview
+// Previous / play-pause / next under MERCURY's taskbar thumbnail (the preview
 // that appears when hovering the taskbar icon). They follow the playback
 // state SMTC gets and report presses with the same names SMTC uses.
 class TaskbarButtons {

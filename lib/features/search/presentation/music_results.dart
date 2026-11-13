@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/discover/presentation/load_more.dart';
-import 'package:noir/features/discover/presentation/ytm_items.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/search/application/music_search_controller.dart';
-import 'package:noir/features/search/application/search_controller.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/discover/presentation/load_more.dart';
+import 'package:mercury/features/discover/presentation/ytm_items.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/search/application/music_search_controller.dart';
+import 'package:mercury/features/search/application/search_controller.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 /// Filters offered on the Search page, in order.
 const musicSearchFilters = {
@@ -127,8 +127,8 @@ class MusicResults extends ConsumerWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(
-              top: NoirSpacing.xxl,
-              bottom: NoirSpacing.sm,
+              top: MercurySpacing.xxl,
+              bottom: MercurySpacing.sm,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,10 +137,10 @@ class MusicResults extends ConsumerWidget {
                   header: true,
                   child: Text('YouTube Music', style: t.titleMedium),
                 ),
-                const SizedBox(height: NoirSpacing.md),
+                const SizedBox(height: MercurySpacing.md),
                 Wrap(
-                  spacing: NoirSpacing.xs,
-                  runSpacing: NoirSpacing.xs,
+                  spacing: MercurySpacing.xs,
+                  runSpacing: MercurySpacing.xs,
                   children: [
                     for (final MapEntry(key: filter, value: label)
                         in musicSearchFilters.entries)

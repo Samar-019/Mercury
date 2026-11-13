@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/core/widgets/reveal.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/core/widgets/reveal.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 /// The transition modes this build can play: Smart and Disco need their
 /// planners.
@@ -52,7 +52,7 @@ class MixModeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = _effective(ref);
-    return NoirIconButton(
+    return MercuryIconButton(
       glyph: MixModeIcon(mode, size: size),
       tooltip: 'Transitions: ${_name(mode)}',
       active: mode != TransitionMode.off,
@@ -60,7 +60,7 @@ class MixModeButton extends ConsumerWidget {
       onPressed: () {
         if (FormFactor.touch) {
           unawaited(
-            showNoirSheet<void>(
+            showMercurySheet<void>(
               context,
               label: 'Close transitions',
               child: const _MixPanel(width: double.infinity),
@@ -70,7 +70,7 @@ class MixModeButton extends ConsumerWidget {
         }
         final box = context.findRenderObject()! as RenderBox;
         unawaited(
-          showNoirPopover(
+          showMercuryPopover(
             context,
             // A small gap between the button and the panel.
             anchor: (box.localToGlobal(Offset.zero) & box.size).inflate(6),
@@ -89,7 +89,7 @@ class _MixPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     final mode = _effective(ref);
     final seconds = ref.watch(
@@ -111,17 +111,17 @@ class _MixPanel extends ConsumerWidget {
       child: SizedBox(
         width: width,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: NoirSpacing.xs),
+          padding: const EdgeInsets.symmetric(vertical: MercurySpacing.xs),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  NoirSpacing.lg,
-                  NoirSpacing.sm,
-                  NoirSpacing.lg,
-                  NoirSpacing.xs,
+                  MercurySpacing.lg,
+                  MercurySpacing.sm,
+                  MercurySpacing.lg,
+                  MercurySpacing.xs,
                 ),
                 child: ExcludeSemantics(
                   child: Text(
@@ -149,8 +149,8 @@ class _MixPanel extends ConsumerWidget {
                     focusColor: c.selected,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: NoirSpacing.lg,
-                        vertical: NoirSpacing.sm,
+                        horizontal: MercurySpacing.lg,
+                        vertical: MercurySpacing.sm,
                       ),
                       child: Row(
                         children: [
@@ -162,7 +162,7 @@ class _MixPanel extends ConsumerWidget {
                             ),
                             child: MixModeIcon(m),
                           ),
-                          const SizedBox(width: NoirSpacing.md),
+                          const SizedBox(width: MercurySpacing.md),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +178,7 @@ class _MixPanel extends ConsumerWidget {
                             ),
                           ),
                           if (m == mode) ...[
-                            const SizedBox(width: NoirSpacing.md),
+                            const SizedBox(width: MercurySpacing.md),
                             Icon(
                               Icons.check_rounded,
                               size: 18,
@@ -195,8 +195,8 @@ class _MixPanel extends ConsumerWidget {
                 visible: mode == TransitionMode.crossfade,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    left: NoirSpacing.lg,
-                    right: NoirSpacing.lg,
+                    left: MercurySpacing.lg,
+                    right: MercurySpacing.lg,
                   ),
                   child: Row(
                     children: [
@@ -246,7 +246,7 @@ class MixModeIcon extends StatelessWidget {
     size: Size.square(size),
     painter: _MixModePainter(
       mode,
-      IconTheme.of(context).color ?? context.noir.textPrimary,
+      IconTheme.of(context).color ?? context.mercury.textPrimary,
     ),
   );
 }

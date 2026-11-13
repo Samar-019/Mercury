@@ -3,21 +3,21 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/edge_player/edge_snapshot.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/edge_player/edge_snapshot.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/shared/models/media.dart';
 import 'package:window_manager/window_manager.dart';
 
 /// Implemented by the Windows runner (windows/runner/edge_player.cpp).
-const edgeChannel = MethodChannel('noir/edge');
+const edgeChannel = MethodChannel('mercury/edge');
 
-/// Whether NOIR's main window is the active one; the edge player shows
+/// Whether MERCURY's main window is the active one; the edge player shows
 /// whenever it isn't (minimized, or another window in front). Kept up to
 /// date by [EdgePlayerBridge].
 final mainWindowActiveProvider = NotifierProvider<MainWindowActive, bool>(
@@ -200,7 +200,7 @@ class EdgePlayerBridge with WindowListener {
     }
   }
 
-  // Clicking the edge player never activates it, so NOIR's window loses
+  // Clicking the edge player never activates it, so MERCURY's window loses
   // focus only to other apps.
   @override
   void onWindowBlur() => _window.active = false;
@@ -281,7 +281,7 @@ class EdgePlayerBridge with WindowListener {
       await windowManager.show();
       await windowManager.focus();
     } on Object catch (e) {
-      debugPrint('NOIR window could not be shown: $e');
+      debugPrint('MERCURY window could not be shown: $e');
     }
   }
 }

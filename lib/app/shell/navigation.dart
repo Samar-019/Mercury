@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 
 /// Shell branches, in `StatefulShellRoute` order.
 enum Branch {
@@ -18,16 +18,16 @@ enum Branch {
 
 /// Opacity and offset of one page during a fade-through at [t] (0–1): the
 /// outgoing page fades out first, then the incoming one fades in while
-/// rising [NoirMotion.shift] px. Shared by branch switches and pushed pages.
+/// rising [MercuryMotion.shift] px. Shared by branch switches and pushed pages.
 ({double opacity, double dy}) fadeThrough(double t, {required bool incoming}) {
   if (!incoming) {
     return (
-      opacity: 1 - const Interval(0, 0.4, curve: NoirMotion.exit).transform(t),
+      opacity: 1 - const Interval(0, 0.4, curve: MercuryMotion.exit).transform(t),
       dy: 0,
     );
   }
-  final v = const Interval(0.3, 1, curve: NoirMotion.standard).transform(t);
-  return (opacity: v, dy: (1 - v) * NoirMotion.shift);
+  final v = const Interval(0.3, 1, curve: MercuryMotion.standard).transform(t);
+  return (opacity: v, dy: (1 - v) * MercuryMotion.shift);
 }
 
 /// Branch navigators stacked like `IndexedStack` — every visited branch
@@ -55,7 +55,7 @@ class _BranchSwitcherState extends State<BranchSwitcher>
   void didUpdateWidget(BranchSwitcher old) {
     super.didUpdateWidget(old);
     if (old.index == widget.index) return;
-    final duration = NoirEffects.of(context).motion(NoirMotion.layout);
+    final duration = MercuryEffects.of(context).motion(MercuryMotion.layout);
     if (duration == Duration.zero) {
       _previous = null;
       _controller.value = 1;

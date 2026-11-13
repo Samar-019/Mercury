@@ -2,19 +2,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 import '../helpers/fake_engine.dart';
 import '../helpers/fake_http.dart';
@@ -65,19 +65,19 @@ class _Harness {
     await tester.runAsync(() async {
       final repo = container.read(youTubeRepositoryProvider);
       await repo.savePlaylists(const [
-        YtPlaylist(id: 'PLt', title: 'NOIR Likes', itemCount: 0, etag: 'e'),
+        YtPlaylist(id: 'PLt', title: 'MERCURY Likes', itemCount: 0, etag: 'e'),
       ]);
     });
     if (withTarget) {
       container
           .read(saveTargetProvider.notifier)
-          .set(const SaveTarget('PLt', 'NOIR Likes'));
+          .set(const SaveTarget('PLt', 'MERCURY Likes'));
     }
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-          theme: buildNoirTheme(Brightness.dark, Density.comfortable),
+          theme: buildMercuryTheme(Brightness.dark, Density.comfortable),
           home: const Scaffold(
             body: Column(
               children: [
@@ -138,7 +138,7 @@ void main() {
     final h = await _Harness.pump(tester);
     h.account.set(AccountStatus.disconnected);
     await tester.pumpAndSettle();
-    expect(find.byTooltip('Save to NOIR Likes'), findsNothing);
+    expect(find.byTooltip('Save to MERCURY Likes'), findsNothing);
     final calls = h.http.requests.length;
 
     await tester.runAsync(() async {
@@ -180,7 +180,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Save hearted songs to'), findsOneWidget);
     expect(find.text('Create new playlist…'), findsOneWidget);
-    expect(find.text('NOIR Likes'), findsOneWidget);
+    expect(find.text('MERCURY Likes'), findsOneWidget);
   });
 
   testWidgets('403 insufficientPermissions leads to the permission prompt, '
@@ -201,15 +201,15 @@ void main() {
     };
 
     await tester.runAsync(() async {
-      await tester.tap(find.byTooltip('Save to NOIR Likes'));
+      await tester.tap(find.byTooltip('Save to MERCURY Likes'));
       await Future<void>.delayed(const Duration(milliseconds: 200));
     });
     await tester.pumpAndSettle();
-    expect(find.text('Allow NOIR to edit your playlists?'), findsOneWidget);
+    expect(find.text('Allow MERCURY to edit your playlists?'), findsOneWidget);
 
     denied = false;
     await tester.tap(find.text('Continue'));
-    final saved = find.text('Saved to NOIR Likes');
+    final saved = find.text('Saved to MERCURY Likes');
     for (var i = 0; i < 40 && saved.evaluate().isEmpty; i++) {
       await tester.runAsync(
         () => Future<void>.delayed(const Duration(milliseconds: 20)),
@@ -220,7 +220,7 @@ void main() {
     expect(h.account.upgrades, 1);
     expect(h.http.requests.where((r) => r.method == 'POST'), hasLength(2));
     expect(saved, findsOneWidget);
-    expect(find.byTooltip('Remove from NOIR Likes'), findsOneWidget);
+    expect(find.byTooltip('Remove from MERCURY Likes'), findsOneWidget);
     // Let the toast finish.
     await tester.pump(const Duration(seconds: 5));
     await tester.pumpAndSettle();

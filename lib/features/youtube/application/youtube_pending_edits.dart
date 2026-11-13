@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
 
 final youTubePendingEditsProvider = Provider<YouTubePendingEdits>(
   (ref) => YouTubePendingEdits(ref.watch(youTubeClockProvider)),
 );
 
-/// Playlist changes NOIR just made on YouTube.
+/// Playlist changes MERCURY just made on YouTube.
 ///
 /// YouTube answers list requests from a cache that can lag a write by
 /// several seconds, so a sync right after "add" may not contain the new item

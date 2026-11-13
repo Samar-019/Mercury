@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final songVersionsProvider = Provider<SongVersions>(
   (ref) => SongVersions(ref.watch(innerTubeClientProvider)),

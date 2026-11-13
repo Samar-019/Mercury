@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/features/library/data/library_indexer.dart';
-import 'package:noir/features/library/data/library_repository.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/features/library/data/library_indexer.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
 import 'package:path/path.dart' as p;
 
 import '../helpers/test_database.dart';
@@ -19,7 +19,7 @@ void main() {
   setUp(() {
     db = inMemoryDatabase();
     repo = LibraryRepository(db);
-    root = Directory.systemTemp.createTempSync('noir_indexer_');
+    root = Directory.systemTemp.createTempSync('mercury_indexer_');
     music = p.join(root.path, 'Music');
     indexer = LibraryIndexer(repo, Directory(p.join(root.path, 'artwork')));
   });

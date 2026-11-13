@@ -1,6 +1,6 @@
 import 'package:drift_dev/api/migrations_native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
+import 'package:mercury/core/database/app_database.dart';
 
 import '../generated_migrations/schema.dart';
 

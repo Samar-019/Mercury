@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/dialogs.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
 
 /// Concise in-app privacy notice. Full text: docs/privacy.md.
 Future<void> showPrivacyNotice(BuildContext context) => showGlassDialog<void>(
@@ -8,7 +8,7 @@ Future<void> showPrivacyNotice(BuildContext context) => showGlassDialog<void>(
   builder: (context) {
     final t = Theme.of(context).textTheme;
     Widget p(String title, String body) => Padding(
-      padding: const EdgeInsets.only(bottom: NoirSpacing.md),
+      padding: const EdgeInsets.only(bottom: MercurySpacing.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,7 +23,7 @@ Future<void> showPrivacyNotice(BuildContext context) => showGlassDialog<void>(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Privacy', style: t.titleMedium),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         p(
           'Stored on this device',
           'Your library index, artwork extracted from your files, playlists, '
@@ -36,7 +36,7 @@ Future<void> showPrivacyNotice(BuildContext context) => showGlassDialog<void>(
         ),
         p(
           'Google / YouTube (future)',
-          'When account support arrives, NOIR will talk only to Google, with '
+          'When account support arrives, MERCURY will talk only to Google, with '
               'your consent, and you will be able to disconnect and revoke '
               'access at any time.',
         ),

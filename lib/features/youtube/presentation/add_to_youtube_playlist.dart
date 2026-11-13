@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// "Add to playlist…" for a YouTube song: the user's YouTube playlists with
 /// a check on those that contain it. Tapping one adds or removes the song
@@ -60,7 +60,7 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final playlists = ref.watch(youTubePlaylistsProvider).value ?? const [];
     final containing =
         ref.watch(youTubePlaylistsWithVideoProvider(track.uri)).value ??
@@ -87,18 +87,18 @@ class _Body extends ConsumerWidget {
       String? subtitle,
     }) => InkWell(
       onTap: onTap,
-      borderRadius: NoirRadii.mdAll,
+      borderRadius: MercuryRadii.mdAll,
       hoverColor: c.hover,
       focusColor: c.selected,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: NoirSpacing.sm,
-          vertical: NoirSpacing.sm,
+          horizontal: MercurySpacing.sm,
+          vertical: MercurySpacing.sm,
         ),
         child: Row(
           children: [
             SizedBox.square(dimension: 20, child: Center(child: leading)),
-            const SizedBox(width: NoirSpacing.md),
+            const SizedBox(width: MercurySpacing.md),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,12 +149,12 @@ class _Body extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Save to playlist', style: t.titleMedium),
-        const SizedBox(height: NoirSpacing.sm),
+        const SizedBox(height: MercurySpacing.sm),
         Text(
           'Changes go straight to your YouTube account.',
           style: t.bodySmall,
         ),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 320),
           child: ListView(
@@ -184,7 +184,7 @@ class _Body extends ConsumerWidget {
           subtitle: 'Private',
           onTap: () => Navigator.of(context).pop(true),
         ),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(

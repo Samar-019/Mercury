@@ -1,7 +1,7 @@
 // Spike: can the official YouTube IFrame Player API run inside WebView2 on
 // Windows with a valid embedder identity (no Error 153)?
 //
-// MODE=mapped  -> page served from https://app.noir.player/ via WebView2
+// MODE=mapped  -> page served from https://app.mercury.player/ via WebView2
 //                 virtual host mapping (expected: works).
 // MODE=string  -> same page loaded with NavigateToString, no origin
 //                 (control: expected Error 153).
@@ -15,7 +15,7 @@ import 'package:webview_windows/webview_windows.dart';
 
 const _mode = String.fromEnvironment('MODE', defaultValue: 'mapped');
 const _videoId = String.fromEnvironment('VIDEO', defaultValue: 'dQw4w9WgXcQ');
-const _host = 'app.noir.player';
+const _host = 'app.mercury.player';
 
 String _playerHtml(String origin) => '''
 <!doctype html>
@@ -85,7 +85,7 @@ class _SpikeAppState extends State<SpikeApp> {
     await _controller.initialize();
     _controller.webMessage.listen((m) => stdout.writeln('SPIKE: $m'));
     if (_mode == 'mapped') {
-      final dir = Directory('${Directory.systemTemp.path}\\noir_yt_spike')
+      final dir = Directory('${Directory.systemTemp.path}\\mercury_yt_spike')
         ..createSync(recursive: true);
       File('${dir.path}\\player.html')
           .writeAsStringSync(_playerHtml(", origin: 'https://$_host'"));
@@ -96,7 +96,7 @@ class _SpikeAppState extends State<SpikeApp> {
       await _controller.loadStringContent(_playerHtml(''));
     }
     setState(() => _ready = true);
-    // Like NOIR: cue, then play from outside the page (no user gesture).
+    // Like MERCURY: cue, then play from outside the page (no user gesture).
     Timer(const Duration(seconds: 6), () async {
       await _controller.executeScript("player.cueVideoById({videoId:'$_videoId',startSeconds:0})");
       await _controller.executeScript('window.wantPlay = true; player.playVideo()');

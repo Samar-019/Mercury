@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/integrations/youtube_music/ytm_parsers.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/integrations/youtube_music/ytm_parsers.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import 'fake_innertube.dart';
 

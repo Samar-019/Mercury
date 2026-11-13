@@ -4,14 +4,14 @@ import 'dart:ui' show lerpDouble;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide RepeatMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/mix_mode_button.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/mix_mode_button.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Shuffle · previous · play/pause · next · repeat · transitions. Controls the active
 /// engine cannot honor are not rendered at all.
@@ -34,13 +34,13 @@ class PlaybackControls extends ConsumerWidget {
     final caps = s.capabilities;
     final hasItem = s.current != null;
     final icon = large ? 28.0 : 22.0;
-    final gap = SizedBox(width: large ? NoirSpacing.xl : NoirSpacing.sm);
+    final gap = SizedBox(width: large ? MercurySpacing.xl : MercurySpacing.sm);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         if (showModes && caps.canShuffle) ...[
-          NoirIconButton(
+          MercuryIconButton(
             icon: Icons.shuffle_rounded,
             tooltip: s.shuffle ? 'Shuffle on' : 'Shuffle off',
             active: s.shuffle,
@@ -50,11 +50,11 @@ class PlaybackControls extends ConsumerWidget {
           gap,
         ],
         if (caps.canSkip) ...[
-          NoirIconButton(
+          MercuryIconButton(
             icon: Icons.skip_previous_rounded,
             tooltip: 'Previous',
             size: icon,
-            color: context.noir.textPrimary,
+            color: context.mercury.textPrimary,
             onPressed: hasItem ? () => unawaited(ctrl.previous()) : null,
           ),
           gap,
@@ -66,17 +66,17 @@ class PlaybackControls extends ConsumerWidget {
         ),
         if (caps.canSkip) ...[
           gap,
-          NoirIconButton(
+          MercuryIconButton(
             icon: Icons.skip_next_rounded,
             tooltip: 'Next',
             size: icon,
-            color: context.noir.textPrimary,
+            color: context.mercury.textPrimary,
             onPressed: s.hasNext ? () => unawaited(ctrl.next()) : null,
           ),
         ],
         if (showModes && caps.canRepeat) ...[
           gap,
-          NoirIconButton(
+          MercuryIconButton(
             icon: s.repeat == RepeatMode.one
                 ? Icons.repeat_one_rounded
                 : Icons.repeat_rounded,
@@ -141,7 +141,7 @@ class _ProgressSliderState extends ConsumerState<ProgressSlider>
       next,
     ) {
       if (previous == null || next == null || previous == next) return;
-      final duration = NoirEffects.of(context).motion(_rewindTime);
+      final duration = MercuryEffects.of(context).motion(_rewindTime);
       if (duration == Duration.zero || _shownMs == 0 || _dragMs != null) {
         return;
       }
@@ -180,14 +180,14 @@ class _ProgressSliderState extends ConsumerState<ProgressSlider>
                 ? lerpDouble(
                     _rewindFromMs,
                     liveMs,
-                    NoirMotion.standard.transform(_rewind.value),
+                    MercuryMotion.standard.transform(_rewind.value),
                   )!
                 : liveMs)
             .clamp(0.0, maxMs > 0 ? maxMs : 0.0);
     _shownMs = valueMs;
     final t = Theme.of(context).textTheme.labelSmall?.copyWith(
       fontFeatures: tabularFigures,
-      color: context.noir.textSecondary,
+      color: context.mercury.textSecondary,
     );
     final shown = Duration(milliseconds: valueMs.round());
 
@@ -251,7 +251,7 @@ class _ProgressSliderState extends ConsumerState<ProgressSlider>
       children: [
         slider,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: NoirSpacing.lg),
+          padding: const EdgeInsets.symmetric(horizontal: MercurySpacing.lg),
           child: Row(
             children: [
               Text(formatClock(shown), style: t),
@@ -283,7 +283,7 @@ class ProgressLine extends ConsumerWidget {
       child: LinearProgressIndicator(
         value: value,
         minHeight: 2,
-        borderRadius: NoirRadii.pillAll,
+        borderRadius: MercuryRadii.pillAll,
       ),
     );
   }
@@ -332,7 +332,7 @@ class _VolumeControlState extends ConsumerState<VolumeControl>
 
   void _glideTo(double target) {
     _to = target;
-    final duration = NoirEffects.of(context).motion(NoirMotion.fast);
+    final duration = MercuryEffects.of(context).motion(MercuryMotion.fast);
     if (duration == Duration.zero) {
       unawaited(ref.read(playbackProvider.notifier).setVolume(target));
       return;
@@ -344,7 +344,7 @@ class _VolumeControlState extends ConsumerState<VolumeControl>
   }
 
   void _onGlide() {
-    final t = NoirMotion.standard.transform(_glide.value);
+    final t = MercuryMotion.standard.transform(_glide.value);
     unawaited(
       ref.read(playbackProvider.notifier).setVolume(lerpDouble(_from, _to, t)!),
     );
@@ -363,7 +363,7 @@ class _VolumeControlState extends ConsumerState<VolumeControl>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          NoirIconButton(
+          MercuryIconButton(
             icon: volume == 0
                 ? Icons.volume_off_rounded
                 : volume < 0.5

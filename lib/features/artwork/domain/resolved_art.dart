@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
-import 'package:noir/features/lyrics/domain/song_guess.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/lyrics/domain/song_guess.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
-/// What NOIR found out about a YouTube video's artwork, plus the
+/// What MERCURY found out about a YouTube video's artwork, plus the
 /// YouTube Music metadata that came with it (byline links, video type).
 @immutable
 class ResolvedArt {

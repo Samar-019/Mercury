@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/shell/sidebar.dart';
-import 'package:noir/core/widgets/shelf_row.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/features/discover/application/for_you.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/shell/sidebar.dart';
+import 'package:mercury/core/widgets/shelf_row.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/features/discover/application/for_you.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 
 import '../helpers/fake_innertube_client.dart';
 import '../helpers/pump_app.dart';

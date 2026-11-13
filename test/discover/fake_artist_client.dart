@@ -1,5 +1,5 @@
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 
 import '../helpers/fake_innertube_client.dart';
 

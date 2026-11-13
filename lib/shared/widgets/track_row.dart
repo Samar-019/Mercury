@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/application/unplayable_tracks.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/track_menu.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/unplayable_tracks.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/track_menu.dart';
 
 /// A track in any list: number or artwork, title/artist, duration, and a
 /// context menu (right-click, long-press, or the "more" button).
@@ -50,7 +50,7 @@ class _TrackRowState extends ConsumerState<TrackRow> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     final compact =
         ref.watch(settingsProvider.select((s) => s.density)) == Density.compact;
@@ -78,14 +78,14 @@ class _TrackRowState extends ConsumerState<TrackRow> {
           onLongPressStart: (d) => _showMenu(d.globalPosition),
           child: InkWell(
             onTap: widget.onPlay,
-            borderRadius: NoirRadii.mdAll,
+            borderRadius: MercuryRadii.mdAll,
             hoverColor: c.hover,
             focusColor: c.selected,
-            hoverDuration: NoirEffects.of(context).motion(NoirMotion.fast),
+            hoverDuration: MercuryEffects.of(context).motion(MercuryMotion.fast),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: NoirSpacing.sm,
-                vertical: compact ? NoirSpacing.xs : NoirSpacing.sm - 2,
+                horizontal: MercurySpacing.sm,
+                vertical: compact ? MercurySpacing.xs : MercurySpacing.sm - 2,
               ),
               child: Row(
                 children: [
@@ -107,7 +107,7 @@ class _TrackRowState extends ConsumerState<TrackRow> {
                     ),
                   if (widget.showArtwork) ...[
                     Artwork(path: track.artwork, size: art, radius: 6),
-                    const SizedBox(width: NoirSpacing.md),
+                    const SizedBox(width: MercurySpacing.md),
                   ],
                   Expanded(
                     child: Column(
@@ -137,7 +137,7 @@ class _TrackRowState extends ConsumerState<TrackRow> {
                   ),
                   if (track.isFavorite)
                     Padding(
-                      padding: const EdgeInsets.only(left: NoirSpacing.sm),
+                      padding: const EdgeInsets.only(left: MercurySpacing.sm),
                       child: Icon(
                         Icons.favorite_rounded,
                         size: 14,
@@ -148,14 +148,14 @@ class _TrackRowState extends ConsumerState<TrackRow> {
                   // YouTube songs: saved to the user's chosen playlist.
                   if (track.source == MediaSource.youtube)
                     Padding(
-                      padding: const EdgeInsets.only(left: NoirSpacing.xs),
+                      padding: const EdgeInsets.only(left: MercurySpacing.xs),
                       child: YouTubeSaveButton(
                         track,
                         size: 16,
                         showWhenUnsaved: _hovered || !_hasHover(context),
                       ),
                     ),
-                  const SizedBox(width: NoirSpacing.md),
+                  const SizedBox(width: MercurySpacing.md),
                   widget.trailing ??
                       Text(
                         track.duration == null
@@ -214,12 +214,12 @@ class _MoreButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: visible ? 1 : 0,
-      duration: NoirEffects.of(context).motion(NoirMotion.fast),
+      duration: MercuryEffects.of(context).motion(MercuryMotion.fast),
       child: Builder(
         builder: (context) => IconButton(
           tooltip: 'More',
           icon: const Icon(Icons.more_horiz_rounded, size: 18),
-          color: context.noir.textSecondary,
+          color: context.mercury.textSecondary,
           onPressed: () {
             final box = context.findRenderObject()! as RenderBox;
             onPressed(box.localToGlobal(box.size.center(Offset.zero)));

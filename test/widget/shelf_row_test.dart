@@ -2,11 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/shelf_row.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/shelf_row.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
 
 const _effects = EffectsConfig(
   glass: false,
@@ -27,8 +27,8 @@ Future<ScrollController> _pump(WidgetTester tester) async {
   addTearDown(page.dispose);
   await tester.pumpWidget(
     MaterialApp(
-      theme: buildNoirTheme(Brightness.dark, Density.comfortable),
-      home: NoirEffects(
+      theme: buildMercuryTheme(Brightness.dark, Density.comfortable),
+      home: MercuryEffects(
         config: _effects,
         child: Scaffold(
           body: ListView(

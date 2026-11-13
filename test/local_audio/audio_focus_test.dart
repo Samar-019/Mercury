@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/integrations/local_audio/local_audio_engine.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/integrations/local_audio/local_audio_engine.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// A deck that only remembers whether it plays and how loud.
 class _Deck implements AudioDeck {

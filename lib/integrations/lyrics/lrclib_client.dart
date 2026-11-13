@@ -52,7 +52,7 @@ class LrclibClient {
   final Dio _dio;
   final String baseUrl;
 
-  static const userAgent = 'NOIR/1.0.0';
+  static const userAgent = 'MERCURY/1.0.0';
 
   /// Exact lookup. LRCLIB matches the duration within ±2 s. Null on 404.
   Future<LrclibRecord?> get({

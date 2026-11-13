@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_refresh.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_refresh.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/fake_http.dart';
 import '../helpers/test_database.dart';

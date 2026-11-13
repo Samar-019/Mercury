@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/widgets/liquid_glass.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/widgets/liquid_glass.dart';
 
-/// NOIR's material: the same Liquid Glass as the player island
+/// MERCURY's material: the same Liquid Glass as the player island
 /// ([LiquidGlassMaterial]) in any shape, driven by the same Glass slider.
 /// With Liquid Glass off: an opaque surface with the exact same geometry,
 /// so layout never changes.
 ///
 /// [floating] surfaces (menus, dialogs, toasts, arrows over a shelf) blur
 /// and refract the content under them, through the lens shader when they
-/// are small. The rest sit on NOIR's smooth canvas and paint the same glass
+/// are small. The rest sit on MERCURY's smooth canvas and paint the same glass
 /// without a backdrop pass.
 ///
 /// Use sparingly — navigation, player, panels, dialogs, menus — never per
@@ -18,7 +18,7 @@ import 'package:noir/core/widgets/liquid_glass.dart';
 class GlassSurface extends StatefulWidget {
   const GlassSurface({
     required this.child,
-    this.borderRadius = NoirRadii.lgAll,
+    this.borderRadius = MercuryRadii.lgAll,
     this.blur,
     this.fillOpacity = 1,
     this.borderOpacity = 1,
@@ -77,7 +77,7 @@ class _GlassSurfaceState extends State<GlassSurface> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final active = widget.selected || (widget.interactive && _hovered);
     // Phones skip the lens shader: it samples the backdrop again every
     // frame a menu or popover animates, which a phone's GPU felt.

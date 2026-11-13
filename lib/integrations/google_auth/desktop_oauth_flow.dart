@@ -6,7 +6,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:noir/integrations/google_auth/google_oauth_config.dart';
+import 'package:mercury/integrations/google_auth/google_oauth_config.dart';
 
 /// Tokens returned by Google's token endpoint. Never logged.
 class OAuthTokens {
@@ -90,7 +90,7 @@ final class OAuthReauthRequired extends OAuthException {
 final class OAuthWriteDeclined extends OAuthException {
   const OAuthWriteDeclined()
     : super(
-        "NOIR can't save songs to your playlists without that permission. "
+        "MERCURY can't save songs to your playlists without that permission. "
         'Everything else keeps working.',
       );
 }
@@ -286,11 +286,11 @@ class DesktopOAuthFlow {
 
   static String _page(bool ok) =>
       '''
-<!doctype html><html><head><meta charset="utf-8"><title>NOIR</title>
+<!doctype html><html><head><meta charset="utf-8"><title>MERCURY</title>
 <style>body{margin:0;height:100vh;display:grid;place-items:center;
 background:#090909;color:#f2f2f0;font:16px system-ui,sans-serif}
 p{color:#a3a3a3}</style></head><body><div>
 <h1>${ok ? 'Connected' : 'Not connected'}</h1>
-<p>${ok ? 'You can close this tab and return to NOIR.' : 'Return to NOIR and try again.'}</p>
+<p>${ok ? 'You can close this tab and return to MERCURY.' : 'Return to MERCURY and try again.'}</p>
 </div></body></html>''';
 }

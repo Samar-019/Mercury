@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
 
 /// Space plays or pauses, Ctrl+→ and Ctrl+← skip, anywhere under [child].
 ///

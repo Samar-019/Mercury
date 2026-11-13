@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 
 /// Apple Liquid Glass press response for a small control (an icon button):
 /// on pointer down a glassy lens bubble — translucent, with a bright rim —
@@ -82,7 +82,7 @@ class _LiquidPressState extends State<LiquidPress>
   }
 
   void _springTo(double target, SpringDescription spring) {
-    if (!NoirEffects.of(context).animations) {
+    if (!MercuryEffects.of(context).animations) {
       _press.value = target;
       return;
     }
@@ -116,7 +116,7 @@ class _LiquidPressState extends State<LiquidPress>
     if (e.pointer != _pointer) return;
     _pointer = null;
     _springTo(0, _out);
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final box = context.findRenderObject() as RenderBox?;
     final inside =
         box != null && box.hasSize && box.size.contains(e.localPosition);
@@ -127,7 +127,7 @@ class _LiquidPressState extends State<LiquidPress>
 
   @override
   Widget build(BuildContext context) {
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final bubble = fx.highlights;
     final dark = Theme.of(context).brightness == Brightness.dark;
     return Listener(
@@ -334,8 +334,8 @@ class _BubblePainter extends CustomPainter {
       old.dark != dark;
 }
 
-/// Turns on [LiquidPress] for the NOIR buttons below it that support it
-/// (`NoirIconButton`, `PrimaryPlayButton`) — opt-in, so buttons elsewhere
+/// Turns on [LiquidPress] for the MERCURY buttons below it that support it
+/// (`MercuryIconButton`, `PrimaryPlayButton`) — opt-in, so buttons elsewhere
 /// keep their usual feedback.
 class LiquidPressScope extends InheritedWidget {
   const LiquidPressScope({required super.child, super.key});

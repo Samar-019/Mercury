@@ -1,4 +1,4 @@
-import 'package:noir/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
 
 /// A synthetic analysis on an exact grid: [bars] bars at [bpm] starting at
 /// [downbeat], with optional vocals between bar numbers.

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Wall-clock time for the mixer; tests substitute a simulated one.
 abstract interface class MixClock {

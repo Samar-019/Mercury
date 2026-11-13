@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
 
-/// A transport command from outside NOIR's own UI.
+/// A transport command from outside MERCURY's own UI.
 enum MediaCommand { playPause, play, pause, next, previous, stop }
 
 /// Where a [MediaCommand] came from.
 enum MediaCommandSource {
-  /// A media key seen by NOIR's focused window.
+  /// A media key seen by MERCURY's focused window.
   keyboard,
 
   /// The OS media session (Windows SMTC: media keys and the media flyout).
@@ -17,7 +17,7 @@ final mediaCommandsProvider = Provider<MediaCommands>(MediaCommands.new);
 
 /// Routes media commands to the playback controller, once per key press.
 ///
-/// On Windows one press of a media key can reach NOIR twice: as a key event
+/// On Windows one press of a media key can reach MERCURY twice: as a key event
 /// in the focused window and as an SMTC button press. Which of the two
 /// arrives (and in what order) depends on the OS, so instead of guessing,
 /// a command that matches one accepted from the *other* source moments ago

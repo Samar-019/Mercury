@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final playlistsProvider = StreamProvider<List<Playlist>>(
   (ref) => ref.watch(playlistRepositoryProvider).watchPlaylists(),

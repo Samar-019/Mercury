@@ -3,28 +3,28 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/core/widgets/reveal.dart';
-import 'package:noir/core/widgets/shelf_row.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/playlists/presentation/add_to_playlist.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/core/widgets/reveal.dart';
+import 'package:mercury/core/widgets/shelf_row.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/playlists/presentation/add_to_playlist.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 enum LibraryTab { playlists, artists, albums, tracks, favorites }
 
@@ -88,7 +88,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
     return PageScaffold(
       title: 'Your Library',
       actions: [
-        NoirIconButton(
+        MercuryIconButton(
           icon: _filtering ? Icons.search_off_rounded : Icons.search_rounded,
           tooltip: _filtering ? 'Close filter' : 'Filter library',
           onPressed: () => setState(() {
@@ -107,15 +107,15 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
           child: Padding(
             // The chips' [ShelfRow.lift] completes the top gap.
             padding: const EdgeInsets.only(
-              top: NoirSpacing.lg - ShelfRow.lift,
-              bottom: NoirSpacing.md,
+              top: MercurySpacing.lg - ShelfRow.lift,
+              bottom: MercurySpacing.md,
             ),
             child: Row(
               children: [
                 Expanded(
                   child: ShelfRow(
                     height: MediaQuery.textScalerOf(context).scale(22) + 22,
-                    spacing: NoirSpacing.xs,
+                    spacing: MercurySpacing.xs,
                     arrowSize: 32,
                     children: [
                       for (final t in tabs)
@@ -142,7 +142,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
           child: Reveal(
             visible: _filtering,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: NoirSpacing.md),
+              padding: const EdgeInsets.only(bottom: MercurySpacing.md),
               child: TextField(
                 controller: _filter,
                 autofocus: true,
@@ -152,9 +152,9 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
                   prefixIcon: const Icon(Icons.filter_list_rounded, size: 18),
                   isDense: true,
                   filled: true,
-                  fillColor: context.noir.hover,
+                  fillColor: context.mercury.hover,
                   border: const OutlineInputBorder(
-                    borderRadius: NoirRadii.pillAll,
+                    borderRadius: MercuryRadii.pillAll,
                     borderSide: BorderSide.none,
                   ),
                 ),
@@ -253,7 +253,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
     return [
       const SliverToBoxAdapter(
         child: Padding(
-          padding: EdgeInsets.only(top: NoirSpacing.xl),
+          padding: EdgeInsets.only(top: MercurySpacing.xl),
           child: SectionHeader('From YouTube'),
         ),
       ),
@@ -376,7 +376,7 @@ class _RecentlyPlayed extends ConsumerWidget {
         WindowClass.of(MediaQuery.sizeOf(context).width) == WindowClass.compact;
     final tile = compact ? 128.0 : 150.0;
     return Padding(
-      padding: const EdgeInsets.only(top: NoirSpacing.lg),
+      padding: const EdgeInsets.only(top: MercurySpacing.lg),
       child: TileRow(
         title: 'Recently played',
         tileWidth: tile,
@@ -420,7 +420,7 @@ class _SortButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NoirMenuButton<TrackSort>(
+    return MercuryMenuButton<TrackSort>(
       tooltip: 'Sort',
       icon: Icons.sort_rounded,
       onSelected: onChanged,
@@ -431,7 +431,7 @@ class _SortButton extends StatelessWidget {
           (TrackSort.album, 'Album'),
           (TrackSort.recentlyAdded, 'Recently added'),
         ])
-          NoirMenuItem(value, label, checked: value == sort),
+          MercuryMenuItem(value, label, checked: value == sort),
       ],
     );
   }
@@ -445,7 +445,7 @@ class _AddMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scan = ref.read(libraryScanProvider.notifier);
-    return NoirMenuButton<String>(
+    return MercuryMenuButton<String>(
       tooltip: 'Add',
       icon: Icons.add_rounded,
       onSelected: (v) async {
@@ -463,18 +463,18 @@ class _AddMenu extends ConsumerWidget {
         }
       },
       items: () => [
-        const NoirMenuItem(
+        const MercuryMenuItem(
           'playlist',
           'New playlist',
           icon: Icons.playlist_add_rounded,
         ),
         if (LibraryScanController.supportsFolders)
-          const NoirMenuItem(
+          const MercuryMenuItem(
             'folder',
             'Add music folder…',
             icon: Icons.create_new_folder_outlined,
           ),
-        const NoirMenuItem(
+        const MercuryMenuItem(
           'files',
           'Add files…',
           icon: Icons.library_add_outlined,
@@ -516,7 +516,7 @@ class _ScanBanner extends ConsumerWidget {
     return Reveal(
       visible: text != null,
       child: Padding(
-        padding: const EdgeInsets.only(top: NoirSpacing.md),
+        padding: const EdgeInsets.only(top: MercurySpacing.md),
         child: Row(
           children: [
             if (icon == null)
@@ -526,10 +526,10 @@ class _ScanBanner extends ConsumerWidget {
               )
             else
               Icon(icon, size: 16),
-            const SizedBox(width: NoirSpacing.sm),
+            const SizedBox(width: MercurySpacing.sm),
             Expanded(child: Text(text ?? '', style: t.bodySmall)),
             if (closable)
-              NoirIconButton(
+              MercuryIconButton(
                 icon: Icons.close_rounded,
                 tooltip: 'Dismiss',
                 size: 16,

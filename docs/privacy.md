@@ -10,7 +10,7 @@
 - Songs and artists you marked "Not interested", and which playlists you
   hid from the sidebar.
 - On Android/iOS: copies of files you import with "Add files" (app documents
-  folder → `NOIR Music/`).
+  folder → `MERCURY Music/`).
 
 Everything can be cleared in Settings (Library, Recommendations, Storage)
 or by removing library folders.
@@ -34,7 +34,7 @@ directly, as a logged-out visitor:
 - **Never sent:** cookies, Google sign-in or OAuth tokens, or anything
   else tied to your account. The client has its own HTTP connection with a
   guard that strips such headers. YouTube hands every logged-out visitor an
-  anonymous visitor id; NOIR keeps it in memory only.
+  anonymous visitor id; MERCURY keeps it in memory only.
 - **Stored:** results are kept in memory for at most 30 minutes (home
   feed) or a few minutes (search, radio, playlists) and never written to
   disk.
@@ -52,14 +52,14 @@ for the song currently playing. Lyrics are off at every launch; leave the
 panel closed and nothing is ever sent.
 
 **YouTube Music** (anonymous, through the same logged-out client as
-discovery above — no cookies, sign-in or tokens). For a YouTube song NOIR
+discovery above — no cookies, sign-in or tokens). For a YouTube song MERCURY
 asks music.youtube.com for that video's Lyrics tab, then for the lyrics
 behind it. Time-synced lyrics are only given to YouTube Music's Android
 app, so that one request introduces itself as the Android app (its client
 name, version and user agent) and carries no visitor id; plain lyrics are
 asked as the web client. Sent: the video id and the lyrics page id, plus the
 system language and country. Lyrics there are licensed from providers such
-as Musixmatch or LyricFind, which NOIR names under the lyrics.
+as Musixmatch or LyricFind, which MERCURY names under the lyrics.
 
 **LRCLIB** ([lrclib.net](https://lrclib.net), a free community lyrics
 database) is asked for local files first, and for YouTube songs when YouTube
@@ -67,21 +67,21 @@ Music has no time-synced lyrics. It is sent:
 
 - the song title and artist (for YouTube videos: the cleaned-up video title
   and channel name), the album for local files, and the duration in seconds;
-- a `User-Agent: NOIR/<version>` header, plus your IP address as with any
+- a `User-Agent: MERCURY/<version>` header, plus your IP address as with any
   web request.
 
-When LRCLIB has no time-synced lyrics for a local file, NOIR searches
+When LRCLIB has no time-synced lyrics for a local file, MERCURY searches
 YouTube Music's songs for its artist and title (anonymously, as above),
 and uses the lyrics of a song whose title, artist and length (within 3 s)
 match.
 
 No account, file path or listening history is sent. Answers are kept in
-memory for the last 50 songs and are gone when NOIR quits.
+memory for the last 50 songs and are gone when MERCURY quits.
 
 ## Google account (optional)
 
 Signing in with Google is optional. You sign in on Google's own page in
-your browser; NOIR never sees your password. Details of the flow are in
+your browser; MERCURY never sees your password. Details of the flow are in
 [oauth-flow.md](oauth-flow.md).
 
 - **Permissions asked:** your name, email and Google account id (`openid
@@ -90,7 +90,7 @@ your browser; NOIR never sees your password. Details of the flow are in
   a feature that needs it (see below).
 - **Read from YouTube:** your playlists and the videos in them, your liked
   videos, and the title, channel, duration and thumbnail of those videos.
-  NOIR doesn't read subscriptions, watch history, comments or anything
+  MERCURY doesn't read subscriptions, watch history, comments or anything
   else.
 - **Stored on this device:** your name, email and account id, and a copy
   of the playlists and videos above so the library opens offline. That copy
@@ -100,13 +100,13 @@ your browser; NOIR never sees your password. Details of the flow are in
   (Windows Credential Manager, Android Keystore, Apple Keychain), and are
   sent only to Google.
 - **Shared with:** nobody. Data from your Google account goes only between
-  your device and Google. NOIR has no server, and doesn't use the data for
+  your device and Google. MERCURY has no server, and doesn't use the data for
   ads or to train AI models.
-- **Disconnect** in Settings → Accounts revokes NOIR's access at Google and
+- **Disconnect** in Settings → Accounts revokes MERCURY's access at Google and
   deletes the account data and the YouTube copy from this device. You can
-  also remove NOIR's access at https://myaccount.google.com/permissions.
+  also remove MERCURY's access at https://myaccount.google.com/permissions.
 
-NOIR's use of information received from Google APIs adheres to the
+MERCURY's use of information received from Google APIs adheres to the
 [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy),
 including the Limited Use requirements. See also the
 [Google Privacy Policy](https://policies.google.com/privacy) and the
@@ -114,7 +114,7 @@ including the Limited Use requirements. See also the
 
 ## Written to your YouTube account
 
-NOIR changes your YouTube account only when you ask it to, and only after you
+MERCURY changes your YouTube account only when you ask it to, and only after you
 grant the extra permission ("manage your YouTube account") in your browser:
 
 - **Heart on a YouTube song** — adds that video to the playlist you chose in
@@ -122,20 +122,20 @@ grant the extra permission ("manage your YouTube account") in your browser:
   Tapping the filled heart removes it from that playlist again
   (`playlistItems.delete`). Nothing else in the playlist is touched.
 - **Create new playlist…** — creates one **private** playlist with the name
-  you typed (default "NOIR Likes", `playlists.insert`).
+  you typed (default "MERCURY Likes", `playlists.insert`).
 - **Liked music** — if you choose it as the heart's target, or tick it in
-  "Add to playlist…", NOIR likes the video on YouTube (`videos.rate`).
+  "Add to playlist…", MERCURY likes the video on YouTube (`videos.rate`).
   Removing a song from Liked music clears that rating.
 - **Not interested** on a YouTube song also dislikes it on YouTube
-  (`videos.rate`), if NOIR has this permission. Allowing the song again in
+  (`videos.rate`), if MERCURY has this permission. Allowing the song again in
   Settings clears the rating. Without the permission the choice stays in
-  NOIR.
+  MERCURY.
 
-NOIR never deletes playlists and never writes anything in the background. On this
+MERCURY never deletes playlists and never writes anything in the background. On this
 device it remembers which playlist you chose (deleted when you disconnect).
 You can withdraw the permission at https://myaccount.google.com/permissions
 or by disconnecting in Settings.
 
 ## Contact
 
-Questions about your data or this policy: noir.support.mail@gmail.com
+Questions about your data or this policy: mercury.support.mail@gmail.com

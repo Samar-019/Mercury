@@ -2,10 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
 
 /// Square cover art for a YouTube video.
 ///
@@ -24,7 +24,7 @@ class YouTubeCover extends ConsumerStatefulWidget {
   const YouTubeCover({
     required this.videoId,
     required this.size,
-    this.radius = NoirRadii.xl,
+    this.radius = MercuryRadii.xl,
     this.semanticLabel = 'Cover art',
     this.placeholder,
     super.key,
@@ -76,11 +76,11 @@ class _YouTubeCoverState extends ConsumerState<YouTubeCover> {
     final placeholder =
         widget.placeholder ??
         ColoredBox(
-          color: context.noir.surfaceElevated,
+          color: context.mercury.surfaceElevated,
           child: Icon(
             Icons.music_note_rounded,
             size: size * 0.3,
-            color: context.noir.textTertiary,
+            color: context.mercury.textTertiary,
           ),
         );
     final thumbnail = _ThumbnailCrop(
@@ -95,7 +95,7 @@ class _YouTubeCoverState extends ConsumerState<YouTubeCover> {
     if (artUrl == null) {
       child = thumbnail;
     } else {
-      final fade = NoirEffects.of(context).motion(NoirMotion.slow);
+      final fade = MercuryEffects.of(context).motion(MercuryMotion.slow);
       child = Stack(
         fit: StackFit.expand,
         children: [
@@ -118,7 +118,7 @@ class _YouTubeCoverState extends ConsumerState<YouTubeCover> {
               return AnimatedOpacity(
                 opacity: _artShown ? 1 : 0,
                 duration: fade,
-                curve: NoirMotion.standard,
+                curve: MercuryMotion.standard,
                 child: image,
               );
             },

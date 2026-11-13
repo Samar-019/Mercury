@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart' show immutable;
-import 'package:noir/integrations/youtube_music/json_nav.dart';
+import 'package:mercury/integrations/youtube_music/json_nav.dart';
 
 /// Lyrics as YouTube Music shows them: time-synced [lines] when it has
 /// them, otherwise plain [text].

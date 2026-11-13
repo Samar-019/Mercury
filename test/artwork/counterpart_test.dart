@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 const songArt = 'https://lh3.googleusercontent.com/song=w544-h544-l90-rj';
 

@@ -6,26 +6,26 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/shell/sidebar_hidden.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/features/accounts/presentation/account_card.dart';
-import 'package:noir/features/discover/application/for_you.dart';
-import 'package:noir/features/home/data/history_repository.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/search/data/search_history_repository.dart';
-import 'package:noir/features/settings/application/maintenance.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/privacy_notice.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
+import 'package:mercury/app/shell/sidebar_hidden.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/features/accounts/presentation/account_card.dart';
+import 'package:mercury/features/discover/application/for_you.dart';
+import 'package:mercury/features/home/data/history_repository.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/search/data/search_history_repository.dart';
+import 'package:mercury/features/settings/application/maintenance.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/privacy_notice.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
 
 /// Extra settings sections contributed by optional modules, shown after
 /// Playback. Empty by default.
@@ -57,7 +57,7 @@ class SettingsScreen extends ConsumerWidget {
                   value: s.themeMode,
                   onChanged: (m) => set((s) => s.copyWith(themeMode: m)),
                 ),
-                const SizedBox(height: NoirSpacing.md),
+                const SizedBox(height: MercurySpacing.md),
                 _ChoiceTile<Density>(
                   icon: Icons.density_medium_rounded,
                   title: 'Density',
@@ -147,7 +147,7 @@ class SettingsScreen extends ConsumerWidget {
                     icon: Icons.view_sidebar_rounded,
                     title: 'Player at the screen edge',
                     subtitle:
-                        'While NOIR is in the background, point at the line '
+                        'While MERCURY is in the background, point at the line '
                         'at the screen edge. Drag the player to any edge.',
                     value: s.edgePlayerEnabled,
                     onChanged: (v) =>
@@ -193,7 +193,7 @@ class _Section extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 28, bottom: NoirSpacing.md),
+    padding: const EdgeInsets.only(top: 28, bottom: MercurySpacing.md),
     child: Semantics(
       header: true,
       child: Text(title, style: Theme.of(context).textTheme.titleSmall),
@@ -215,8 +215,8 @@ class _ThemePicker extends StatelessWidget {
       (ThemeMode.system, Icons.desktop_windows_outlined, 'System'),
     ];
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     return Row(
       children: [
         for (final (mode, icon, label) in options) ...[
@@ -248,13 +248,13 @@ class _ThemePicker extends StatelessWidget {
                                     ? c.textPrimary
                                     : c.textSecondary,
                               ),
-                              duration: fx.motion(NoirMotion.medium),
+                              duration: fx.motion(MercuryMotion.medium),
                               builder: (_, color, _) =>
                                   Icon(icon, size: 20, color: color),
                             ),
                             const SizedBox(height: 6),
                             AnimatedDefaultTextStyle(
-                              duration: fx.motion(NoirMotion.medium),
+                              duration: fx.motion(MercuryMotion.medium),
                               style: t.labelMedium!.copyWith(
                                 color: value == mode ? c.textPrimary : null,
                               ),
@@ -269,7 +269,7 @@ class _ThemePicker extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: NoirSpacing.md),
+          const SizedBox(width: MercurySpacing.md),
         ],
       ],
     );
@@ -287,10 +287,10 @@ class _IconBadge extends StatelessWidget {
     height: 36,
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: context.noir.hover,
-      border: Border.all(color: context.noir.glassBorder),
+      color: context.mercury.hover,
+      border: Border.all(color: context.mercury.glassBorder),
     ),
-    child: Icon(icon, size: 18, color: context.noir.textSecondary),
+    child: Icon(icon, size: 18, color: context.mercury.textSecondary),
   );
 }
 
@@ -315,17 +315,17 @@ class _ToggleTile extends StatelessWidget {
     return MergeSemantics(
       child: InkWell(
         onTap: () => onChanged(!value),
-        borderRadius: NoirRadii.mdAll,
-        hoverDuration: NoirEffects.of(context).motion(NoirMotion.fast),
+        borderRadius: MercuryRadii.mdAll,
+        hoverDuration: MercuryEffects.of(context).motion(MercuryMotion.fast),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: NoirSpacing.sm,
-            horizontal: NoirSpacing.xs,
+            vertical: MercurySpacing.sm,
+            horizontal: MercurySpacing.xs,
           ),
           child: Row(
             children: [
               _IconBadge(icon),
-              const SizedBox(width: NoirSpacing.md),
+              const SizedBox(width: MercurySpacing.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +336,7 @@ class _ToggleTile extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: NoirSpacing.md),
+              const SizedBox(width: MercurySpacing.md),
               Switch(value: value, onChanged: onChanged),
             ],
           ),
@@ -368,19 +368,19 @@ class _ChoiceTile<T> extends StatelessWidget {
     final t = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: NoirSpacing.sm,
-        horizontal: NoirSpacing.xs,
+        vertical: MercurySpacing.sm,
+        horizontal: MercurySpacing.xs,
       ),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: NoirSpacing.md,
-        runSpacing: NoirSpacing.sm,
+        spacing: MercurySpacing.md,
+        runSpacing: MercurySpacing.sm,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               _IconBadge(icon),
-              const SizedBox(width: NoirSpacing.md),
+              const SizedBox(width: MercurySpacing.md),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +396,7 @@ class _ChoiceTile<T> extends StatelessWidget {
             ],
           ),
           Wrap(
-            spacing: NoirSpacing.xs,
+            spacing: MercurySpacing.xs,
             children: [
               for (final MapEntry(:key, value: label) in options.entries)
                 PillChip(
@@ -433,7 +433,7 @@ class _SliderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.only(left: 52, right: NoirSpacing.xs),
+      padding: const EdgeInsets.only(left: 52, right: MercurySpacing.xs),
       child: Row(
         children: [
           SizedBox(
@@ -441,7 +441,7 @@ class _SliderTile extends StatelessWidget {
             child: Text(
               label,
               style: onChanged == null
-                  ? t.bodySmall?.copyWith(color: context.noir.textTertiary)
+                  ? t.bodySmall?.copyWith(color: context.mercury.textTertiary)
                   : t.bodySmall,
             ),
           ),
@@ -484,12 +484,12 @@ class _LibrarySettings extends ConsumerWidget {
           subtitle: switch (folders.length) {
             _ when !LibraryScanController.supportsFolders =>
               'Add audio files from this device.',
-            0 => 'Add a folder and NOIR keeps it in sync.',
+            0 => 'Add a folder and MERCURY keeps it in sync.',
             1 => '1 folder',
             final n => '$n folders',
           },
           trailing: Wrap(
-            spacing: NoirSpacing.sm,
+            spacing: MercurySpacing.sm,
             children: [
               if (LibraryScanController.supportsFolders)
                 PillButton(
@@ -522,7 +522,7 @@ class _LibrarySettings extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                NoirIconButton(
+                MercuryIconButton(
                   icon: Icons.close_rounded,
                   tooltip: 'Remove folder from library',
                   size: 16,
@@ -543,7 +543,7 @@ class _LibrarySettings extends ConsumerWidget {
           ),
         if (folders.isNotEmpty)
           Padding(
-            padding: const EdgeInsets.only(left: 52, top: NoirSpacing.xs),
+            padding: const EdgeInsets.only(left: 52, top: MercurySpacing.xs),
             child: PillButton(
               label: scan is Scanning ? 'Scanning…' : 'Rescan',
               icon: Icons.refresh_rounded,
@@ -608,7 +608,7 @@ class _RecommendationSettings extends ConsumerWidget {
   }
 }
 
-/// Space NOIR uses on this device, and what it remembers.
+/// Space MERCURY uses on this device, and what it remembers.
 class _StorageSettings extends ConsumerWidget {
   const _StorageSettings();
 
@@ -676,13 +676,13 @@ class _ActionTile extends StatelessWidget {
     final t = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: NoirSpacing.sm,
-        horizontal: NoirSpacing.xs,
+        vertical: MercurySpacing.sm,
+        horizontal: MercurySpacing.xs,
       ),
       child: Row(
         children: [
           _IconBadge(icon),
-          const SizedBox(width: NoirSpacing.md),
+          const SizedBox(width: MercurySpacing.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -693,7 +693,7 @@ class _ActionTile extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: NoirSpacing.md),
+          const SizedBox(width: MercurySpacing.md),
           trailing,
         ],
       ),
@@ -708,7 +708,7 @@ class _SidebarDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final hidden = ref.watch(sidebarHiddenProvider);
     final ctrl = ref.read(sidebarHiddenProvider.notifier);
     final likes = ref.watch(youTubeLikesProvider).value ?? const [];
@@ -725,9 +725,9 @@ class _SidebarDialog extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Show in sidebar', style: t.titleMedium),
-        const SizedBox(height: NoirSpacing.sm),
+        const SizedBox(height: MercurySpacing.sm),
         Text('Hidden playlists stay in Library.', style: t.bodySmall),
-        const SizedBox(height: NoirSpacing.md),
+        const SizedBox(height: MercurySpacing.md),
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 360),
           child: ListView(
@@ -750,7 +750,7 @@ class _SidebarDialog extends ConsumerWidget {
             ],
           ),
         ),
-        const SizedBox(height: NoirSpacing.md),
+        const SizedBox(height: MercurySpacing.md),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
@@ -771,7 +771,7 @@ class _About extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
     final info = ref.watch(packageInfoProvider).value;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -783,10 +783,10 @@ class _About extends ConsumerWidget {
         ),
         const SizedBox(height: 2),
         Text('Less interface. More music.', style: t.bodySmall),
-        const SizedBox(height: NoirSpacing.md),
+        const SizedBox(height: MercurySpacing.md),
         Wrap(
-          spacing: NoirSpacing.sm,
-          runSpacing: NoirSpacing.sm,
+          spacing: MercurySpacing.sm,
+          runSpacing: MercurySpacing.sm,
           children: [
             PillButton(
               label: 'Privacy',
@@ -798,7 +798,7 @@ class _About extends ConsumerWidget {
               icon: Icons.description_outlined,
               onPressed: () => showLicensePage(
                 context: context,
-                applicationName: 'NOIR',
+                applicationName: 'MERCURY',
                 applicationVersion: info?.version,
               ),
             ),
@@ -811,7 +811,7 @@ class _About extends ConsumerWidget {
         ),
         if (!fx.animations && MediaQuery.disableAnimationsOf(context))
           Padding(
-            padding: const EdgeInsets.only(top: NoirSpacing.md),
+            padding: const EdgeInsets.only(top: MercurySpacing.md),
             child: Text('Reduced motion is on.', style: t.labelSmall),
           ),
       ],
@@ -825,7 +825,7 @@ class _About extends ConsumerWidget {
     try {
       saved = await FilePicker.saveFile(
         dialogTitle: 'Save diagnostics',
-        fileName: 'noir-diagnostics.json',
+        fileName: 'mercury-diagnostics.json',
         mimeType: 'application/json',
         bytes: bytes,
       );

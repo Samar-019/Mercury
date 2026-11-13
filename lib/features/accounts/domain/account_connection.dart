@@ -5,9 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as tabs;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/integrations/google_auth/desktop_oauth_flow.dart';
-import 'package:noir/integrations/google_auth/google_oauth_config.dart';
-import 'package:noir/integrations/google_auth/token_store.dart';
+import 'package:mercury/integrations/google_auth/desktop_oauth_flow.dart';
+import 'package:mercury/integrations/google_auth/google_oauth_config.dart';
+import 'package:mercury/integrations/google_auth/token_store.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum AccountStatus {
@@ -42,7 +42,7 @@ class AccountConnection {
 
   bool get isConnected => status == AccountStatus.connected;
 
-  /// Whether NOIR may add and remove items in the user's playlists.
+  /// Whether MERCURY may add and remove items in the user's playlists.
   bool get canSaveToPlaylists =>
       isConnected && GoogleOAuthConfig.grantsWrite(grantedScopes);
 }
@@ -147,7 +147,7 @@ class GoogleAccountService implements AccountConnectionService {
       if (!tokens.scopes.contains(GoogleOAuthConfig.youtubeReadOnlyScope)) {
         // Google's consent screen lets people untick individual scopes.
         throw const OAuthFailed(
-          'NOIR needs permission to view your YouTube account. Connect again '
+          'MERCURY needs permission to view your YouTube account. Connect again '
           'and keep the YouTube box ticked.',
         );
       }

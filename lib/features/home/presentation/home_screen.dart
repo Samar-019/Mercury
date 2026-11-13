@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/features/discover/presentation/discover_section.dart';
-import 'package:noir/features/home/application/pinned_playlists.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/features/discover/presentation/discover_section.dart';
+import 'package:mercury/features/home/application/pinned_playlists.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
 
 /// Quiet, editorial start page: the user's saved collections in one row,
 /// then Discover (YouTube Music's anonymous home feed). The player island
@@ -53,7 +53,7 @@ class _Greeting extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.only(top: NoirSpacing.sm, bottom: 28),
+      padding: const EdgeInsets.only(top: MercurySpacing.sm, bottom: 28),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -156,18 +156,18 @@ class _PlaylistsRow extends ConsumerWidget {
             artwork: c.artwork,
             onTap: () => context.go(pin.location),
             onContextMenu: (position) async {
-              final action = await showNoirMenu<String>(
+              final action = await showMercuryMenu<String>(
                 context,
                 anchor: position & Size.zero,
                 items: [
                   if (pinned)
-                    const NoirMenuItem(
+                    const MercuryMenuItem(
                       'pin',
                       'Unpin from Home',
                       icon: Icons.push_pin_outlined,
                     )
                   else
-                    const NoirMenuItem(
+                    const MercuryMenuItem(
                       'pin',
                       'Pin to Home',
                       icon: Icons.push_pin_rounded,

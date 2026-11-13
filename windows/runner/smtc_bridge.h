@@ -12,8 +12,8 @@
 #include "taskbar_buttons.h"
 
 // Bridges Windows' System Media Transport Controls (the media flyout and the
-// keyboard media keys, which work while NOIR is unfocused or minimized) to
-// Dart over the "noir/smtc" method channel. The taskbar thumbnail's buttons
+// keyboard media keys, which work while MERCURY is unfocused or minimized) to
+// Dart over the "mercury/smtc" method channel. The taskbar thumbnail's buttons
 // follow the same state and report presses the same way.
 //
 // Dart -> native: "metadata", "playback", "timeline", "clear".

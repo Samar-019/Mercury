@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:noir/integrations/local_audio/mpv_deck.dart';
+import 'package:mercury/integrations/local_audio/mpv_deck.dart';
 
 import '../helpers/wav.dart';
 
@@ -40,7 +40,7 @@ void main() {
         unawaited(r.response.close());
       });
       final url = 'http://127.0.0.1:${server.port}';
-      final dir = Directory.systemTemp.createTempSync('noir_deck_');
+      final dir = Directory.systemTemp.createTempSync('mercury_deck_');
       addTearDown(() => dir.deleteSync(recursive: true));
       final deck = MpvDeck();
       addTearDown(deck.dispose);
@@ -72,7 +72,7 @@ void main() {
 
   group('text sniffing', () {
     late Directory dir;
-    setUp(() => dir = Directory.systemTemp.createTempSync('noir_sniff_'));
+    setUp(() => dir = Directory.systemTemp.createTempSync('mercury_sniff_'));
     tearDown(() => dir.deleteSync(recursive: true));
 
     Future<bool> sniff(List<int> bytes) {

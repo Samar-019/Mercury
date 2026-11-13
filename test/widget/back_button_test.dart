@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/library/presentation/collection_screens.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/now_playing_screen.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/library/presentation/collection_screens.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/now_playing_screen.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 import '../helpers/pump_app.dart';
 

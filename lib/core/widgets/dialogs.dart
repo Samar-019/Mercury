@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
 
 /// Shows the widget built by `builder` in a glass dialog over a dimmed
 /// backdrop.
@@ -12,28 +12,28 @@ Future<T?> showGlassDialog<T>(
   BuildContext context, {
   required Widget Function(BuildContext context) builder,
 }) {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   return showGeneralDialog<T>(
     context: context,
     barrierDismissible: true,
     barrierLabel: 'Dismiss',
     barrierColor: Colors.black.withValues(alpha: 0.45),
-    transitionDuration: fx.motion(NoirMotion.medium),
+    transitionDuration: fx.motion(MercuryMotion.medium),
     pageBuilder: (context, _, _) => SafeArea(
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 420),
           child: Padding(
-            padding: const EdgeInsets.all(NoirSpacing.lg),
+            padding: const EdgeInsets.all(MercurySpacing.lg),
             child: Material(
               type: MaterialType.transparency,
               // A scrim keeps the text legible on clear glass.
               child: GlassSurface(
-                borderRadius: NoirRadii.xlAll,
+                borderRadius: MercuryRadii.xlAll,
                 floating: true,
                 shadow: 1,
                 fillOpacity: 4,
-                padding: const EdgeInsets.all(NoirSpacing.xl),
+                padding: const EdgeInsets.all(MercurySpacing.xl),
                 child: builder(context),
               ),
             ),
@@ -44,7 +44,7 @@ Future<T?> showGlassDialog<T>(
     transitionBuilder: (context, animation, _, child) {
       final curved = CurvedAnimation(
         parent: animation,
-        curve: NoirMotion.standard,
+        curve: MercuryMotion.standard,
       );
       return AnimatedBuilder(
         animation: curved,
@@ -71,15 +71,15 @@ Future<bool> confirm(
     context,
     builder: (context) {
       final t = Theme.of(context).textTheme;
-      final c = context.noir;
+      final c = context.mercury;
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: t.titleMedium),
-          const SizedBox(height: NoirSpacing.sm),
+          const SizedBox(height: MercurySpacing.sm),
           Text(message, style: t.bodySmall),
-          const SizedBox(height: NoirSpacing.xl),
+          const SizedBox(height: MercurySpacing.xl),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -88,7 +88,7 @@ Future<bool> confirm(
                 style: TextButton.styleFrom(foregroundColor: c.textSecondary),
                 child: const Text('Cancel'),
               ),
-              const SizedBox(width: NoirSpacing.sm),
+              const SizedBox(width: MercurySpacing.sm),
               TextButton(
                 autofocus: true,
                 onPressed: () => Navigator.of(context).pop(true),
@@ -159,13 +159,13 @@ class _PromptBodyState extends State<_PromptBody> {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.title, style: t.titleMedium),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         TextField(
           controller: _controller,
           autofocus: true,
@@ -178,12 +178,12 @@ class _PromptBodyState extends State<_PromptBody> {
             filled: true,
             fillColor: c.hover,
             border: const OutlineInputBorder(
-              borderRadius: NoirRadii.mdAll,
+              borderRadius: MercuryRadii.mdAll,
               borderSide: BorderSide.none,
             ),
           ),
         ),
-        const SizedBox(height: NoirSpacing.xl),
+        const SizedBox(height: MercurySpacing.xl),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -192,7 +192,7 @@ class _PromptBodyState extends State<_PromptBody> {
               style: TextButton.styleFrom(foregroundColor: c.textSecondary),
               child: const Text('Cancel'),
             ),
-            const SizedBox(width: NoirSpacing.sm),
+            const SizedBox(width: MercurySpacing.sm),
             PillButton(
               label: widget.confirmLabel,
               filled: true,
@@ -214,7 +214,7 @@ void showToast(BuildContext context, String message) {
   final overlay = Overlay.maybeOf(context, rootOverlay: true);
   if (overlay == null) return;
   if (_toast?.mounted ?? false) _toast!.remove();
-  final bottom = MediaQuery.paddingOf(context).bottom + NoirSpacing.lg;
+  final bottom = MediaQuery.paddingOf(context).bottom + MercurySpacing.lg;
   late final OverlayEntry entry;
   entry = OverlayEntry(
     builder: (_) => _Toast(
@@ -257,8 +257,8 @@ class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_life.isAnimating || _life.isCompleted) return;
-    final fx = NoirEffects.of(context);
-    final fade = fx.motion(NoirMotion.medium).inMilliseconds;
+    final fx = MercuryEffects.of(context);
+    final fade = fx.motion(MercuryMotion.medium).inMilliseconds;
     final total = fade * 2 + _visible.inMilliseconds;
     final edge = fade / total;
     _shown = TweenSequence<double>([
@@ -267,7 +267,7 @@ class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
           tween: Tween<double>(
             begin: 0,
             end: 1,
-          ).chain(CurveTween(curve: NoirMotion.standard)),
+          ).chain(CurveTween(curve: MercuryMotion.standard)),
           weight: edge,
         ),
       TweenSequenceItem(tween: ConstantTween<double>(1), weight: 1 - edge * 2),
@@ -276,7 +276,7 @@ class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
           tween: Tween<double>(
             begin: 1,
             end: 0,
-          ).chain(CurveTween(curve: NoirMotion.exit)),
+          ).chain(CurveTween(curve: MercuryMotion.exit)),
           weight: edge,
         ),
     ]).animate(_life);
@@ -296,10 +296,10 @@ class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     return Positioned(
-      left: NoirSpacing.lg,
-      right: NoirSpacing.lg,
+      left: MercurySpacing.lg,
+      right: MercurySpacing.lg,
       bottom: widget.bottom,
       child: IgnorePointer(
         child: Center(
@@ -314,13 +314,13 @@ class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
                 child: Semantics(
                   liveRegion: true,
                   child: GlassSurface(
-                    borderRadius: NoirRadii.mdAll,
+                    borderRadius: MercuryRadii.mdAll,
                     floating: true,
                     shadow: 0.8,
                     fillOpacity: 4,
                     padding: const EdgeInsets.symmetric(
-                      horizontal: NoirSpacing.lg,
-                      vertical: NoirSpacing.md,
+                      horizontal: MercurySpacing.lg,
+                      vertical: MercurySpacing.md,
                     ),
                     child: Text(
                       widget.message,

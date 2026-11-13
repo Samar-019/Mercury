@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/library/data/library_indexer.dart';
-import 'package:noir/features/library/data/library_repository.dart';
+import 'package:mercury/features/library/data/library_indexer.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-/// Where NOIR keeps derived data (artwork) and, on mobile, imported copies.
+/// Where MERCURY keeps derived data (artwork) and, on mobile, imported copies.
 final appDirectoriesProvider = Provider<AppDirectories>(
   (ref) =>
       throw UnimplementedError('appDirectoriesProvider must be overridden'),
@@ -23,7 +23,7 @@ class AppDirectories {
     final docs = await getApplicationDocumentsDirectory();
     return AppDirectories(
       artwork: Directory(p.join(support.path, 'artwork')),
-      importedMusic: Directory(p.join(docs.path, 'NOIR Music')),
+      importedMusic: Directory(p.join(docs.path, 'MERCURY Music')),
     );
   }
 
@@ -84,7 +84,7 @@ class LibraryScanController extends Notifier<ScanState> {
     if (folder == null) return; // Cancelled.
     if (folder.startsWith('content://')) {
       state = const ScanFailed(
-        "NOIR can't read that location directly. Pick a folder in internal "
+        "MERCURY can't read that location directly. Pick a folder in internal "
         'storage, or use "Add files" instead.',
       );
       return;
@@ -125,7 +125,7 @@ class LibraryScanController extends Notifier<ScanState> {
   }
 
   /// Picks audio files. Desktop indexes them in place; mobile platforms copy
-  /// them into NOIR's own folder because picker paths there are temporary.
+  /// them into MERCURY's own folder because picker paths there are temporary.
   Future<void> importFiles() async {
     if (_busy) return;
     final picked = await FilePicker.pickFiles(
@@ -143,7 +143,7 @@ class LibraryScanController extends Notifier<ScanState> {
 
   void dismissResult() => state = const ScanIdle();
 
-  /// Mobile pickers may hand out content URIs; copy the bytes into NOIR's
+  /// Mobile pickers may hand out content URIs; copy the bytes into MERCURY's
   /// own folder so the library keeps working after the picker cache is gone.
   Future<List<String>> _copyIntoLibrary(List<PlatformFile> files) async {
     final dir = ref.read(appDirectoriesProvider).importedMusic;
@@ -189,8 +189,8 @@ class LibraryScanController extends Notifier<ScanState> {
     } on Object catch (e) {
       debugPrint('Library scan failed: ${e.runtimeType}');
       state = const ScanFailed(
-        "NOIR couldn't read that location. Check that it still exists and "
-        'that NOIR has permission to open it.',
+        "MERCURY couldn't read that location. Check that it still exists and "
+        'that MERCURY has permission to open it.',
       );
     }
   }
@@ -202,7 +202,7 @@ class LibraryScanController extends Notifier<ScanState> {
     final statuses = await [Permission.audio, Permission.storage].request();
     if (statuses.values.any((s) => s.isGranted || s.isLimited)) return true;
     state = const ScanFailed(
-      'NOIR needs access to your music to index a folder. You can allow it in '
+      'MERCURY needs access to your music to index a folder. You can allow it in '
       'system settings.',
     );
     return false;

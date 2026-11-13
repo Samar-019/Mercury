@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/youtube/application/youtube_pending_edits.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/google_auth/desktop_oauth_flow.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/youtube/application/youtube_pending_edits.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/google_auth/desktop_oauth_flow.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// YouTube's playlist id for the user's likes. As a [SaveTarget] or edit
 /// target it means rating the video, not a playlist item.

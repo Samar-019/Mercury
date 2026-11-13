@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// What NOIR keeps about a connected Google account. The refresh token is the
+/// What MERCURY keeps about a connected Google account. The refresh token is the
 /// only credential; the access token lives in memory only.
 class StoredAccount {
   const StoredAccount({
@@ -55,7 +55,7 @@ class SecureTokenStore implements TokenStore {
 
   final FlutterSecureStorage _storage;
 
-  static const _key = 'noir.google.account';
+  static const _key = 'mercury.google.account';
 
   @override
   Future<StoredAccount?> read() async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/settings/presentation/settings_screen.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/settings/presentation/settings_screen.dart';
 
 import '../helpers/pump_app.dart';
 

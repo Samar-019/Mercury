@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
 
 /// Calm explanation with an optional next step. Used for empty and error
 /// states so every screen says what happened and what to do.
@@ -26,27 +26,27 @@ class MessageState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 420),
         child: Padding(
-          padding: EdgeInsets.all(compact ? NoirSpacing.lg : NoirSpacing.xxl),
+          padding: EdgeInsets.all(compact ? MercurySpacing.lg : MercurySpacing.xxl),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(icon, size: compact ? 28 : 40, color: c.textTertiary),
-              SizedBox(height: compact ? NoirSpacing.md : NoirSpacing.lg),
+              SizedBox(height: compact ? MercurySpacing.md : MercurySpacing.lg),
               Text(
                 title,
                 style: compact ? t.titleSmall : t.titleMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: NoirSpacing.sm),
+              const SizedBox(height: MercurySpacing.sm),
               Text(message, style: t.bodySmall, textAlign: TextAlign.center),
               if (actionLabel != null) ...[
-                const SizedBox(height: NoirSpacing.xl),
+                const SizedBox(height: MercurySpacing.xl),
                 PillButton(label: actionLabel!, onPressed: onAction),
               ],
             ],
@@ -89,11 +89,11 @@ class LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     Widget bar(double w, double h) => Container(
       width: w,
       height: h,
-      decoration: BoxDecoration(color: c.hover, borderRadius: NoirRadii.smAll),
+      decoration: BoxDecoration(color: c.hover, borderRadius: MercuryRadii.smAll),
     );
     return Semantics(
       label: 'Loading',
@@ -102,16 +102,16 @@ class LoadingState extends StatelessWidget {
           children: [
             for (var i = 0; i < rows; i++)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: NoirSpacing.sm),
+                padding: const EdgeInsets.symmetric(vertical: MercurySpacing.sm),
                 child: Row(
                   children: [
                     bar(44, 44),
-                    const SizedBox(width: NoirSpacing.md),
+                    const SizedBox(width: MercurySpacing.md),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         bar(160, 12),
-                        const SizedBox(height: NoirSpacing.sm),
+                        const SizedBox(height: MercurySpacing.sm),
                         bar(96, 10),
                       ],
                     ),
@@ -137,7 +137,7 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.only(bottom: NoirSpacing.md),
+      padding: const EdgeInsets.only(bottom: MercurySpacing.md),
       child: Row(
         children: [
           Expanded(
@@ -150,7 +150,7 @@ class SectionHeader extends StatelessWidget {
             TextButton(
               onPressed: onAction,
               style: TextButton.styleFrom(
-                foregroundColor: context.noir.textSecondary,
+                foregroundColor: context.mercury.textSecondary,
                 textStyle: t.labelMedium,
               ),
               child: Text(action!),

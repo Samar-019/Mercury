@@ -10,8 +10,8 @@ class GoogleOAuthConfig {
   const GoogleOAuthConfig({this.desktopClientId, this.desktopClientSecret});
 
   factory GoogleOAuthConfig.fromEnvironment() {
-    const id = String.fromEnvironment('NOIR_GOOGLE_DESKTOP_CLIENT_ID');
-    const secret = String.fromEnvironment('NOIR_GOOGLE_DESKTOP_CLIENT_SECRET');
+    const id = String.fromEnvironment('MERCURY_GOOGLE_DESKTOP_CLIENT_ID');
+    const secret = String.fromEnvironment('MERCURY_GOOGLE_DESKTOP_CLIENT_SECRET');
     return GoogleOAuthConfig(
       desktopClientId: id.isEmpty ? null : id,
       desktopClientSecret: secret.isEmpty ? null : secret,

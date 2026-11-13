@@ -3,10 +3,10 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 final FutureProvider<int> artworkCacheSizeProvider =

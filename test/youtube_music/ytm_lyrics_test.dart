@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
-import 'package:noir/features/lyrics/domain/lyrics.dart';
-import 'package:noir/integrations/lyrics/ytm_lyrics_source.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_lyrics.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/domain/lyrics.dart';
+import 'package:mercury/integrations/lyrics/ytm_lyrics_source.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_lyrics.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/fake_innertube_client.dart';
 import 'fake_innertube.dart';

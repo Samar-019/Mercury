@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final youTubePlaylistsProvider = StreamProvider<List<YouTubePlaylist>>(
   (ref) => ref.watch(youTubeRepositoryProvider).watchPlaylists(),

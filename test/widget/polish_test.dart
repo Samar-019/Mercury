@@ -2,10 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
-import 'package:noir/features/home/application/pinned_playlists.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
+import 'package:mercury/features/home/application/pinned_playlists.dart';
 
 import '../helpers/test_database.dart';
 

@@ -3,22 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/home/application/pinned_playlists.dart';
-import 'package:noir/features/home/presentation/pin_button.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_filter.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/home/application/pinned_playlists.dart';
+import 'package:mercury/features/home/presentation/pin_button.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_filter.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 /// A local playlist: play, shuffle, rename, delete, reorder, remove songs.
 class PlaylistScreen extends ConsumerStatefulWidget {
@@ -77,7 +77,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
                 : () => unawaited(playback.surprise(tracks)),
             actions: [
               PinButton(PinnedRef(PinKind.local, '${p.id}')),
-              NoirMenuButton<String>(
+              MercuryMenuButton<String>(
                 tooltip: 'More',
                 icon: Icons.more_horiz_rounded,
                 onSelected: (v) async {
@@ -110,17 +110,17 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
                 },
                 items: () => [
                   if (tracks.isNotEmpty)
-                    const NoirMenuItem(
+                    const MercuryMenuItem(
                       'queue',
                       'Add to queue',
                       icon: Icons.queue_music_rounded,
                     ),
-                  const NoirMenuItem(
+                  const MercuryMenuItem(
                     'rename',
                     'Rename…',
                     icon: Icons.edit_outlined,
                   ),
-                  const NoirMenuItem(
+                  const MercuryMenuItem(
                     'delete',
                     'Delete…',
                     icon: Icons.delete_outline_rounded,
@@ -133,7 +133,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
         if (list.isNotEmpty)
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: NoirSpacing.md),
+              padding: const EdgeInsets.only(bottom: MercurySpacing.md),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TrackFilterField(

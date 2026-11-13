@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/youtube/application/youtube_pending_edits.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/youtube/application/youtube_pending_edits.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
 
 final youTubeApiProvider = Provider<YouTubeApi>((ref) {
   final account = ref.watch(accountServiceProvider);
@@ -56,7 +56,7 @@ final youTubeSyncProvider =
 
 /// Keeps the local YouTube cache in step with the account.
 ///
-/// The YouTube Data API cannot push changes, so NOIR asks: when the account
+/// The YouTube Data API cannot push changes, so MERCURY asks: when the account
 /// connects, at startup, when the app comes back to the foreground after a
 /// few minutes, every 15 minutes while open, and on demand. Playlists whose
 /// etag did not change are not downloaded again.
@@ -73,7 +73,7 @@ class YouTubeSyncController extends Notifier<YouTubeSyncState>
   Timer? _timer;
   Future<void>? _running;
 
-  /// Etag of the likes NOIR has, so an unchanged list costs one request.
+  /// Etag of the likes MERCURY has, so an unchanged list costs one request.
   String? _likesEtag;
 
   @override

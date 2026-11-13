@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 import 'fake_engine.dart';
 import 'fake_innertube_client.dart';
@@ -52,7 +52,7 @@ class TestApp {
     final db = inMemoryDatabase();
     final engine = FakeEngine();
     final ytm = innerTube ?? FakeInnerTubeClient();
-    final tmp = Directory.systemTemp.createTempSync('noir_widget_');
+    final tmp = Directory.systemTemp.createTempSync('mercury_widget_');
     final container = ProviderContainer(
       overrides: [
         databaseProvider.overrideWithValue(db),
@@ -96,7 +96,7 @@ class TestApp {
       ]);
     }
     await tester.pumpWidget(
-      UncontrolledProviderScope(container: container, child: const NoirApp()),
+      UncontrolledProviderScope(container: container, child: const MercuryApp()),
     );
     await tester.pumpAndSettle();
 

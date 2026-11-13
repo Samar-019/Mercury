@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
-import 'package:noir/features/lyrics/presentation/karaoke_lyrics.dart';
-import 'package:noir/features/lyrics/presentation/lyrics_view.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/presentation/karaoke_lyrics.dart';
+import 'package:mercury/features/lyrics/presentation/lyrics_view.dart';
 
 const _shot = ValueKey('shot');
 
@@ -54,7 +54,7 @@ void main() {
     );
     addTearDown(change.dispose);
     final shrink = ReverseAnimation(
-      CurvedAnimation(parent: change, curve: NoirMotion.standard),
+      CurvedAnimation(parent: change, curve: MercuryMotion.standard),
     );
     final position = ValueNotifier(const Duration(seconds: 10));
     addTearDown(position.dispose);

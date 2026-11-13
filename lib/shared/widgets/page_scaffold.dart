@@ -1,14 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
 
 /// Horizontal page padding for the current width.
 double pagePadding(BuildContext context) =>
     switch (WindowClass.of(MediaQuery.sizeOf(context).width)) {
-      WindowClass.compact => NoirSpacing.lg,
-      WindowClass.medium => NoirSpacing.xl,
+      WindowClass.compact => MercurySpacing.lg,
+      WindowClass.medium => MercurySpacing.xl,
       WindowClass.expanded => 40,
     };
 
@@ -46,7 +46,7 @@ class PageScaffold extends StatelessWidget {
           slivers: [
             if (title != null)
               SliverPadding(
-                padding: EdgeInsets.fromLTRB(pad, NoirSpacing.lg, pad - 8, 0),
+                padding: EdgeInsets.fromLTRB(pad, MercurySpacing.lg, pad - 8, 0),
                 sliver: SliverToBoxAdapter(
                   child: Row(
                     children: [
@@ -70,8 +70,8 @@ class PageScaffold extends StatelessWidget {
             SliverToBoxAdapter(
               child: SizedBox(
                 height: math.max(
-                  NoirSpacing.xxxl,
-                  MediaQuery.paddingOf(context).bottom + NoirSpacing.lg,
+                  MercurySpacing.xxxl,
+                  MediaQuery.paddingOf(context).bottom + MercurySpacing.lg,
                 ),
               ),
             ),

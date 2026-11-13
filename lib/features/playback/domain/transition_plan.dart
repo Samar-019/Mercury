@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:noir/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
 
 /// How one track hands over to the next.
 enum TransitionType {
@@ -309,7 +309,7 @@ typedef NextTrackPicker = int? Function(
 const transitionLead = 6.0;
 
 /// Plans how [outgoing] hands over to [incoming]. Supplied by an optional
-/// module; without one NOIR offers plain crossfades only.
+/// module; without one MERCURY offers plain crossfades only.
 typedef TransitionPlanner = TransitionPlan Function(
   TransitionSide outgoing,
   TransitionSide incoming, {

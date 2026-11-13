@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
 
 /// Where resolved YouTube artwork survives restarts.
 abstract interface class ArtworkCacheStore {

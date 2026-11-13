@@ -4,8 +4,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 
 /// How a Liquid Glass surface renders, from the effects settings. The
 /// Glass slider ([EffectsConfig.glassLevel]) drives all four together:
@@ -81,7 +81,7 @@ class LiquidGlassStyle {
 
 /// A floating Liquid Glass capsule (stadium shape), after Apple's
 /// iOS 26 / macOS Tahoe material as SimpMusic draws it with Kyant's
-/// backdrop library, in NOIR's monochrome palette — the player island.
+/// backdrop library, in MERCURY's monochrome palette — the player island.
 /// See [LiquidGlassMaterial] for the material itself; this adds the
 /// capsule's soft, wide floating shadow.
 class LiquidGlass extends StatelessWidget {
@@ -104,7 +104,7 @@ class LiquidGlass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     return LiquidGlassMaterial(
       padding: padding,
       tintImage: tintImage,
@@ -129,7 +129,7 @@ class LiquidGlass extends StatelessWidget {
   }
 }
 
-/// NOIR's Liquid Glass material, shared by the player island
+/// MERCURY's Liquid Glass material, shared by the player island
 /// ([LiquidGlass]) and every other glass surface (`GlassSurface`), so the
 /// Glass slider changes all of them alike:
 ///
@@ -144,17 +144,17 @@ class LiquidGlass extends StatelessWidget {
 /// - a top sheen and a specular rim — bright along the top edge, fading
 ///   down the sides, with a faint catch light at the bottom.
 ///
-/// Respects [NoirEffects]: with Liquid Glass off it is an opaque surface of
+/// Respects [MercuryEffects]: with Liquid Glass off it is an opaque surface of
 /// the same geometry (no backdrop filter); Performance mode keeps a light
 /// blur but drops saturation, refraction and highlights.
 ///
 /// Cost: the blur is one backdrop pass and the lens shader one more, so
 /// the shader is kept to small surfaces ([maxLensExtent]), and surfaces on
-/// NOIR's smooth canvas skip both ([backdrop]).
+/// MERCURY's smooth canvas skip both ([backdrop]).
 class LiquidGlassMaterial extends StatelessWidget {
   const LiquidGlassMaterial({
     required this.child,
-    this.borderRadius = NoirRadii.pillAll,
+    this.borderRadius = MercuryRadii.pillAll,
     this.padding,
     this.shadows = const [],
     this.density = 1,
@@ -202,8 +202,8 @@ class LiquidGlassMaterial extends StatelessWidget {
 
   /// Whether the surface blurs and refracts what is behind it, for glass
   /// that floats over content. Without, it paints the same glass — tint,
-  /// sheen, rim and lens band — for surfaces that sit on NOIR's canvas
-  /// (`NoirBackdrop`), which is already smooth and grey: a backdrop pass
+  /// sheen, rim and lens band — for surfaces that sit on MERCURY's canvas
+  /// (`MercuryBackdrop`), which is already smooth and grey: a backdrop pass
   /// there would cost a full-window copy per frame and show nothing.
   final bool backdrop;
 
@@ -237,7 +237,7 @@ class LiquidGlassMaterial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final style = LiquidGlassStyle.of(fx, density: density);
     final refracts = fx.glass && backdrop && style.refraction > 0 && refract;
     if (refracts) _LensProgram.load();
@@ -255,7 +255,7 @@ class LiquidGlassMaterial extends StatelessWidget {
     bool refracts,
     FragmentProgram? lens,
   ) {
-    final c = context.noir;
+    final c = context.mercury;
     final dark = Theme.of(context).brightness == Brightness.dark;
 
     // Content scrolls underneath, so dark glass dims rather than milks:
@@ -296,7 +296,7 @@ class LiquidGlassMaterial extends StatelessWidget {
             child: IgnorePointer(
               child: ExcludeSemantics(
                 child: AnimatedSwitcher(
-                  duration: fx.motion(NoirMotion.slow),
+                  duration: fx.motion(MercuryMotion.slow),
                   child: _Tint(
                     key: ValueKey(tint),
                     image: tint,
@@ -310,8 +310,8 @@ class LiquidGlassMaterial extends StatelessWidget {
           Positioned.fill(
             child: IgnorePointer(
               child: AnimatedContainer(
-                duration: fx.motion(NoirMotion.fast),
-                curve: NoirMotion.standard,
+                duration: fx.motion(MercuryMotion.fast),
+                curve: MercuryMotion.standard,
                 decoration: BoxDecoration(
                   color: wash,
                   borderRadius: borderRadius,
@@ -739,7 +739,7 @@ class _LensLayer extends ContainerLayer {
 }
 
 /// [image] decoded 8 px wide and stretched over the capsule: a smooth
-/// wash of its tones, desaturated so NOIR stays monochrome-led.
+/// wash of its tones, desaturated so MERCURY stays monochrome-led.
 class _Tint extends StatelessWidget {
   const _Tint({required this.image, required this.alpha, super.key});
 

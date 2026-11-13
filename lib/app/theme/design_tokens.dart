@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /// Color tokens for one brightness. Monochrome by design: hierarchy comes from
 /// opacity, blur and contrast, never from an accent hue.
 @immutable
-class NoirPalette extends ThemeExtension<NoirPalette> {
-  const NoirPalette({
+class MercuryPalette extends ThemeExtension<MercuryPalette> {
+  const MercuryPalette({
     required this.background,
     required this.backgroundSecondary,
     required this.surfaceSolid,
@@ -23,7 +23,7 @@ class NoirPalette extends ThemeExtension<NoirPalette> {
     required this.shadow,
   });
 
-  static const dark = NoirPalette(
+  static const dark = MercuryPalette(
     background: Color(0xFF090909),
     backgroundSecondary: Color(0xFF111111),
     surfaceSolid: Color(0xFF161616),
@@ -42,7 +42,7 @@ class NoirPalette extends ThemeExtension<NoirPalette> {
     shadow: Color(0x99000000),
   );
 
-  static const light = NoirPalette(
+  static const light = MercuryPalette(
     background: Color(0xFFF6F4F0),
     backgroundSecondary: Color(0xFFEFECE7),
     surfaceSolid: Color(0xFFFBFAF8),
@@ -81,13 +81,13 @@ class NoirPalette extends ThemeExtension<NoirPalette> {
   final Color shadow;
 
   @override
-  NoirPalette copyWith() => this;
+  MercuryPalette copyWith() => this;
 
   @override
-  NoirPalette lerp(NoirPalette? other, double t) {
+  MercuryPalette lerp(MercuryPalette? other, double t) {
     if (other == null) return this;
     Color l(Color a, Color b) => Color.lerp(a, b, t)!;
-    return NoirPalette(
+    return MercuryPalette(
       background: l(background, other.background),
       backgroundSecondary: l(backgroundSecondary, other.backgroundSecondary),
       surfaceSolid: l(surfaceSolid, other.surfaceSolid),
@@ -109,7 +109,7 @@ class NoirPalette extends ThemeExtension<NoirPalette> {
 }
 
 /// 4-pt spacing scale.
-abstract final class NoirSpacing {
+abstract final class MercurySpacing {
   static const double xxs = 2;
   static const double xs = 4;
   static const double sm = 8;
@@ -120,7 +120,7 @@ abstract final class NoirSpacing {
   static const double xxxl = 48;
 }
 
-abstract final class NoirRadii {
+abstract final class MercuryRadii {
   static const double sm = 8;
   static const double md = 12;
   static const double lg = 16;
@@ -135,14 +135,14 @@ abstract final class NoirRadii {
 }
 
 /// Backdrop blur sigmas. `reduced` is used by Performance mode.
-abstract final class NoirBlur {
+abstract final class MercuryBlur {
   static const double full = 28;
   static const double reduced = 10;
 }
 
-/// Always pass durations through `NoirEffects.of(context).motion(...)` so
+/// Always pass durations through `MercuryEffects.of(context).motion(...)` so
 /// "Animations off" and the system reduced-motion flag make them instant.
-abstract final class NoirMotion {
+abstract final class MercuryMotion {
   static const Duration fast = Duration(milliseconds: 120);
   static const Duration medium = Duration(milliseconds: 220);
 
@@ -178,6 +178,6 @@ enum WindowClass {
 }
 
 /// Shorthand to read the palette from anywhere below the app theme.
-extension NoirThemeX on BuildContext {
-  NoirPalette get noir => Theme.of(this).extension<NoirPalette>()!;
+extension MercuryThemeX on BuildContext {
+  MercuryPalette get mercury => Theme.of(this).extension<MercuryPalette>()!;
 }

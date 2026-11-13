@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Asks for a name and creates a local playlist. Returns its id.
 Future<int?> createPlaylist(BuildContext context, WidgetRef ref) async {
@@ -40,12 +40,12 @@ Future<void> addToPlaylist(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Add to playlist', style: t.titleMedium),
-            const SizedBox(height: NoirSpacing.md),
+            const SizedBox(height: MercurySpacing.md),
             ListTile(
               leading: const Icon(Icons.add_rounded),
               title: const Text('New playlist…'),
               shape: const RoundedRectangleBorder(
-                borderRadius: NoirRadii.mdAll,
+                borderRadius: MercuryRadii.mdAll,
               ),
               onTap: () => Navigator.of(context).pop(newPlaylist),
             ),
@@ -63,7 +63,7 @@ Future<void> addToPlaylist(
                         style: t.bodySmall,
                       ),
                       shape: const RoundedRectangleBorder(
-                        borderRadius: NoirRadii.mdAll,
+                        borderRadius: MercuryRadii.mdAll,
                       ),
                       onTap: () => Navigator.of(context).pop(p.id),
                     ),

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/widgets/artwork_flow.dart';
-import 'package:noir/features/lyrics/presentation/karaoke_lyrics.dart';
+import 'package:mercury/core/widgets/artwork_flow.dart';
+import 'package:mercury/features/lyrics/presentation/karaoke_lyrics.dart';
 
 // Each step of these clocks redraws the window, so they step at a set
 // pace instead of at the display's refresh rate (144 Hz on some laptops).

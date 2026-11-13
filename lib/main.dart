@@ -1,5 +1,5 @@
-import 'package:noir/app/bootstrap.dart';
-import 'package:noir/features/edge_player/edge_player_view.dart';
+import 'package:mercury/app/bootstrap.dart';
+import 'package:mercury/features/edge_player/edge_player_view.dart';
 
 Future<void> main() => bootstrap();
 

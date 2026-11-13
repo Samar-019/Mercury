@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/search/application/search_controller.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/search/application/search_controller.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/test_database.dart';
 

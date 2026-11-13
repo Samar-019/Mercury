@@ -7,19 +7,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:just_audio_media_kit/just_audio_media_kit.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/core/platform/profile_paths.dart';
-import 'package:noir/features/analysis/application/analysis_providers.dart';
-import 'package:noir/features/edge_player/edge_player_bridge.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/media_session.dart';
-import 'package:noir/features/playback/presentation/windows_media_controls.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/core/platform/profile_paths.dart';
+import 'package:mercury/features/analysis/application/analysis_providers.dart';
+import 'package:mercury/features/edge_player/edge_player_bridge.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/media_session.dart';
+import 'package:mercury/features/playback/presentation/windows_media_controls.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -32,7 +32,7 @@ Future<void> bootstrap({List<Override> overrides = const []}) async {
   WidgetsFlutterBinding.ensureInitialized();
   _registerLicenses();
 
-  const profile = String.fromEnvironment('NOIR_PROFILE_DIR');
+  const profile = String.fromEnvironment('MERCURY_PROFILE_DIR');
   if (profile.isNotEmpty) {
     PathProviderPlatform.instance = ProfilePathProvider(profile);
   }
@@ -73,7 +73,7 @@ Future<void> bootstrap({List<Override> overrides = const []}) async {
     ..listen(analysisQueueProvider, (_, _) {});
 
   runApp(
-    UncontrolledProviderScope(container: container, child: const NoirApp()),
+    UncontrolledProviderScope(container: container, child: const MercuryApp()),
   );
 }
 
@@ -83,7 +83,7 @@ Future<void> _setUpWindow() async {
     size: Size(1360, 860),
     minimumSize: Size(720, 520),
     center: true,
-    title: 'NOIR',
+    title: 'MERCURY',
     backgroundColor: Color(0xFF090909),
     titleBarStyle: TitleBarStyle.hidden,
     windowButtonVisibility: true, // macOS keeps native traffic lights.

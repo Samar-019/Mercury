@@ -1,11 +1,11 @@
 // End-to-end tour on a real device/desktop engine:
 //
 //   flutter test integration_test -d windows \
-//     --dart-define=NOIR_DEMO_DIR=<folder with music> \
-//     --dart-define=NOIR_SHOT_DIR=<folder for screenshots>
+//     --dart-define=MERCURY_DEMO_DIR=<folder with music> \
+//     --dart-define=MERCURY_SHOT_DIR=<folder for screenshots>
 //
-// Without NOIR_DEMO_DIR it generates a few WAV files. Screenshots are only
-// written when NOIR_SHOT_DIR is set.
+// Without MERCURY_DEMO_DIR it generates a few WAV files. Screenshots are only
+// written when MERCURY_SHOT_DIR is set.
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -17,25 +17,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:just_audio_media_kit/just_audio_media_kit.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/shared/models/playback.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/shared/models/playback.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
 import '../test/helpers/wav.dart';
 
-const _demoDir = String.fromEnvironment('NOIR_DEMO_DIR');
-const _shotDir = String.fromEnvironment('NOIR_SHOT_DIR');
+const _demoDir = String.fromEnvironment('MERCURY_DEMO_DIR');
+const _shotDir = String.fromEnvironment('MERCURY_SHOT_DIR');
 
 final GlobalKey<State<StatefulWidget>> _shotKey = GlobalKey();
 
@@ -69,14 +69,14 @@ Future<void> _resize(Size size) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('NOIR tour: library, playback, effects, layouts', (tester) async {
+  testWidgets('MERCURY tour: library, playback, effects, layouts', (tester) async {
     JustAudioMediaKit.ensureInitialized();
     if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
       await windowManager.ensureInitialized();
       // Same frameless window as the real app (see bootstrap.dart).
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     }
-    final tmp = Directory.systemTemp.createTempSync('noir_tour_');
+    final tmp = Directory.systemTemp.createTempSync('mercury_tour_');
     addTearDown(() => tmp.deleteSync(recursive: true));
 
     var music = _demoDir;
@@ -90,7 +90,7 @@ void main() {
       }
     }
 
-    final dbFile = File(p.join(tmp.path, 'noir.sqlite'));
+    final dbFile = File(p.join(tmp.path, 'mercury.sqlite'));
     final db = AppDatabase(NativeDatabase(dbFile));
     addTearDown(db.close);
     final container = ProviderContainer(
@@ -115,7 +115,7 @@ void main() {
         key: _shotKey,
         child: UncontrolledProviderScope(
           container: container,
-          child: const NoirApp(),
+          child: const MercuryApp(),
         ),
       ),
     );

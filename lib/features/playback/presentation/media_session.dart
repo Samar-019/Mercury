@@ -3,22 +3,22 @@ import 'dart:async';
 import 'package:audio_service/audio_service.dart' as svc;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
-/// Connects NOIR's single playback controller to the OS media session
+/// Connects MERCURY's single playback controller to the OS media session
 /// (Android notification / lock screen, iOS & macOS Now Playing). The
 /// session only mirrors state and forwards commands — it never plays audio.
 Future<void> startMediaSession(ProviderContainer container) async {
   try {
     await svc.AudioService.init(
-      builder: () => _NoirAudioHandler(container),
+      builder: () => _MercuryAudioHandler(container),
       config: const svc.AudioServiceConfig(
-        androidNotificationChannelId: 'app.noir.player.playback',
+        androidNotificationChannelId: 'app.mercury.player.playback',
         androidNotificationChannelName: 'Playback',
         androidNotificationOngoing: true,
       ),
@@ -29,8 +29,8 @@ Future<void> startMediaSession(ProviderContainer container) async {
   }
 }
 
-class _NoirAudioHandler extends svc.BaseAudioHandler with svc.SeekHandler {
-  _NoirAudioHandler(this._container) {
+class _MercuryAudioHandler extends svc.BaseAudioHandler with svc.SeekHandler {
+  _MercuryAudioHandler(this._container) {
     _container.listen<PlaybackState>(
       playbackProvider,
       (_, next) => _publish(next),

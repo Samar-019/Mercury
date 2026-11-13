@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/youtube_video_layer.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/youtube_video_layer.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 /// Whether the desktop right-hand queue panel is open.
 final queuePanelOpenProvider = NotifierProvider<_PanelOpen, bool>(
@@ -62,7 +62,7 @@ class _SheetOpen extends Notifier<bool> {
 /// navigator, so `maybePop` (Esc, mouse Back) closes it before anything
 /// underneath. Tapping outside closes it too.
 Future<void> showQueueSheet(BuildContext context, WidgetRef ref) async {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   final open = ref.read(queueSheetOpenProvider.notifier)..set(open: true);
   try {
     await showGeneralDialog<void>(
@@ -70,12 +70,12 @@ Future<void> showQueueSheet(BuildContext context, WidgetRef ref) async {
       barrierDismissible: true,
       barrierLabel: 'Close queue',
       barrierColor: Colors.black.withValues(alpha: 0.3),
-      transitionDuration: fx.motion(NoirMotion.slow),
+      transitionDuration: fx.motion(MercuryMotion.slow),
       pageBuilder: (context, _, _) => const _QueueSheet(),
       transitionBuilder: (context, animation, _, child) {
         final curved = CurvedAnimation(
           parent: animation,
-          curve: NoirMotion.emphasized,
+          curve: MercuryMotion.emphasized,
           reverseCurve: Curves.easeInCubic,
         );
         if (_QueueSheet.fullScreen(context)) {
@@ -144,13 +144,13 @@ class _QueueSheet extends ConsumerWidget {
               child: Row(
                 children: [
                   Expanded(child: Text('Queue', style: t.titleMedium)),
-                  NoirIconButton(
+                  MercuryIconButton(
                     icon: Icons.close_rounded,
                     tooltip: 'Close queue (Esc)',
                     onPressed: close,
                   ),
                   if (usesCustomWindowChrome) ...[
-                    const SizedBox(width: NoirSpacing.sm),
+                    const SizedBox(width: MercurySpacing.sm),
                     const WindowControls(),
                   ],
                 ],
@@ -169,7 +169,7 @@ class _QueueSheet extends ConsumerWidget {
             ),
           const Expanded(
             child: QueueList(
-              padding: EdgeInsets.symmetric(horizontal: NoirSpacing.md),
+              padding: EdgeInsets.symmetric(horizontal: MercurySpacing.md),
             ),
           ),
         ],
@@ -188,12 +188,12 @@ class _QueueSheet extends ConsumerWidget {
             // A phone's full-screen sheet is opaque: blurring the whole
             // screen behind it cost a phone's GPU every frame.
             child: full
-                ? ColoredBox(color: context.noir.background, child: content)
+                ? ColoredBox(color: context.mercury.background, child: content)
                 : GlassSurface(
                     borderRadius: width < maxWidth
                         ? BorderRadius.zero
                         : const BorderRadius.horizontal(
-                            left: Radius.circular(NoirRadii.xl),
+                            left: Radius.circular(MercuryRadii.xl),
                           ),
                     shadow: 1,
                     highlight: 0.4,
@@ -210,7 +210,7 @@ class _QueueSheet extends ConsumerWidget {
   }
 }
 
-/// NOIR's local queue: the current item, then reorderable upcoming items.
+/// MERCURY's local queue: the current item, then reorderable upcoming items.
 class QueueList extends ConsumerWidget {
   const QueueList({this.padding = EdgeInsets.zero, super.key});
 
@@ -244,13 +244,13 @@ class QueueList extends ConsumerWidget {
           sliver: SliverList.list(
             children: [
               Text('Now playing', style: t.labelMedium),
-              const SizedBox(height: NoirSpacing.sm),
+              const SizedBox(height: MercurySpacing.sm),
               TrackRow(
                 key: ValueKey('q-${current.uid}'),
                 track: current.track,
                 onPlay: () => unawaited(ctrl.togglePlayPause()),
               ),
-              const SizedBox(height: NoirSpacing.lg),
+              const SizedBox(height: MercurySpacing.lg),
               Row(
                 children: [
                   Expanded(child: Text('Up next', style: t.labelMedium)),
@@ -270,7 +270,7 @@ class QueueList extends ConsumerWidget {
                         if (ok) ctrl.clearUpcoming();
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: context.noir.textSecondary,
+                        foregroundColor: context.mercury.textSecondary,
                         textStyle: t.labelMedium,
                       ),
                       child: const Text('Clear'),
@@ -279,7 +279,7 @@ class QueueList extends ConsumerWidget {
               ),
               if (upcoming.isEmpty)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: NoirSpacing.lg),
+                  padding: const EdgeInsets.symmetric(vertical: MercurySpacing.lg),
                   child: Text(
                     'The queue ends after this song.',
                     style: t.bodySmall,
@@ -324,10 +324,10 @@ class QueueList extends ConsumerWidget {
           ),
         ),
         SliverPadding(
-          padding: padding.copyWith(top: NoirSpacing.lg),
+          padding: padding.copyWith(top: MercurySpacing.lg),
           sliver: SliverToBoxAdapter(
             child: Text(
-              "This is NOIR's own queue. Changing it never edits your "
+              "This is MERCURY's own queue. Changing it never edits your "
               'playlists.',
               style: t.labelSmall,
             ),
@@ -353,7 +353,7 @@ class QueuePanel extends ConsumerWidget {
           child: Row(
             children: [
               Expanded(child: Text('Queue', style: t.titleMedium)),
-              NoirIconButton(
+              MercuryIconButton(
                 icon: Icons.close_rounded,
                 tooltip: 'Close queue',
                 onPressed: ref.read(queuePanelOpenProvider.notifier).close,
@@ -363,7 +363,7 @@ class QueuePanel extends ConsumerWidget {
         ),
         const Expanded(
           child: QueueList(
-            padding: EdgeInsets.symmetric(horizontal: NoirSpacing.md),
+            padding: EdgeInsets.symmetric(horizontal: MercurySpacing.md),
           ),
         ),
       ],
@@ -386,7 +386,7 @@ class QueueScreen extends StatelessWidget {
       body: const SafeArea(
         top: false,
         child: QueueList(
-          padding: EdgeInsets.symmetric(horizontal: NoirSpacing.lg),
+          padding: EdgeInsets.symmetric(horizontal: MercurySpacing.lg),
         ),
       ),
     );

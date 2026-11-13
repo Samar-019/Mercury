@@ -18,7 +18,7 @@ namespace {
 using flutter::EncodableMap;
 using flutter::EncodableValue;
 
-constexpr wchar_t kWindowClass[] = L"NOIR_EDGE_PLAYER";
+constexpr wchar_t kWindowClass[] = L"MERCURY_EDGE_PLAYER";
 
 // The window's size (square, for every edge) and how far it reaches past the
 // screen edge, in logical pixels. The view lays the player out inside it.
@@ -109,7 +109,7 @@ double GetDouble(const EncodableMap& map, const char* key) {
 
 EdgePlayer::EdgePlayer(flutter::BinaryMessenger* app_messenger)
     : app_channel_(std::make_unique<Channel>(
-          app_messenger, "noir/edge",
+          app_messenger, "mercury/edge",
           &flutter::StandardMethodCodec::GetInstance())) {
   app_channel_->SetMethodCallHandler([this](const auto& call, auto result) {
     HandleAppCall(call, std::move(result));
@@ -282,7 +282,7 @@ bool EdgePlayer::Create() {
   ::MoveWindow(content, 0, 0, size.cx, size.cy, TRUE);
 
   view_channel_ = std::make_unique<Channel>(
-      view_->engine()->messenger(), "noir/edge_view",
+      view_->engine()->messenger(), "mercury/edge_view",
       &flutter::StandardMethodCodec::GetInstance());
   view_channel_->SetMethodCallHandler([this](const auto& call, auto result) {
     HandleViewCall(call, std::move(result));
@@ -300,7 +300,7 @@ HWND EdgePlayer::CreateHost() {
   const SIZE size = WindowSize();
   HWND window = ::CreateWindowExW(
       WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_NOACTIVATE, kWindowClass,
-      L"NOIR", WS_POPUP, origin_.x, origin_.y, size.cx, size.cy, nullptr,
+      L"MERCURY", WS_POPUP, origin_.x, origin_.y, size.cx, size.cy, nullptr,
       nullptr, ::GetModuleHandleW(nullptr), this);
   if (!window) return nullptr;
   // Lets the view's transparent pixels show what is behind the window.

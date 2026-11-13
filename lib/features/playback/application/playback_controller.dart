@@ -4,32 +4,32 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/features/discover/application/for_you.dart';
-import 'package:noir/features/home/data/history_repository.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/song_versions.dart';
-import 'package:noir/features/playback/application/transition_log.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/playback/application/unplayable_tracks.dart';
-import 'package:noir/features/playback/domain/audio_source_provider.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/routing_engine.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/integrations/local_audio/local_audio_engine.dart';
-import 'package:noir/integrations/local_audio/mix_runner.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/integrations/youtube_playback/embedded_player.dart';
-import 'package:noir/integrations/youtube_playback/youtube_embed_engine.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/features/discover/application/for_you.dart';
+import 'package:mercury/features/home/data/history_repository.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/song_versions.dart';
+import 'package:mercury/features/playback/application/transition_log.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/playback/application/unplayable_tracks.dart';
+import 'package:mercury/features/playback/domain/audio_source_provider.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/routing_engine.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/integrations/local_audio/local_audio_engine.dart';
+import 'package:mercury/integrations/local_audio/mix_runner.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/integrations/youtube_playback/embedded_player.dart';
+import 'package:mercury/integrations/youtube_playback/youtube_embed_engine.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 import 'package:path/path.dart' as p;
 
 /// Optional local files for non-local tracks; none by default.
@@ -87,7 +87,7 @@ final durationProvider = StreamProvider<Duration?>(
   (ref) => ref.watch(playbackEngineProvider).duration,
 );
 
-/// Single source of truth for what NOIR is playing. Owns NOIR's local queue,
+/// Single source of truth for what MERCURY is playing. Owns MERCURY's local queue,
 /// which is never synchronized to any provider playlist.
 class PlaybackController extends Notifier<PlaybackState> {
   static const sessionKey = 'playback_session';

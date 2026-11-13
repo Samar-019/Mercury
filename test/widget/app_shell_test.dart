@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/shell/adaptive_shell.dart';
-import 'package:noir/app/shell/sidebar.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_glass.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/mini_players.dart';
-import 'package:noir/features/playback/presentation/mix_mode_button.dart';
-import 'package:noir/features/playback/presentation/playback_controls.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/features/queue/presentation/queue_panel.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/shell/adaptive_shell.dart';
+import 'package:mercury/app/shell/sidebar.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_glass.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/mini_players.dart';
+import 'package:mercury/features/playback/presentation/mix_mode_button.dart';
+import 'package:mercury/features/playback/presentation/playback_controls.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/features/queue/presentation/queue_panel.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 import '../helpers/pump_app.dart';
 
@@ -460,7 +460,7 @@ void main() {
         UncontrolledProviderScope(
           container: app.container,
           child: MaterialApp(
-            theme: buildNoirTheme(Brightness.dark, Density.comfortable),
+            theme: buildMercuryTheme(Brightness.dark, Density.comfortable),
             home: Scaffold(
               body: ListView(
                 controller: scroll,
@@ -873,7 +873,7 @@ void main() {
 
       await tester.tap(find.byTooltip('More').first);
       await tester.pump();
-      await tester.pump(NoirMotion.slow ~/ 2);
+      await tester.pump(MercuryMotion.slow ~/ 2);
       final item = find.text('Add to queue');
       // Sliding up, not fading in.
       expect(tester.getTopLeft(item).dy, greaterThan(500));

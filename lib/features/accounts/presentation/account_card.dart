@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/presentation/save_target_picker.dart';
-import 'package:noir/integrations/google_auth/google_oauth_config.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/presentation/save_target_picker.dart';
+import 'package:mercury/integrations/google_auth/google_oauth_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Google / YouTube connection: status, what is shared, sync, disconnect.
@@ -26,7 +26,7 @@ class AccountConnectionCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final service = ref.watch(accountServiceProvider);
     final account =
         ref.watch(accountConnectionProvider).value ?? service.current;
@@ -38,7 +38,7 @@ class AccountConnectionCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 16, color: c.textSecondary),
-          const SizedBox(width: NoirSpacing.sm),
+          const SizedBox(width: MercurySpacing.sm),
           Expanded(child: Text(text, style: t.bodySmall)),
         ],
       ),
@@ -88,7 +88,7 @@ class AccountConnectionCard extends ConsumerWidget {
               context,
               title: 'Disconnect Google account?',
               message:
-                  'NOIR revokes its access at Google and deletes every '
+                  'MERCURY revokes its access at Google and deletes every '
                   'YouTube playlist and video it saved on this device. '
                   'Nothing changes on YouTube.',
               confirmLabel: 'Disconnect',
@@ -100,14 +100,14 @@ class AccountConnectionCard extends ConsumerWidget {
       ],
     ];
 
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     return GlassSurface(
       blur: 0,
-      padding: const EdgeInsets.all(NoirSpacing.lg),
+      padding: const EdgeInsets.all(MercurySpacing.lg),
       // Connecting / connected swap whole sections; let the card resize.
       child: AnimatedSize(
-        duration: fx.motion(NoirMotion.medium),
-        curve: NoirMotion.standard,
+        duration: fx.motion(MercuryMotion.medium),
+        curve: MercuryMotion.standard,
         alignment: Alignment.topCenter,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,14 +122,14 @@ class AccountConnectionCard extends ConsumerWidget {
                     color: c.textPrimary,
                   ),
                 ),
-                const SizedBox(width: NoirSpacing.md),
+                const SizedBox(width: MercurySpacing.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Google / YouTube', style: t.titleSmall),
                       AnimatedSwitcher(
-                        duration: fx.motion(NoirMotion.medium),
+                        duration: fx.motion(MercuryMotion.medium),
                         layoutBuilder: (current, previous) => Stack(
                           alignment: Alignment.centerLeft,
                           children: [...previous, ?current],
@@ -146,20 +146,20 @@ class AccountConnectionCard extends ConsumerWidget {
               ],
             ),
             if (account.message != null) ...[
-              const SizedBox(height: NoirSpacing.md),
+              const SizedBox(height: MercurySpacing.md),
               Text(
                 account.message!,
                 style: t.bodySmall?.copyWith(color: c.destructive),
               ),
             ],
             if (account.status == AccountStatus.connected) ...[
-              const SizedBox(height: NoirSpacing.md),
+              const SizedBox(height: MercurySpacing.md),
               line(
                 Icons.schedule_rounded,
                 sync.lastSyncAt == null
                     ? 'Not synced yet'
                     : 'Last synced ${_ago(sync.lastSyncAt!)} · updates every '
-                          '15 minutes while NOIR is open',
+                          '15 minutes while MERCURY is open',
               ),
               if (sync.status == SyncStatus.failed && sync.message != null)
                 line(Icons.error_outline_rounded, sync.message!),
@@ -173,16 +173,16 @@ class AccountConnectionCard extends ConsumerWidget {
               ),
               if (account.canSaveToPlaylists)
                 line(Icons.check_rounded, 'Can save to playlists'),
-              const SizedBox(height: NoirSpacing.lg),
+              const SizedBox(height: MercurySpacing.lg),
               const SaveTargetSetting(),
             ] else ...[
-              const SizedBox(height: NoirSpacing.md),
+              const SizedBox(height: MercurySpacing.md),
               Text(
-                'Connecting lets NOIR read your YouTube account. Here is what '
+                'Connecting lets MERCURY read your YouTube account. Here is what '
                 "YouTube's official APIs allow:",
                 style: t.bodySmall?.copyWith(color: c.textPrimary),
               ),
-              const SizedBox(height: NoirSpacing.xs),
+              const SizedBox(height: MercurySpacing.xs),
               line(
                 Icons.check_rounded,
                 'Your playlists (also those made in YouTube Music), liked '
@@ -205,16 +205,16 @@ class AccountConnectionCard extends ConsumerWidget {
               ),
             ],
             if (actions.isNotEmpty) ...[
-              const SizedBox(height: NoirSpacing.lg),
+              const SizedBox(height: MercurySpacing.lg),
               Wrap(
-                spacing: NoirSpacing.sm,
-                runSpacing: NoirSpacing.sm,
+                spacing: MercurySpacing.sm,
+                runSpacing: MercurySpacing.sm,
                 children: actions,
               ),
             ],
-            const SizedBox(height: NoirSpacing.md),
+            const SizedBox(height: MercurySpacing.md),
             Text(
-              'Sign-in happens in your browser — NOIR never sees your Google '
+              'Sign-in happens in your browser — MERCURY never sees your Google '
               'password. You can also revoke access at any time in your Google '
               'Account.',
               style: t.labelSmall,

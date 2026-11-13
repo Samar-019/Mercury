@@ -5,16 +5,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/shell/navigation_history.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/features/playback/application/media_commands.dart';
-import 'package:noir/features/playback/presentation/youtube_video_layer.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/shell/navigation_history.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/features/playback/application/media_commands.dart';
+import 'package:mercury/features/playback/presentation/youtube_video_layer.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
-class NoirApp extends ConsumerWidget {
-  const NoirApp({super.key});
+class MercuryApp extends ConsumerWidget {
+  const MercuryApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,15 +34,15 @@ class NoirApp extends ConsumerWidget {
     );
     final settings = ref.read(settingsProvider);
     return MaterialApp.router(
-      title: 'NOIR',
+      title: 'MERCURY',
       debugShowCheckedModeBanner: false,
       themeMode: settings.themeMode,
-      theme: buildNoirTheme(Brightness.light, settings.density),
-      darkTheme: buildNoirTheme(Brightness.dark, settings.density),
+      theme: buildMercuryTheme(Brightness.light, settings.density),
+      darkTheme: buildMercuryTheme(Brightness.dark, settings.density),
       routerConfig: ref.watch(routerProvider),
       // Effects depend on both the user's settings and the system
       // reduced-motion flag, so they are resolved below MediaQuery.
-      builder: (context, child) => NoirEffects(
+      builder: (context, child) => MercuryEffects(
         config: EffectsConfig.resolve(
           settings,
           systemReducedMotion: MediaQuery.disableAnimationsOf(context),

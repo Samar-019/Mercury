@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/presentation/save_target_picker.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/presentation/save_target_picker.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Heart for a YouTube song: saves it to (or removes it from) the playlist
 /// chosen in Settings → Accounts. Never a YouTube like. Without a Google
@@ -45,7 +45,7 @@ class YouTubeSaveButton extends ConsumerWidget {
         : ref.watch(youTubeSavedProvider(track.uri));
     final title = local ? null : ref.watch(saveTargetTitleProvider);
     final visible = saved || showWhenUnsaved;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final tooltip = local
         ? saved
               ? 'Remove from favorites (this device)'
@@ -60,16 +60,16 @@ class YouTubeSaveButton extends ConsumerWidget {
       ignoring: !visible,
       child: AnimatedOpacity(
         opacity: visible ? 1 : 0,
-        duration: fx.motion(NoirMotion.fast),
+        duration: fx.motion(MercuryMotion.fast),
         child: Semantics(
           toggled: saved,
           child: AnimatedSwitcher(
-            duration: fx.motion(NoirMotion.fast),
+            duration: fx.motion(MercuryMotion.fast),
             transitionBuilder: (child, animation) => ScaleTransition(
               scale: Tween<double>(begin: 0.6, end: 1).animate(animation),
               child: FadeTransition(opacity: animation, child: child),
             ),
-            child: NoirIconButton(
+            child: MercuryIconButton(
               key: ValueKey(saved),
               icon: saved
                   ? Icons.favorite_rounded
@@ -117,7 +117,7 @@ Future<void> toggleYouTubeSave(
   if (message != null && context.mounted) showToast(context, message);
 }
 
-/// True when NOIR may edit the user's playlists, asking for it first.
+/// True when MERCURY may edit the user's playlists, asking for it first.
 Future<bool> ensureWriteAccess(BuildContext context, WidgetRef ref) async {
   if (ref.read(accountServiceProvider).current.canSaveToPlaylists) return true;
   return await askForWriteAccess(context, ref);
@@ -128,11 +128,11 @@ Future<bool> ensureWriteAccess(BuildContext context, WidgetRef ref) async {
 Future<bool> askForWriteAccess(BuildContext context, WidgetRef ref) async {
   final ok = await confirm(
     context,
-    title: 'Allow NOIR to edit your playlists?',
+    title: 'Allow MERCURY to edit your playlists?',
     message:
         'Hearting a YouTube song adds it to a playlist you choose on your '
-        'YouTube account. For that, Google asks you once to let NOIR manage '
-        'your YouTube account. NOIR only adds and removes songs in that '
+        'YouTube account. For that, Google asks you once to let MERCURY manage '
+        'your YouTube account. MERCURY only adds and removes songs in that '
         'playlist (and creates it if you ask), or likes and unlikes songs '
         'when you use Liked music. It never deletes anything else. Your '
         'browser opens next.',

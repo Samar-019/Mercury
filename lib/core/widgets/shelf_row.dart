@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
 
 /// Horizontally scrolling shelf (tiles, chips) with an optional title.
 ///
@@ -20,7 +20,7 @@ class ShelfRow extends StatefulWidget {
   const ShelfRow({
     required this.children,
     required this.height,
-    this.spacing = NoirSpacing.lg,
+    this.spacing = MercurySpacing.lg,
     this.itemExtent,
     this.arrowCenter,
     this.arrowSize = 36,
@@ -109,21 +109,21 @@ class _ShelfRowState extends State<ShelfRow> {
       target = (first + direction * perPage) * extent;
     }
     target = target.clamp(p.minScrollExtent, p.maxScrollExtent);
-    final duration = NoirEffects.of(context).motion(NoirMotion.slow * 1.5);
+    final duration = MercuryEffects.of(context).motion(MercuryMotion.slow * 1.5);
     if (duration == Duration.zero) {
       _controller.jumpTo(target);
     } else {
       _controller.animateTo(
         target,
         duration: duration,
-        curve: NoirMotion.emphasized,
+        curve: MercuryMotion.emphasized,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     _controller.smooth = fx.animations;
     final height = widget.height + ShelfRow.lift;
     final arrowTop =
@@ -169,7 +169,7 @@ class _ShelfRowState extends State<ShelfRow> {
                   ),
                 ),
                 Positioned(
-                  left: NoirSpacing.sm,
+                  left: MercurySpacing.sm,
                   top: arrowTop,
                   child: _Arrow(
                     icon: Icons.chevron_left_rounded,
@@ -180,7 +180,7 @@ class _ShelfRowState extends State<ShelfRow> {
                   ),
                 ),
                 Positioned(
-                  right: NoirSpacing.sm,
+                  right: MercurySpacing.sm,
                   top: arrowTop,
                   child: _Arrow(
                     icon: Icons.chevron_right_rounded,
@@ -208,14 +208,14 @@ class _ShelfRowState extends State<ShelfRow> {
           Text(
             eyebrow.toUpperCase(),
             style: t.labelSmall?.copyWith(
-              color: context.noir.textTertiary,
+              color: context.mercury.textTertiary,
               letterSpacing: 0.8,
             ),
           ),
         Padding(
           // With [ShelfRow.lift] this matches [SectionHeader]'s gap.
           padding: const EdgeInsets.only(
-            bottom: NoirSpacing.md - ShelfRow.lift,
+            bottom: MercurySpacing.md - ShelfRow.lift,
           ),
           child: Row(
             children: [
@@ -229,7 +229,7 @@ class _ShelfRowState extends State<ShelfRow> {
                 TextButton(
                   onPressed: widget.onAction,
                   style: TextButton.styleFrom(
-                    foregroundColor: context.noir.textSecondary,
+                    foregroundColor: context.mercury.textSecondary,
                     textStyle: t.labelMedium,
                   ),
                   child: Text(label),
@@ -298,35 +298,35 @@ class _Arrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     return IgnorePointer(
       ignoring: !visible,
       child: ExcludeFocus(
         excluding: !visible,
         child: TweenAnimationBuilder<double>(
           tween: Tween(end: visible ? 1 : 0),
-          duration: fx.motion(NoirMotion.medium),
-          curve: NoirMotion.standard,
+          duration: fx.motion(MercuryMotion.medium),
+          curve: MercuryMotion.standard,
           builder: (context, opacity, child) =>
               GlassFade(opacity: opacity, child: child!),
           child: AnimatedScale(
             scale: visible || !fx.animations ? 1 : 0.9,
-            duration: fx.motion(NoirMotion.medium),
-            curve: NoirMotion.standard,
+            duration: fx.motion(MercuryMotion.medium),
+            curve: MercuryMotion.standard,
             child: LiquidPress(
               enabled: visible,
               child: SizedBox.square(
                 dimension: size,
                 child: GlassSurface(
-                  borderRadius: NoirRadii.pillAll,
+                  borderRadius: MercuryRadii.pillAll,
                   shadow: 0.4,
                   floating: true,
                   child: Center(
-                    child: NoirIconButton(
+                    child: MercuryIconButton(
                       icon: icon,
                       tooltip: tooltip,
                       size: size * 0.55,
-                      color: context.noir.textPrimary,
+                      color: context.mercury.textPrimary,
                       onPressed: onPressed,
                     ),
                   ),

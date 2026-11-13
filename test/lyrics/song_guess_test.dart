@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/lyrics/domain/song_guess.dart';
+import 'package:mercury/features/lyrics/domain/song_guess.dart';
 
 void main() {
   group('cleanArtistName', () {

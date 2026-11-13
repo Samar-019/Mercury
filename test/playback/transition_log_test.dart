@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/playback/application/transition_log.dart';
+import 'package:mercury/features/playback/application/transition_log.dart';
 
 void main() {
   test('keeps the newest lines in memory and on disk, size-capped', () async {
-    final dir = Directory.systemTemp.createTempSync('noir_log');
+    final dir = Directory.systemTemp.createTempSync('mercury_log');
     addTearDown(() => dir.deleteSync(recursive: true));
     final file = File('${dir.path}/logs/transitions.log');
     final log = TransitionLog(file: file, capacity: 5, maxBytes: 2000);

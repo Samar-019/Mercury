@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 import 'package:window_manager/window_manager.dart';
 
-/// True where NOIR draws its own window chrome (frameless window).
+/// True where MERCURY draws its own window chrome (frameless window).
 bool get usesCustomWindowChrome => Platform.isWindows || Platform.isLinux;
 
 /// macOS keeps its native traffic lights top-left; reserve room for them.
@@ -170,7 +170,7 @@ class _DotState extends State<_Dot> {
           ? Color(widget.focused ? 0xFF3D3D3D : 0xFF2C2C2C)
           : Color(widget.focused ? 0xFFC9C9C9 : 0xFFDDDDDD);
     }
-    final duration = NoirEffects.of(context)
+    final duration = MercuryEffects.of(context)
         .motion(const Duration(milliseconds: 180));
     return Tooltip(
       message: widget.tooltip,

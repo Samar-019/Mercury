@@ -2,7 +2,7 @@ name: permission_handler_windows
 description: >-
   Stand-in for permission_handler_windows without native code. The real
   plugin subscribes to Windows location updates when the app starts, which
-  keeps the "location in use" indicator on. NOIR asks for permissions on
+  keeps the "location in use" indicator on. MERCURY asks for permissions on
   Android only.
 version: 0.2.2
 publish_to: none

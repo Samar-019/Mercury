@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
 
 /// The playback position the karaoke fill shows: the engine's position,
 /// interpolated about 60 times a second while [run] says it is playing, so

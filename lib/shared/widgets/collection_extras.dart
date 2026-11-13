@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Extra header controls for a page of songs, contributed by optional
 /// modules; [page] identifies it (`youtube:<playlist id>`,

@@ -4,19 +4,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/shell/sidebar.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/liquid_glass.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/mini_players.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/now_playing_screen.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/shell/sidebar.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/liquid_glass.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/mini_players.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/now_playing_screen.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 import '../helpers/pump_app.dart';
 
@@ -63,7 +63,7 @@ Finder _bubble(String tooltip) => find.descendant(
 );
 
 LiquidGlassStyle _islandStyle(WidgetTester tester) => LiquidGlassStyle.of(
-  NoirEffects.of(tester.element(_inIsland(find.byType(LiquidGlass)))),
+  MercuryEffects.of(tester.element(_inIsland(find.byType(LiquidGlass)))),
 );
 
 Rect _islandRect(WidgetTester tester) =>

@@ -8,46 +8,46 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/app/shell/adaptive_shell.dart';
-import 'package:noir/app/shell/sidebar.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_glass.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/presentation/ytm_artist_screen.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/library/presentation/collection_screens.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/lyrics/presentation/karaoke_lyrics.dart';
-import 'package:noir/features/lyrics/presentation/lyrics_view.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/features/playback/presentation/mini_players.dart';
-import 'package:noir/features/playback/presentation/mix_mode_button.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/now_playing_screen.dart';
-import 'package:noir/features/playback/presentation/playback_controls.dart';
-import 'package:noir/features/playback/presentation/playback_shortcuts.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/integrations/youtube_music/ytm_lyrics.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/app/shell/adaptive_shell.dart';
+import 'package:mercury/app/shell/sidebar.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_glass.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/presentation/ytm_artist_screen.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/library/presentation/collection_screens.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/lyrics/presentation/karaoke_lyrics.dart';
+import 'package:mercury/features/lyrics/presentation/lyrics_view.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/features/playback/presentation/mini_players.dart';
+import 'package:mercury/features/playback/presentation/mix_mode_button.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/now_playing_screen.dart';
+import 'package:mercury/features/playback/presentation/playback_controls.dart';
+import 'package:mercury/features/playback/presentation/playback_shortcuts.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/integrations/youtube_music/ytm_lyrics.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../discover/fake_artist_client.dart';
 import '../helpers/fake_engine.dart';
@@ -99,7 +99,7 @@ pumpNowPlaying(
           'syncedLyrics': synced,
         }),
   );
-  final tmp = Directory.systemTemp.createTempSync('noir_np_');
+  final tmp = Directory.systemTemp.createTempSync('mercury_np_');
   final container = ProviderContainer(
     overrides: [
       databaseProvider.overrideWithValue(db),
@@ -123,7 +123,7 @@ pumpNowPlaying(
     trackRow('b.mp3', title: 'Quiet Harbor', artist: 'Mara Vale'),
   ]);
   await tester.pumpWidget(
-    UncontrolledProviderScope(container: container, child: const NoirApp()),
+    UncontrolledProviderScope(container: container, child: const MercuryApp()),
   );
   await tester.pumpAndSettle();
   addTearDown(() async {
@@ -199,9 +199,9 @@ void main() {
       await pumpNowPlaying(tester, size: phone);
       await tester.tap(find.byTooltip('Close player (Esc)'));
       await tester.pump();
-      await tester.pump(NoirMotion.slow ~/ 2);
+      await tester.pump(MercuryMotion.slow ~/ 2);
       expect(pageTop(tester), inExclusiveRange(0, 900));
-      await tester.pump(NoirMotion.slow ~/ 2);
+      await tester.pump(MercuryMotion.slow ~/ 2);
       // Down at the bottom edge once the queue sheet would be.
       final gone =
           find.byType(NowPlayingScreen).evaluate().isEmpty ||
@@ -220,7 +220,7 @@ void main() {
       final app = await pumpNowPlaying(tester, size: phone);
       await tester.tap(_inPlayer(find.byType(MixModeButton)).first);
       await tester.pump();
-      await tester.pump(NoirMotion.slow ~/ 2);
+      await tester.pump(MercuryMotion.slow ~/ 2);
       // Sliding up, not fading in.
       final panel = find.text('TRANSITIONS');
       expect(tester.getTopLeft(panel).dy, greaterThan(600));
@@ -1182,7 +1182,7 @@ void main() {
           );
         final image = await recorder.endRecording().toImage(64, 64);
         final png = await image.toByteData(format: ui.ImageByteFormat.png);
-        final dir = Directory.systemTemp.createTempSync('noir_flow_');
+        final dir = Directory.systemTemp.createTempSync('mercury_flow_');
         final file = File('${dir.path}/art.png')
           ..writeAsBytesSync(png!.buffer.asUint8List());
         return file;

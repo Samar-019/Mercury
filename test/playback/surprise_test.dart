@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 import '../helpers/fake_analysis.dart';
 import '../helpers/fake_engine.dart';

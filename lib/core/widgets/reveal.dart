@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 
 /// Shows or hides [child] by growing / shrinking its height while fading
 /// it, instead of popping it in and out of the layout. The child is only
@@ -14,11 +14,11 @@ class Reveal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final duration = NoirEffects.of(context).motion(NoirMotion.medium);
+    final duration = MercuryEffects.of(context).motion(MercuryMotion.medium);
     return AnimatedSwitcher(
       duration: duration,
-      switchInCurve: NoirMotion.standard,
-      switchOutCurve: NoirMotion.exit,
+      switchInCurve: MercuryMotion.standard,
+      switchOutCurve: MercuryMotion.exit,
       transitionBuilder: (child, animation) => SizeTransition(
         sizeFactor: animation,
         alignment: Alignment.topCenter,

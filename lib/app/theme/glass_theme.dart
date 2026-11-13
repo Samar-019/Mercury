@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
 
 /// Effective visual-effects configuration, combining the user's settings with
-/// the system reduced-motion preference. Read via [NoirEffects.of].
+/// the system reduced-motion preference. Read via [MercuryEffects.of].
 @immutable
 class EffectsConfig {
   const EffectsConfig({
@@ -25,8 +25,8 @@ class EffectsConfig {
       blurSigma: !settings.liquidGlass
           ? 0
           : performance
-          ? NoirBlur.reduced
-          : NoirBlur.full,
+          ? MercuryBlur.reduced
+          : MercuryBlur.full,
       highlights: settings.liquidGlass && !performance,
       ambient: settings.liquidGlass && !performance,
       animations: settings.animations && !systemReducedMotion,
@@ -75,13 +75,13 @@ class EffectsConfig {
   );
 }
 
-class NoirEffects extends InheritedWidget {
-  const NoirEffects({required this.config, required super.child, super.key});
+class MercuryEffects extends InheritedWidget {
+  const MercuryEffects({required this.config, required super.child, super.key});
 
   final EffectsConfig config;
 
   static EffectsConfig of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<NoirEffects>()?.config ??
+      context.dependOnInheritedWidgetOfExactType<MercuryEffects>()?.config ??
       const EffectsConfig(
         glass: false,
         blurSigma: 0,
@@ -91,5 +91,5 @@ class NoirEffects extends InheritedWidget {
       );
 
   @override
-  bool updateShouldNotify(NoirEffects oldWidget) => config != oldWidget.config;
+  bool updateShouldNotify(MercuryEffects oldWidget) => config != oldWidget.config;
 }

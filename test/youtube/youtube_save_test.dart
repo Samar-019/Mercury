@@ -5,18 +5,18 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/youtube/application/youtube_pending_edits.dart';
-import 'package:noir/features/youtube/application/youtube_refresh.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/google_auth/desktop_oauth_flow.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/youtube/application/youtube_pending_edits.dart';
+import 'package:mercury/features/youtube/application/youtube_refresh.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/google_auth/desktop_oauth_flow.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/fake_http.dart';
 import '../helpers/test_database.dart';
@@ -91,7 +91,7 @@ void main() {
       ..listen(youTubeSaveProvider, (_, _) {})
       ..listen(saveTargetProvider, (_, _) {});
     await repo.savePlaylists(const [
-      YtPlaylist(id: 'PLt', title: 'NOIR Likes', itemCount: 2, etag: 'e1'),
+      YtPlaylist(id: 'PLt', title: 'MERCURY Likes', itemCount: 2, etag: 'e1'),
     ]);
     await repo.savePlaylistItems('PLt', 'e1', const [
       YtPlaylistEntry(videoId: 'v1', id: 'item-v1'),
@@ -106,7 +106,7 @@ void main() {
 
   void chooseTarget() => container
       .read(saveTargetProvider.notifier)
-      .set(const SaveTarget('PLt', 'NOIR Likes'));
+      .set(const SaveTarget('PLt', 'MERCURY Likes'));
 
   YouTubeSaveController ctrl() => container.read(youTubeSaveProvider.notifier);
 
@@ -151,16 +151,16 @@ void main() {
       http.handler = (_) => ok({
         'id': 'PLnew',
         'etag': 'n1',
-        'snippet': {'title': 'NOIR Likes'},
+        'snippet': {'title': 'MERCURY Likes'},
         'status': {'privacyStatus': 'private'},
       });
-      final p = await api.createPlaylist('NOIR Likes');
+      final p = await api.createPlaylist('MERCURY Likes');
       expect(p.id, 'PLnew');
       final r = http.requests.single;
       expect(r.method, 'POST');
       expect(r.uri.path, '/youtube/v3/playlists');
       expect(body(r), {
-        'snippet': {'title': 'NOIR Likes'},
+        'snippet': {'title': 'MERCURY Likes'},
         'status': {'privacyStatus': 'private'},
       });
     });
@@ -197,7 +197,7 @@ void main() {
       final outcome = await ctrl().toggle(ytTrack('v2'));
 
       expect(outcome.result, SaveResult.saved);
-      expect(outcome.message, 'Saved to NOIR Likes');
+      expect(outcome.message, 'Saved to MERCURY Likes');
       expect(await repo.playlistItemIds('PLt', 'v2'), ['item-v2']);
       final tracks = await repo.watchPlaylistTracks('PLt').first;
       expect(tracks.map((t) => t.uri), contains('v2'));
@@ -216,7 +216,7 @@ void main() {
       final outcome = await ctrl().toggle(ytTrack('v1'));
 
       expect(outcome.result, SaveResult.removed);
-      expect(outcome.message, 'Removed from NOIR Likes');
+      expect(outcome.message, 'Removed from MERCURY Likes');
       final r = http.requests.single;
       expect((r.method, r.uri.queryParameters['id']), ('DELETE', 'item-v1'));
       expect(await repo.playlistContains('PLt', 'v1'), isFalse);
@@ -260,7 +260,7 @@ void main() {
       final outcome = await pending;
 
       expect(outcome.result, SaveResult.failed);
-      expect(outcome.message, startsWith("Couldn't save to NOIR Likes."));
+      expect(outcome.message, startsWith("Couldn't save to MERCURY Likes."));
       expect(saved('v2'), isFalse);
       expect(http.requests, hasLength(1), reason: 'one request per video');
       expect(await repo.playlistContains('PLt', 'v2'), isFalse);
@@ -331,7 +331,7 @@ void main() {
       await until(() => next.read(saveTargetProvider) != null);
       expect(
         next.read(saveTargetProvider),
-        const SaveTarget('PLt', 'NOIR Likes'),
+        const SaveTarget('PLt', 'MERCURY Likes'),
       );
     });
 
@@ -348,13 +348,13 @@ void main() {
       http.handler = (_) => ok({
         'id': 'PLnew',
         'etag': 'n1',
-        'snippet': {'title': 'NOIR Likes'},
+        'snippet': {'title': 'MERCURY Likes'},
         'contentDetails': {'itemCount': 0},
         'status': {'privacyStatus': 'private'},
       });
-      await ctrl().createTarget('NOIR Likes');
+      await ctrl().createTarget('MERCURY Likes');
       expect(container.read(saveTargetProvider)?.id, 'PLnew');
-      expect((await repo.playlistRow('PLnew'))?.title, 'NOIR Likes');
+      expect((await repo.playlistRow('PLnew'))?.title, 'MERCURY Likes');
     });
   });
 

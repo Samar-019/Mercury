@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/analysis/application/analysis_providers.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/analysis/application/analysis_providers.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/shared/models/media.dart';
 
 enum TransitionPhase {
   /// Planned; waiting for the outgoing track to reach the start point.

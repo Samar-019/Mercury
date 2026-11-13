@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/artwork/data/artwork_cache_store.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/artwork/data/artwork_cache_store.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 String art(String id) => 'https://lh3.googleusercontent.com/$id';
 

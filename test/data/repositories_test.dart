@@ -1,13 +1,13 @@
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/features/home/data/history_repository.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/features/search/data/search_history_repository.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/features/home/data/history_repository.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/features/search/data/search_history_repository.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/shared/models/media.dart';
 import 'package:path/path.dart' as p;
 
 import '../helpers/test_database.dart';

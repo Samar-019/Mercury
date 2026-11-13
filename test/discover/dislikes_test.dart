@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/features/discover/application/for_you.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/features/discover/application/for_you.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 
 import '../helpers/fake_innertube_client.dart';
 

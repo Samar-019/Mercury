@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart'
     show immutable, visibleForTesting;
-import 'package:noir/integrations/youtube_music/json_nav.dart';
-import 'package:noir/integrations/youtube_music/ytm_lyrics.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/integrations/youtube_music/ytm_parsers.dart';
+import 'package:mercury/integrations/youtube_music/json_nav.dart';
+import 'package:mercury/integrations/youtube_music/ytm_lyrics.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/integrations/youtube_music/ytm_parsers.dart';
 
 enum InnerTubeErrorKind { network, timeout, rateLimited, http, parse }
 
@@ -368,7 +368,7 @@ class InnerTubeClient {
 
   static const _parseError = InnerTubeException(
     InnerTubeErrorKind.parse,
-    'YouTube Music changed something NOIR relies on. Try again later.',
+    'YouTube Music changed something MERCURY relies on. Try again later.',
   );
 
   static const _timeoutError = InnerTubeException(

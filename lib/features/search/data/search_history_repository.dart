@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
 
 final searchHistoryRepositoryProvider = Provider<SearchHistoryRepository>(
   (ref) => SearchHistoryRepository(ref.watch(databaseProvider)),

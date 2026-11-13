@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/presentation/load_more.dart';
-import 'package:noir/features/discover/presentation/ytm_items.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/presentation/load_more.dart';
+import 'package:mercury/features/discover/presentation/ytm_items.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Where YouTube Music pages open: `/search` while the Search branch is
@@ -219,12 +219,12 @@ class _ArtistHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final subtitle = [?artist.subscribers, ?artist.audience].join(' · ');
     final actions = [
-      NoirIconButton(
+      MercuryIconButton(
         icon: Icons.radio_rounded,
         tooltip: 'Start radio',
         onPressed: onRadio,
       ),
-      NoirIconButton(
+      MercuryIconButton(
         icon: Icons.open_in_new_rounded,
         tooltip: 'Open in YouTube Music',
         onPressed: () => unawaited(
@@ -253,8 +253,8 @@ class _ArtistHeader extends StatelessWidget {
         WindowClass.of(MediaQuery.sizeOf(context).width) == WindowClass.compact;
     return Padding(
       padding: const EdgeInsets.only(
-        top: NoirSpacing.lg,
-        bottom: NoirSpacing.xl,
+        top: MercurySpacing.lg,
+        bottom: MercurySpacing.xl,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -264,14 +264,14 @@ class _ArtistHeader extends StatelessWidget {
               final height = (box.maxWidth * 0.36).clamp(180.0, 320.0);
               final dpr = MediaQuery.devicePixelRatioOf(context);
               return ClipRRect(
-                borderRadius: NoirRadii.lgAll,
+                borderRadius: MercuryRadii.lgAll,
                 child: SizedBox(
                   width: box.maxWidth,
                   height: height,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      ColoredBox(color: context.noir.surfaceElevated),
+                      ColoredBox(color: context.mercury.surfaceElevated),
                       Image.network(
                         banner,
                         fit: BoxFit.cover,
@@ -297,9 +297,9 @@ class _ArtistHeader extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        left: NoirSpacing.xl,
-                        right: NoirSpacing.xl,
-                        bottom: NoirSpacing.lg,
+                        left: MercurySpacing.xl,
+                        right: MercurySpacing.xl,
+                        bottom: MercurySpacing.lg,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -341,12 +341,12 @@ class _ArtistHeader extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: NoirSpacing.lg),
+          const SizedBox(height: MercurySpacing.lg),
           Row(
             children: [
               PrimaryPlayButton(playing: false, onPressed: onPlay, size: 44),
-              const SizedBox(width: NoirSpacing.sm),
-              NoirIconButton(
+              const SizedBox(width: MercurySpacing.sm),
+              MercuryIconButton(
                 icon: Icons.shuffle_rounded,
                 tooltip: 'Shuffle play',
                 onPressed: onShuffle,
@@ -422,14 +422,14 @@ class _AboutState extends State<_About> {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 760),
           child: AnimatedSize(
-            duration: NoirEffects.of(context).motion(NoirMotion.medium),
-            curve: NoirMotion.standard,
+            duration: MercuryEffects.of(context).motion(MercuryMotion.medium),
+            curve: MercuryMotion.standard,
             alignment: Alignment.topLeft,
             child: Text(
               widget.text,
               maxLines: _open ? null : 3,
               overflow: _open ? null : TextOverflow.ellipsis,
-              style: t.bodyMedium?.copyWith(color: context.noir.textSecondary),
+              style: t.bodyMedium?.copyWith(color: context.mercury.textSecondary),
             ),
           ),
         ),

@@ -1,4 +1,4 @@
-# Runs NOIR on Windows with the local (gitignored) Google OAuth configuration.
+# Runs MERCURY on Windows with the local (gitignored) Google OAuth configuration.
 #   ./tool/run.ps1            debug run
 #   ./tool/run.ps1 -Release   release build into build\windows\x64\runner\Release
 # Builds the optional local entrypoint lib/private/main.dart (never committed)

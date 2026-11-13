@@ -40,7 +40,7 @@ jobs:
       - name: Zip
         shell: pwsh
         run: |
-          $name = "NOIR-$env:GITHUB_REF_NAME-windows-x64.zip"
+          $name = "MERCURY-$env:GITHUB_REF_NAME-windows-x64.zip"
           Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath $name
           "ZIP=$name" | Out-File -FilePath $env:GITHUB_ENV -Append
       - name: Release
@@ -51,8 +51,8 @@ jobs:
           notes=".github/release-notes/$GITHUB_REF_NAME.md"
           if [ -f "$notes" ]; then
             gh release create "$GITHUB_REF_NAME" "$ZIP" --repo "$GITHUB_REPOSITORY" \
-              --title "NOIR $GITHUB_REF_NAME" --notes-file "$notes"
+              --title "MERCURY $GITHUB_REF_NAME" --notes-file "$notes"
           else
             gh release create "$GITHUB_REF_NAME" "$ZIP" --repo "$GITHUB_REPOSITORY" \
-              --title "NOIR $GITHUB_REF_NAME" --generate-notes
+              --title "MERCURY $GITHUB_REF_NAME" --generate-notes
           fi

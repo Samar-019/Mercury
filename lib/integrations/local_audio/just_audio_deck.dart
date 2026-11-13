@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:just_audio/just_audio.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// A deck on just_audio, for platforms without the libmpv deck (Android,
 /// Apple). Speed changes keep the pitch; positions are just_audio's

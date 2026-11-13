@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
 
 import 'artwork_fakes.dart';
 
@@ -31,7 +31,7 @@ void main() {
       ProviderScope(
         overrides: [artworkResolverProvider.overrideWithValue(resolver)],
         child: MaterialApp(
-          theme: buildNoirTheme(Brightness.dark, Density.comfortable),
+          theme: buildMercuryTheme(Brightness.dark, Density.comfortable),
           home: Center(child: child),
         ),
       ),

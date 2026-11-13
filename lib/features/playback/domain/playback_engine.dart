@@ -1,6 +1,6 @@
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Low-level events an engine reports to the playback controller.
 sealed class EngineEvent {

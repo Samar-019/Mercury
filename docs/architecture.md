@@ -73,7 +73,7 @@ message only if played.
 
 ## Design system
 
-`NoirPalette` (ThemeExtension, dark + light), spacing/radius/blur/motion
+`MercuryPalette` (ThemeExtension, dark + light), spacing/radius/blur/motion
 tokens and breakpoints in `app/theme/design_tokens.dart`. `GlassSurface` is
 the only place that applies backdrop blur; `EffectsConfig` combines user
 settings with the system reduced-motion flag:

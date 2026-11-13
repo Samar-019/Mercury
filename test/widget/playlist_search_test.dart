@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/track_filter.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/track_filter.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 import '../helpers/pump_app.dart';
 import '../helpers/test_database.dart';

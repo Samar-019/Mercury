@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
 import 'package:path/path.dart' as p;
 
 /// Persists one JSON file per analysed track under `<support>/analysis/`,

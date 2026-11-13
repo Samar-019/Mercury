@@ -3,22 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/shell/adaptive_shell.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/search/application/music_search_controller.dart';
-import 'package:noir/features/search/application/search_controller.dart';
-import 'package:noir/features/search/data/search_history_repository.dart';
-import 'package:noir/features/search/presentation/music_results.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/shell/adaptive_shell.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/search/application/music_search_controller.dart';
+import 'package:mercury/features/search/application/search_controller.dart';
+import 'package:mercury/features/search/data/search_history_repository.dart';
+import 'package:mercury/features/search/presentation/music_results.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 enum _Filter { all, artists, albums, tracks, playlists }
 
@@ -79,7 +79,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.only(top: NoirSpacing.sm),
+            padding: const EdgeInsets.only(top: MercurySpacing.sm),
             child: _SearchField(
               controller: _controller,
               focusNode: ref.watch(searchFocusProvider),
@@ -94,10 +94,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         else ...[
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: NoirSpacing.lg),
+              padding: const EdgeInsets.symmetric(vertical: MercurySpacing.lg),
               child: Wrap(
-                spacing: NoirSpacing.xs,
-                runSpacing: NoirSpacing.xs,
+                spacing: MercurySpacing.xs,
+                runSpacing: MercurySpacing.xs,
                 children: [
                   for (final f in _Filter.values)
                     PillChip(
@@ -129,7 +129,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           const MusicResults(),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(top: NoirSpacing.xl),
+              padding: const EdgeInsets.only(top: MercurySpacing.xl),
               child: Text(
                 'Your library is searched on this device. YouTube Music '
                 'results come from its public catalog, without your account.',
@@ -160,7 +160,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     return [
       SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.only(top: NoirSpacing.xl),
+          padding: const EdgeInsets.only(top: MercurySpacing.xl),
           child: SectionHeader(
             'Recent searches',
             action: 'Clear',
@@ -174,12 +174,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           key: ValueKey(history[i]),
           dense: true,
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: NoirSpacing.sm,
+            horizontal: MercurySpacing.sm,
           ),
-          shape: const RoundedRectangleBorder(borderRadius: NoirRadii.mdAll),
+          shape: const RoundedRectangleBorder(borderRadius: MercuryRadii.mdAll),
           leading: const Icon(Icons.history_rounded, size: 18),
           title: Text(history[i], style: t.bodyMedium),
-          trailing: NoirIconButton(
+          trailing: MercuryIconButton(
             icon: Icons.close_rounded,
             tooltip: 'Remove from history',
             size: 16,
@@ -225,7 +225,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         const SliverToBoxAdapter(child: SectionHeader('Top result')),
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: NoirSpacing.xl),
+            padding: const EdgeInsets.only(bottom: MercurySpacing.xl),
             child: _TopResultCard(
               title: top.$1,
               kind: top.$2,
@@ -249,7 +249,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ),
           ],
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: NoirSpacing.xl)),
+        const SliverToBoxAdapter(child: SizedBox(height: MercurySpacing.xl)),
       ],
       if (show(_Filter.albums) && r.albums.isNotEmpty) ...[
         const SliverToBoxAdapter(child: SectionHeader('Albums')),
@@ -268,7 +268,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               ),
           ],
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: NoirSpacing.xl)),
+        const SliverToBoxAdapter(child: SizedBox(height: MercurySpacing.xl)),
       ],
       if (show(_Filter.tracks) && r.tracks.isNotEmpty) ...[
         const SliverToBoxAdapter(child: SectionHeader('Tracks')),
@@ -283,7 +283,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             },
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: NoirSpacing.xl)),
+        const SliverToBoxAdapter(child: SizedBox(height: MercurySpacing.xl)),
       ],
       if (show(_Filter.playlists) && r.playlists.isNotEmpty) ...[
         const SliverToBoxAdapter(child: SectionHeader('Playlists')),
@@ -360,10 +360,10 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     return GlassSurface(
-      borderRadius: NoirRadii.pillAll,
+      borderRadius: MercuryRadii.pillAll,
       blur: 0,
       child: SizedBox(
         height: 48,
@@ -395,7 +395,7 @@ class _SearchField extends StatelessWidget {
               valueListenable: controller,
               builder: (context, value, _) => value.text.isEmpty
                   ? const SizedBox(width: 16)
-                  : NoirIconButton(
+                  : MercuryIconButton(
                       icon: Icons.close_rounded,
                       tooltip: 'Clear search',
                       size: 18,
@@ -439,7 +439,7 @@ class _TopResultCard extends StatelessWidget {
             child: Row(
               children: [
                 artwork,
-                const SizedBox(width: NoirSpacing.lg),
+                const SizedBox(width: MercurySpacing.lg),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,7 +452,7 @@ class _TopResultCard extends StatelessWidget {
                 ),
                 Icon(
                   Icons.chevron_right_rounded,
-                  color: context.noir.textTertiary,
+                  color: context.mercury.textTertiary,
                 ),
               ],
             ),

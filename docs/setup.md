@@ -35,18 +35,18 @@ flutter build windows --release      # build\windows\x64\runner\Release\
 flutter build apk --release          # Android (not yet verified, see limitations)
 ```
 
-The Windows release folder (`noir.exe` + `data/` + DLLs, including libmpv) is
+The Windows release folder (`mercury.exe` + `data/` + DLLs, including libmpv) is
 self-contained and can be zipped as-is.
 
-## Where NOIR keeps data (Windows)
+## Where MERCURY keeps data (Windows)
 
-`%APPDATA%\NOIR\NOIR\` — `noir.sqlite` and `artwork\`.
+`%APPDATA%\MERCURY\MERCURY\` — `mercury.sqlite` and `artwork\`.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---|---|
-| A file shows "can't be played" | It is damaged or not audio; NOIR reads MP3, M4A, AAC, FLAC, OGG, Opus, WAV |
+| A file shows "can't be played" | It is damaged or not audio; MERCURY reads MP3, M4A, AAC, FLAC, OGG, Opus, WAV |
 | Songs missing after moving files | Settings → Library → Rescan |
 | UI feels heavy on integrated graphics | Settings → Effects → Performance mode, or turn off Liquid Glass |
 | Build error "Failed to find target with hash string 'android-37'" | Install `platforms/android-37.0` and use AGP ≥ 9.4 |

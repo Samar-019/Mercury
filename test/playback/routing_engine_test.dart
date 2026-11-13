@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/routing_engine.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/routing_engine.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 import '../helpers/fake_audio_files.dart';
 import '../helpers/fake_engine.dart';

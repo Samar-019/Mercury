@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:noir/core/database/app_database.dart';
+import 'package:mercury/core/database/app_database.dart';
 
 AppDatabase inMemoryDatabase() {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;

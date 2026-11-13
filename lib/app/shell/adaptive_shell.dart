@@ -7,21 +7,21 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/shell/navigation.dart';
-import 'package:noir/app/shell/navigation_history.dart';
-import 'package:noir/app/shell/sidebar.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/core/widgets/noir_backdrop.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/mini_players.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/playback_shortcuts.dart';
-import 'package:noir/features/queue/presentation/queue_panel.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/shell/navigation.dart';
+import 'package:mercury/app/shell/navigation_history.dart';
+import 'package:mercury/app/shell/sidebar.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/core/widgets/mercury_backdrop.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/mini_players.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/playback_shortcuts.dart';
+import 'package:mercury/features/queue/presentation/queue_panel.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 /// Focus node of the search field, so shortcuts can jump into it.
 final searchFocusProvider = Provider<FocusNode>((ref) {
@@ -78,7 +78,7 @@ class AdaptiveShell extends ConsumerWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                NoirBackdrop(artworkPath: artwork),
+                MercuryBackdrop(artworkPath: artwork),
                 content,
               ],
             ),
@@ -253,8 +253,8 @@ class _SidePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
       tween: Tween(end: open ? 1 : 0),
-      duration: NoirEffects.of(context).motion(NoirMotion.layout),
-      curve: NoirMotion.emphasized,
+      duration: MercuryEffects.of(context).motion(MercuryMotion.layout),
+      curve: MercuryMotion.emphasized,
       child: const GlassSurface(
         borderRadius: BorderRadius.zero,
         highlight: 0.4,
@@ -359,7 +359,7 @@ class TopBar extends ConsumerWidget {
         shell.currentIndex == Branch.search.index ||
         path.startsWith('/library/playlist/') ||
         path.startsWith('/library/youtube/');
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     return WindowDragArea(
       child: SizedBox(
@@ -386,7 +386,7 @@ class TopBar extends ConsumerWidget {
                         bubbleScale: 1.03,
                         child: GlassSurface(
                           interactive: true,
-                          borderRadius: NoirRadii.pillAll,
+                          borderRadius: MercuryRadii.pillAll,
                           child: SizedBox(
                             width: 280,
                             height: 38,
@@ -416,10 +416,10 @@ class TopBar extends ConsumerWidget {
                     ),
                   ),
                 ),
-              const SizedBox(width: NoirSpacing.md),
+              const SizedBox(width: MercurySpacing.md),
               AccountAvatar(onTap: () => shell.goBranch(Branch.settings.index)),
               if (usesCustomWindowChrome) ...[
-                const SizedBox(width: NoirSpacing.lg),
+                const SizedBox(width: MercurySpacing.lg),
                 const WindowControls(),
               ],
             ],
@@ -450,7 +450,7 @@ class HistoryButtons extends ConsumerWidget {
                 ? () => unawaited(history.back())
                 : null,
           ),
-          const SizedBox(width: NoirSpacing.sm),
+          const SizedBox(width: MercurySpacing.sm),
           _GlassCircleButton(
             icon: Icons.arrow_forward_rounded,
             tooltip: 'Forward (Alt+→)',
@@ -477,8 +477,8 @@ class _GlassCircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     final enabled = onPressed != null;
     return Tooltip(
       message: tooltip,
@@ -491,7 +491,7 @@ class _GlassCircleButton extends StatelessWidget {
         child: LiquidPress(
           enabled: enabled,
           child: GlassSurface(
-            borderRadius: NoirRadii.pillAll,
+            borderRadius: MercuryRadii.pillAll,
             interactive: enabled,
             child: Material(
               type: MaterialType.transparency,
@@ -499,7 +499,7 @@ class _GlassCircleButton extends StatelessWidget {
                 onTap: onPressed,
                 customBorder: const CircleBorder(),
                 hoverColor: c.hover,
-                hoverDuration: fx.motion(NoirMotion.fast),
+                hoverDuration: fx.motion(MercuryMotion.fast),
                 child: SizedBox.square(
                   dimension: _size,
                   child: TweenAnimationBuilder<Color?>(
@@ -508,7 +508,7 @@ class _GlassCircleButton extends StatelessWidget {
                           ? c.textPrimary
                           : c.textTertiary.withValues(alpha: 0.5),
                     ),
-                    duration: fx.motion(NoirMotion.fast),
+                    duration: fx.motion(MercuryMotion.fast),
                     builder: (context, color, _) =>
                         Icon(icon, size: 18, color: color),
                   ),
@@ -532,7 +532,7 @@ class AccountAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     return Tooltip(
       message: 'Settings & account',
       child: Semantics(
@@ -540,14 +540,14 @@ class AccountAvatar extends StatelessWidget {
         label: 'Settings and account',
         child: LiquidPress(
           child: GlassSurface(
-            borderRadius: NoirRadii.pillAll,
+            borderRadius: MercuryRadii.pillAll,
             child: Material(
               type: MaterialType.transparency,
               child: InkResponse(
                 onTap: onTap,
                 customBorder: const CircleBorder(),
                 hoverColor: c.hover,
-                hoverDuration: NoirEffects.of(context).motion(NoirMotion.fast),
+                hoverDuration: MercuryEffects.of(context).motion(MercuryMotion.fast),
                 child: SizedBox.square(
                   dimension: size,
                   child: Icon(

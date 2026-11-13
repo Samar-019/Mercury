@@ -3,7 +3,7 @@
 `reference.png` is the visual direction supplied by the product owner. It is a guide,
 not a pixel spec, and some of its content conflicts with product rules.
 
-## What NOIR adopts
+## What MERCURY adopts
 
 - **Desktop shell (wide):** a left sidebar with Home / Search / Library, then a "Playlists"
   section that lists the user's playlists, a "Create playlist" pill, and a compact player
@@ -31,7 +31,7 @@ not a pixel spec, and some of its content conflicts with product rules.
 
 ## Deliberate deviations and owner decisions
 
-| Reference element | NOIR behavior | Reason |
+| Reference element | MERCURY behavior | Reason |
 |---|---|---|
 | macOS-style traffic-light dots, top-left | **Owner decision (2026-10-24):** the same three dots, but in the **top-right corner** (minimize · maximize · close, close outermost) on a fully frameless window with no system title bar. Colored when focused, grey when not; tooltips on every dot | Reference look, Windows placement |
 | "Daily Mix — Curated for you" | Not shown | No legitimate recommendation source |

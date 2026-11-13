@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
 
 final _themes = <(Brightness, Density), ThemeData>{};
 
-/// Builds NOIR's custom theme. Material is only the foundation: colors,
-/// typography and component shapes all come from NOIR tokens.
+/// Builds MERCURY's custom theme. Material is only the foundation: colors,
+/// typography and component shapes all come from MERCURY tokens.
 ///
 /// Cached: a fresh ThemeData never compares equal (its state-property
 /// closures differ), so rebuilding it on every settings change made
 /// MaterialApp lerp the whole theme for 200 ms — rebuilding the entire app
 /// each frame and stalling the Settings switch animations.
-ThemeData buildNoirTheme(Brightness brightness, Density density) =>
+ThemeData buildMercuryTheme(Brightness brightness, Density density) =>
     _themes[(brightness, density)] ??= _buildTheme(brightness, density);
 
 ThemeData _buildTheme(Brightness brightness, Density density) {
   final c = brightness == Brightness.dark
-      ? NoirPalette.dark
-      : NoirPalette.light;
+      ? MercuryPalette.dark
+      : MercuryPalette.light;
   final scheme = ColorScheme(
     brightness: brightness,
     primary: c.primaryActionFill,
@@ -61,7 +61,7 @@ ThemeData _buildTheme(Brightness brightness, Density density) {
       waitDuration: const Duration(milliseconds: 500),
       decoration: BoxDecoration(
         color: c.surfaceElevated,
-        borderRadius: NoirRadii.smAll,
+        borderRadius: MercuryRadii.smAll,
         border: Border.all(color: c.glassBorder),
       ),
       textStyle: text.labelMedium?.copyWith(color: c.textPrimary),
@@ -72,7 +72,7 @@ ThemeData _buildTheme(Brightness brightness, Density density) {
       elevation: 12,
       shadowColor: c.shadow,
       shape: RoundedRectangleBorder(
-        borderRadius: NoirRadii.mdAll,
+        borderRadius: MercuryRadii.mdAll,
         side: BorderSide(color: c.glassBorder),
       ),
       textStyle: text.bodyMedium,
@@ -84,7 +84,7 @@ ThemeData _buildTheme(Brightness brightness, Density density) {
       actionTextColor: c.textPrimary,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: NoirRadii.mdAll,
+        borderRadius: MercuryRadii.mdAll,
         side: BorderSide(color: c.glassBorder),
       ),
     ),
@@ -128,7 +128,7 @@ ThemeData _buildTheme(Brightness brightness, Density density) {
       backgroundColor: c.surfaceElevated,
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: NoirRadii.xlAll,
+        borderRadius: MercuryRadii.xlAll,
         side: BorderSide(color: c.glassBorder),
       ),
     ),
@@ -143,7 +143,7 @@ ThemeData _buildTheme(Brightness brightness, Density density) {
   );
 }
 
-TextTheme _textTheme(NoirPalette c) {
+TextTheme _textTheme(MercuryPalette c) {
   TextStyle s(double size, FontWeight w, Color color, {double h = 1.3}) =>
       TextStyle(
         fontFamily: 'Inter',

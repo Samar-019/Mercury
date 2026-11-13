@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/shelf_row.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/features/discover/application/for_you.dart';
-import 'package:noir/features/discover/presentation/load_more.dart';
-import 'package:noir/features/discover/presentation/ytm_items.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/shelf_row.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/features/discover/application/for_you.dart';
+import 'package:mercury/features/discover/presentation/load_more.dart';
+import 'package:mercury/features/discover/presentation/ytm_items.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
 
 /// Reloads the Discover feed when it is stale (older than
 /// [HomeFeedController.maxAge]) or always with [force]. A failure keeps the
@@ -146,7 +146,7 @@ class _DiscoverSectionState extends ConsumerState<DiscoverSection> {
     final selected = _pendingChip == null
         ? value.chipParams
         : _pendingChip!.params;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final shelves = value.shelves;
     return SliverMainAxisGroup(
       slivers: [
@@ -187,7 +187,7 @@ class _DiscoverSectionState extends ConsumerState<DiscoverSection> {
               return _revealed.add(key)
                   ? _FadeIn(
                       key: ValueKey(key),
-                      duration: fx.motion(NoirMotion.slow),
+                      duration: fx.motion(MercuryMotion.slow),
                       child: row,
                     )
                   : KeyedSubtree(key: ValueKey(key), child: row);
@@ -317,7 +317,7 @@ class _Header extends StatelessWidget {
       // The chips' [ShelfRow.lift] completes the usual gap.
       padding: const EdgeInsets.only(
         top: 44,
-        bottom: NoirSpacing.md - ShelfRow.lift,
+        bottom: MercurySpacing.md - ShelfRow.lift,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -334,14 +334,14 @@ class _Header extends StatelessWidget {
                 Text(
                   subtitle,
                   style: t.labelSmall?.copyWith(
-                    color: context.noir.textTertiary,
+                    color: context.mercury.textTertiary,
                   ),
                 ),
               ],
             ),
           ),
           if (onRefresh != null)
-            NoirIconButton(
+            MercuryIconButton(
               icon: Icons.refresh_rounded,
               tooltip: refreshTooltip,
               size: 18,
@@ -370,7 +370,7 @@ class _ChipRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShelfRow(
       height: MediaQuery.textScalerOf(context).scale(22) + 22,
-      spacing: NoirSpacing.xs,
+      spacing: MercurySpacing.xs,
       arrowSize: 32,
       children: [
         for (final chip in chips)
@@ -439,11 +439,11 @@ class _ShelfSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     Widget bar(double w, double h) => Container(
       width: w,
       height: h,
-      decoration: BoxDecoration(color: c.hover, borderRadius: NoirRadii.smAll),
+      decoration: BoxDecoration(color: c.hover, borderRadius: MercuryRadii.smAll),
     );
     return Semantics(
       label: 'Loading',
@@ -454,7 +454,7 @@ class _ShelfSkeleton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               bar(160, 16),
-              const SizedBox(height: NoirSpacing.lg),
+              const SizedBox(height: MercurySpacing.lg),
               SizedBox(
                 height: tile + 44,
                 child: ListView.separated(
@@ -462,14 +462,14 @@ class _ShelfSkeleton extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 8,
                   separatorBuilder: (_, _) =>
-                      const SizedBox(width: NoirSpacing.lg),
+                      const SizedBox(width: MercurySpacing.lg),
                   itemBuilder: (_, _) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       bar(tile, tile),
-                      const SizedBox(height: NoirSpacing.sm + 2),
+                      const SizedBox(height: MercurySpacing.sm + 2),
                       bar(tile * 0.7, 12),
-                      const SizedBox(height: NoirSpacing.xs),
+                      const SizedBox(height: MercurySpacing.xs),
                       bar(tile * 0.45, 10),
                     ],
                   ),
@@ -496,12 +496,12 @@ class _FadeIn extends StatelessWidget {
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: 1),
       duration: duration,
-      curve: NoirMotion.standard,
+      curve: MercuryMotion.standard,
       child: child,
       builder: (context, t, child) => Opacity(
         opacity: t,
         child: Transform.translate(
-          offset: Offset(0, (1 - t) * NoirMotion.shift),
+          offset: Offset(0, (1 - t) * MercuryMotion.shift),
           child: child,
         ),
       ),

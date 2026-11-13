@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
 
 /// Borderless icon button with tooltip, hover feedback and a visible focus
-/// ring. Every icon-only action in NOIR goes through this. Under a
+/// ring. Every icon-only action in MERCURY goes through this. Under a
 /// [LiquidPressScope] it answers presses with [LiquidPress].
-class NoirIconButton extends StatelessWidget {
-  const NoirIconButton({
+class MercuryIconButton extends StatelessWidget {
+  const MercuryIconButton({
     required this.tooltip,
     required this.onPressed,
     this.icon,
@@ -33,14 +33,14 @@ class NoirIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final liquid = LiquidPressScope.of(context);
     // Active / inactive color changes fade instead of snapping.
     final button = TweenAnimationBuilder<Color?>(
       tween: ColorTween(
         end: color ?? (active ? c.textPrimary : c.textSecondary),
       ),
-      duration: NoirEffects.of(context).motion(NoirMotion.fast),
+      duration: MercuryEffects.of(context).motion(MercuryMotion.fast),
       builder: (context, animated, _) => IconButton(
         icon: glyph ?? Icon(icon, size: size),
         tooltip: tooltip,
@@ -51,7 +51,7 @@ class NoirIconButton extends StatelessWidget {
         focusColor: c.selected,
         style: IconButton.styleFrom(
           minimumSize: const Size.square(36),
-          padding: const EdgeInsets.all(NoirSpacing.sm),
+          padding: const EdgeInsets.all(MercurySpacing.sm),
         ),
       ),
     );
@@ -79,8 +79,8 @@ class PrimaryPlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     final liquid = LiquidPressScope.of(context);
     final button = Tooltip(
       message: playing ? 'Pause' : playTooltip,
@@ -105,7 +105,7 @@ class PrimaryPlayButton extends StatelessWidget {
               ],
             ),
             child: AnimatedSwitcher(
-              duration: fx.motion(NoirMotion.fast),
+              duration: fx.motion(MercuryMotion.fast),
               child: Icon(
                 playing ? Icons.pause_rounded : Icons.play_arrow_rounded,
                 key: ValueKey(playing),
@@ -143,19 +143,19 @@ class PillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final fg = filled ? c.primaryActionText : c.textPrimary;
     final content = Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: NoirSpacing.lg,
-        vertical: NoirSpacing.sm + 2,
+        horizontal: MercurySpacing.lg,
+        vertical: MercurySpacing.sm + 2,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
             Icon(icon, size: 18, color: fg),
-            const SizedBox(width: NoirSpacing.sm),
+            const SizedBox(width: MercurySpacing.sm),
           ],
           Flexible(
             child: Text(
@@ -183,12 +183,12 @@ class PillButton extends StatelessWidget {
               ? DecoratedBox(
                   decoration: BoxDecoration(
                     color: c.primaryActionFill,
-                    borderRadius: NoirRadii.pillAll,
+                    borderRadius: MercuryRadii.pillAll,
                   ),
                   child: content,
                 )
               : GlassSurface(
-                  borderRadius: NoirRadii.pillAll,
+                  borderRadius: MercuryRadii.pillAll,
                   interactive: true,
                   child: content,
                 ),
@@ -214,8 +214,8 @@ class PillChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     return Semantics(
       selected: selected,
       button: true,
@@ -226,22 +226,22 @@ class PillChip extends StatelessWidget {
           onPressed: onSelected,
           scale: false,
           child: AnimatedContainer(
-            duration: fx.motion(NoirMotion.medium),
-            curve: NoirMotion.standard,
+            duration: fx.motion(MercuryMotion.medium),
+            curve: MercuryMotion.standard,
             padding: const EdgeInsets.symmetric(
-              horizontal: NoirSpacing.lg,
-              vertical: NoirSpacing.sm,
+              horizontal: MercurySpacing.lg,
+              vertical: MercurySpacing.sm,
             ),
             decoration: BoxDecoration(
               color: selected ? c.selected : Colors.transparent,
-              borderRadius: NoirRadii.pillAll,
+              borderRadius: MercuryRadii.pillAll,
               border: Border.all(
                 color: selected ? c.glassBorder : Colors.transparent,
               ),
             ),
             child: AnimatedDefaultTextStyle(
-              duration: fx.motion(NoirMotion.medium),
-              curve: NoirMotion.standard,
+              duration: fx.motion(MercuryMotion.medium),
+              curve: MercuryMotion.standard,
               style: Theme.of(context).textTheme.labelLarge!
                   .copyWith(color: selected ? c.textPrimary : c.textSecondary),
               child: Text(label),
@@ -295,13 +295,13 @@ class _PressableState extends State<_Pressable> {
         onTapCancel: () => setState(() => _down = false),
         child: AnimatedScale(
           scale: widget.scale && _down ? 0.96 : 1,
-          duration: NoirMotion.fast,
+          duration: MercuryMotion.fast,
           child: DecoratedBox(
             position: DecorationPosition.foreground,
             decoration: BoxDecoration(
-              borderRadius: NoirRadii.pillAll,
+              borderRadius: MercuryRadii.pillAll,
               border: _focused
-                  ? Border.all(color: context.noir.textPrimary, width: 1.5)
+                  ? Border.all(color: context.mercury.textPrimary, width: 1.5)
                   : null,
             ),
             child: widget.child,

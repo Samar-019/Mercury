@@ -12,44 +12,44 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/artwork_flow.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/core/widgets/noir_backdrop.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
-import 'package:noir/features/discover/presentation/dislike_actions.dart';
-import 'package:noir/features/discover/presentation/ytm_artist_screen.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/lyrics/presentation/lyrics_view.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/playback/presentation/mix_mode_button.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/playback_controls.dart';
-import 'package:noir/features/playback/presentation/playback_shortcuts.dart';
-import 'package:noir/features/playback/presentation/youtube_video_layer.dart';
-import 'package:noir/features/playlists/presentation/add_to_playlist.dart';
-import 'package:noir/features/queue/presentation/queue_panel.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
-import 'package:noir/shared/widgets/track_menu.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/artwork_flow.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/core/widgets/mercury_backdrop.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/discover/presentation/dislike_actions.dart';
+import 'package:mercury/features/discover/presentation/ytm_artist_screen.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/lyrics/presentation/lyrics_view.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/playback/presentation/mix_mode_button.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/playback_controls.dart';
+import 'package:mercury/features/playback/presentation/playback_shortcuts.dart';
+import 'package:mercury/features/playback/presentation/youtube_video_layer.dart';
+import 'package:mercury/features/playlists/presentation/add_to_playlist.dart';
+import 'package:mercury/features/queue/presentation/queue_panel.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
+import 'package:mercury/shared/widgets/track_menu.dart';
 
-/// NOIR's signature screen: large artwork over a blurred wash of itself,
+/// MERCURY's signature screen: large artwork over a blurred wash of itself,
 /// title, progress, transport, and optionally time-synced lyrics. The queue
 /// opens as a side sheet. Dismiss with the chevron, Esc, or a downward
 /// swipe.
@@ -96,8 +96,8 @@ class _NowPlayingScreenState extends ConsumerState<NowPlayingScreen>
   )..addStatusListener((_) => setState(() {}));
   late final CurvedAnimation _lyricsCurve = CurvedAnimation(
     parent: _lyrics,
-    curve: NoirMotion.emphasized,
-    reverseCurve: NoirMotion.emphasized.flipped,
+    curve: MercuryMotion.emphasized,
+    reverseCurve: MercuryMotion.emphasized.flipped,
   );
 
   /// The route's own animation, and how visible the content and how opaque
@@ -117,7 +117,7 @@ class _NowPlayingScreenState extends ConsumerState<NowPlayingScreen>
   void initState() {
     super.initState();
     ref.listenManual(lyricsVisibleProvider, (_, visible) {
-      final duration = NoirEffects.of(context)
+      final duration = MercuryEffects.of(context)
           .motion(NowPlayingScreen.lyricsDuration);
       if (visible) {
         _lyrics.animateTo(1, duration: duration);
@@ -269,7 +269,7 @@ class _NowPlayingScreenState extends ConsumerState<NowPlayingScreen>
                           material: material,
                           image: _backdrop,
                           scrim: _scrimColors(context),
-                          fallback: context.noir.background,
+                          fallback: context.mercury.background,
                         ),
                       ),
                     ),
@@ -299,7 +299,7 @@ class _NowPlayingScreenState extends ConsumerState<NowPlayingScreen>
 /// it, so it follows the theme: dark under light text, light under dark.
 List<Color> _scrimColors(BuildContext context) {
   final dark = Theme.of(context).brightness == Brightness.dark;
-  final scrim = dark ? Colors.black : context.noir.background;
+  final scrim = dark ? Colors.black : context.mercury.background;
   return [
     scrim.withValues(alpha: dark ? 0.55 : 0.62),
     scrim.withValues(alpha: dark ? 0.72 : 0.78),
@@ -540,7 +540,7 @@ class _ArtworkBackdropState extends State<_ArtworkBackdrop>
 
   /// Flows while there is artwork, motion is wanted and the app is shown.
   void _syncFlow() {
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final state = SchedulerBinding.instance.lifecycleState;
     final visible =
         state != AppLifecycleState.hidden &&
@@ -609,7 +609,7 @@ class _ArtworkBackdropState extends State<_ArtworkBackdrop>
     // Published after this frame: listeners repaint, they never rebuild.
     widget.baked.value = image?.image;
     final duration = animate
-        ? NoirEffects.of(context).motion(NoirMotion.slow * 3)
+        ? MercuryEffects.of(context).motion(MercuryMotion.slow * 3)
         : Duration.zero;
     if (duration == Duration.zero) {
       _previous = null;
@@ -658,7 +658,7 @@ class _ArtworkBackdropState extends State<_ArtworkBackdrop>
       child: Stack(
         fit: StackFit.expand,
         children: [
-          const NoirBackdrop(),
+          const MercuryBackdrop(),
           if (art)
             // Its own layer: only the flow repaints each frame.
             RepaintBoundary(
@@ -717,7 +717,7 @@ class _TopBar extends ConsumerWidget {
           child: Row(
             children: [
               if (reservesWindowControlsSpace) const SizedBox(width: 72),
-              NoirIconButton(
+              MercuryIconButton(
                 icon: Icons.keyboard_arrow_down_rounded,
                 tooltip: 'Close player (Esc)',
                 size: 26,
@@ -732,7 +732,7 @@ class _TopBar extends ConsumerWidget {
                     tooltip: 'More',
                     icon: Icon(
                       Icons.more_horiz_rounded,
-                      color: context.noir.textSecondary,
+                      color: context.mercury.textSecondary,
                     ),
                     onSelected: (v) async {
                       for (final mode in LyricsMode.values) {
@@ -789,7 +789,7 @@ class _TopBar extends ConsumerWidget {
                         child: Text(
                           'Lyrics style',
                           style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(color: context.noir.textTertiary),
+                              ?.copyWith(color: context.mercury.textTertiary),
                         ),
                       ),
                       for (final (mode, label) in const [
@@ -805,7 +805,7 @@ class _TopBar extends ConsumerWidget {
                   ),
                 ),
               if (usesCustomWindowChrome) ...[
-                const SizedBox(width: NoirSpacing.sm),
+                const SizedBox(width: MercurySpacing.sm),
                 // Over the artwork wash, not the shell's plain background.
                 const WindowControls(onImage: true),
               ],
@@ -1382,10 +1382,10 @@ _Buttons _buttons(
   final hasItem = s.current != null;
   final lyrics = ref.watch(lyricsVisibleProvider);
   final queueOpen = ref.watch(queueSheetOpenProvider);
-  final c = context.noir;
+  final c = context.mercury;
   return (
     shuffle: caps.canShuffle
-        ? NoirIconButton(
+        ? MercuryIconButton(
             icon: Icons.shuffle_rounded,
             tooltip: s.shuffle ? 'Shuffle on' : 'Shuffle off',
             size: icon,
@@ -1394,7 +1394,7 @@ _Buttons _buttons(
           )
         : null,
     previous: caps.canSkip
-        ? NoirIconButton(
+        ? MercuryIconButton(
             icon: Icons.skip_previous_rounded,
             tooltip: 'Previous',
             size: skip,
@@ -1408,7 +1408,7 @@ _Buttons _buttons(
       onPressed: hasItem ? () => unawaited(ctrl.togglePlayPause()) : null,
     ),
     next: caps.canSkip
-        ? NoirIconButton(
+        ? MercuryIconButton(
             icon: Icons.skip_next_rounded,
             tooltip: 'Next',
             size: skip,
@@ -1417,7 +1417,7 @@ _Buttons _buttons(
           )
         : null,
     repeat: caps.canRepeat
-        ? NoirIconButton(
+        ? MercuryIconButton(
             icon: s.repeat == RepeatMode.one
                 ? Icons.repeat_one_rounded
                 : Icons.repeat_rounded,
@@ -1431,14 +1431,14 @@ _Buttons _buttons(
             onPressed: hasItem ? ctrl.cycleRepeat : null,
           )
         : null,
-    lyrics: NoirIconButton(
+    lyrics: MercuryIconButton(
       icon: Icons.format_quote_rounded,
       tooltip: lyrics ? 'Hide lyrics' : 'Show lyrics',
       size: icon,
       active: lyrics,
       onPressed: ref.read(lyricsVisibleProvider.notifier).toggle,
     ),
-    queue: NoirIconButton(
+    queue: MercuryIconButton(
       icon: Icons.queue_music_rounded,
       tooltip: 'Queue',
       size: icon,
@@ -1459,11 +1459,11 @@ class ControlCapsule extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final b = _buttons(context, ref);
-    final c = context.noir;
-    const gap = SizedBox(width: NoirSpacing.xs);
+    final c = context.mercury;
+    const gap = SizedBox(width: MercurySpacing.xs);
     return GlassSurface(
       key: glassKey,
-      borderRadius: NoirRadii.pillAll,
+      borderRadius: MercuryRadii.pillAll,
       interactive: true,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       child: Row(
@@ -1479,7 +1479,7 @@ class ControlCapsule extends ConsumerWidget {
           Container(
             width: 1,
             height: 24,
-            margin: const EdgeInsets.symmetric(horizontal: NoirSpacing.sm),
+            margin: const EdgeInsets.symmetric(horizontal: MercurySpacing.sm),
             color: c.textTertiary.withValues(alpha: 0.35),
           ),
           b.lyrics,
@@ -1525,7 +1525,7 @@ class TouchControls extends ConsumerWidget {
               b.repeat ?? none,
             ],
           ),
-          const SizedBox(height: NoirSpacing.lg),
+          const SizedBox(height: MercurySpacing.lg),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [b.lyrics, const MixModeButton(size: 24), b.queue],
@@ -1613,7 +1613,7 @@ class _LargeArtworkState extends ConsumerState<_LargeArtwork>
     final playing = widget.state.status == PlaybackStatus.playing;
     unawaited(ref.read(playbackProvider.notifier).togglePlayPause());
     setState(() => _flashPlaying = !playing);
-    if (NoirEffects.of(context).animations) _flash.forward(from: 0);
+    if (MercuryEffects.of(context).animations) _flash.forward(from: 0);
   }
 
   void _menu(Offset position) => unawaited(
@@ -1624,14 +1624,14 @@ class _LargeArtworkState extends ConsumerState<_LargeArtwork>
   Widget build(BuildContext context) {
     final track = widget.state.current!.track;
     final dark = Theme.of(context).brightness == Brightness.dark;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final paused = widget.state.status == PlaybackStatus.paused;
     final cover = DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: NoirRadii.xlAll,
+        borderRadius: MercuryRadii.xlAll,
         boxShadow: [
           BoxShadow(
-            color: context.noir.shadow,
+            color: context.mercury.shadow,
             blurRadius: 60,
             offset: const Offset(0, 28),
           ),
@@ -1649,7 +1649,7 @@ class _LargeArtworkState extends ConsumerState<_LargeArtwork>
           // Hairline rim, drawn over the cover's edge.
           position: DecorationPosition.foreground,
           decoration: BoxDecoration(
-            borderRadius: NoirRadii.xlAll,
+            borderRadius: MercuryRadii.xlAll,
             border: Border.all(
               color: Colors.white.withValues(alpha: dark ? 0.12 : 0.4),
             ),
@@ -1809,7 +1809,7 @@ class _TrackDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     final track = state.current!.track;
     final failed =
@@ -1823,7 +1823,7 @@ class _TrackDetails extends ConsumerWidget {
     final textAlign = centered >= 0.5 ? TextAlign.center : TextAlign.start;
     final buttons = [
       if (track.localId != null)
-        NoirIconButton(
+        MercuryIconButton(
           icon: track.isFavorite
               ? Icons.favorite_rounded
               : Icons.favorite_border_rounded,
@@ -2030,7 +2030,7 @@ class _RenderTitleRow extends RenderBox
 }
 
 /// YouTube requires its player to stay visible (≥ 200×200, nothing on top)
-/// while it plays, so NOIR keeps a compact player next to the cover. While
+/// while it plays, so MERCURY keeps a compact player next to the cover. While
 /// the queue sheet is open the sheet holds the player instead.
 class _YouTubePlayerTile extends ConsumerWidget {
   const _YouTubePlayerTile();
@@ -2071,12 +2071,12 @@ class _TrackChange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final duration = NoirEffects.of(context).motion(NoirMotion.slow);
+    final duration = MercuryEffects.of(context).motion(MercuryMotion.slow);
     final key = ValueKey(trackId);
     final switcher = AnimatedSwitcher(
       duration: duration,
-      switchInCurve: NoirMotion.standard,
-      switchOutCurve: NoirMotion.exit,
+      switchInCurve: MercuryMotion.standard,
+      switchOutCurve: MercuryMotion.exit,
       layoutBuilder: (current, previous) => Stack(
         alignment: Alignment.topLeft,
         children: [...previous, ?current],
@@ -2105,7 +2105,7 @@ class _TrackChange extends StatelessWidget {
     if (duration == Duration.zero) return switcher;
     return AnimatedSize(
       duration: duration,
-      curve: NoirMotion.standard,
+      curve: MercuryMotion.standard,
       alignment: Alignment.topCenter,
       child: switcher,
     );
@@ -2229,7 +2229,7 @@ class _CoverSwitcherState extends ConsumerState<_CoverSwitcher> {
             key: key,
             path: track.artwork,
             size: size,
-            radius: NoirRadii.xl,
+            radius: MercuryRadii.xl,
             semanticLabel: copy
                 ? null
                 : 'Artwork for ${track.album ?? track.title}',
@@ -2253,7 +2253,7 @@ class _CoverSwitcherState extends ConsumerState<_CoverSwitcher> {
             : null,
       ),
     );
-    final melt = NoirEffects.of(context).animations ? mix : null;
+    final melt = MercuryEffects.of(context).animations ? mix : null;
     _coverKeys.removeWhere(
       (id, _) => id != _shown.id && id != incoming.id && id != melt?.from.id,
     );
@@ -2270,8 +2270,8 @@ class _CoverSwitcherState extends ConsumerState<_CoverSwitcher> {
     final track = _shown;
     final key = ValueKey(track.id);
     return AnimatedSwitcher(
-      duration: NoirEffects.of(context).motion(NoirMotion.slow),
-      switchInCurve: NoirMotion.standard,
+      duration: MercuryEffects.of(context).motion(MercuryMotion.slow),
+      switchInCurve: MercuryMotion.standard,
       layoutBuilder: (current, previous) =>
           Stack(alignment: Alignment.center, children: [...previous, ?current]),
       // The old cover stays opaque underneath until the new one covers it.
@@ -2466,7 +2466,7 @@ class _Lyrics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: NoirEffects.of(context).motion(NoirMotion.slow),
+      duration: MercuryEffects.of(context).motion(MercuryMotion.slow),
       layoutBuilder: (current, previous) =>
           Stack(fit: StackFit.expand, children: [...previous, ?current]),
       child: ready

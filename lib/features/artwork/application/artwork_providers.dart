@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/artwork/data/artwork_cache_store.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/artwork/data/artwork_cache_store.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/playback/domain/audio_source_provider.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/audio_source_provider.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// One engine per media source behind a single [PlaybackEngine], so the
 /// controller and UI stay source-agnostic. Only the active engine's events

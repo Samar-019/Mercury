@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playlists/data/playlist_repository.dart';
-import 'package:noir/features/search/data/search_history_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playlists/data/playlist_repository.dart';
+import 'package:mercury/features/search/data/search_history_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Results from the local library only. Provider (YouTube) search is a
 /// separate, quota-limited source and is never mixed in silently.

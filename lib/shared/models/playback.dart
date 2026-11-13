@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/shared/models/media.dart';
 
 part 'playback.freezed.dart';
 
@@ -39,7 +39,7 @@ abstract class PlaybackCapabilities with _$PlaybackCapabilities {
   static const none = PlaybackCapabilities();
 }
 
-/// One entry in NOIR's local queue. [uid] is unique per insertion so the
+/// One entry in MERCURY's local queue. [uid] is unique per insertion so the
 /// same track can appear twice and still have a stable widget key.
 @freezed
 abstract class QueueItem with _$QueueItem {

@@ -5,8 +5,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// A deck on libmpv through media_kit directly (Windows, Linux), so the
 /// mixer gets what just_audio hides: sample-exact positions (`audio-pts`,
@@ -17,7 +17,7 @@ import 'package:noir/shared/models/playback.dart';
 /// bundles ships no highpass/lowpass, and its lavfi bridge rejects audio
 /// graphs (channel-layout mismatch), so transitions are gain + speed only.
 class MpvDeck implements AudioDeck {
-  MpvDeck({String title = 'NOIR'})
+  MpvDeck({String title = 'MERCURY'})
     : _player = Player(configuration: PlayerConfiguration(title: title)) {
     _subs
       ..add(_player.stream.playing.listen((_) => _emit()))

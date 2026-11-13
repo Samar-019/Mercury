@@ -3,8 +3,8 @@ import 'dart:isolate';
 
 import 'package:audio_metadata_reader/audio_metadata_reader.dart';
 import 'package:drift/drift.dart' show Value;
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/features/library/data/library_repository.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
 import 'package:path/path.dart' as p;
 
 const supportedAudioExtensions = {

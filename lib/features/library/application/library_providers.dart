@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/features/home/data/history_repository.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/features/home/data/history_repository.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final tracksProvider = StreamProvider.family<List<Track>, TrackSort>(
   (ref, sort) => ref.watch(libraryRepositoryProvider).watchTracks(sort: sort),

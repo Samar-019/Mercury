@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/edge_player/edge_player_view.dart';
-import 'package:noir/features/edge_player/edge_snapshot.dart';
+import 'package:mercury/features/edge_player/edge_player_view.dart';
+import 'package:mercury/features/edge_player/edge_snapshot.dart';
 
 const _channel = MethodChannel('test/edge_view');
 
@@ -136,7 +136,7 @@ void main() {
     expect(regions().last, line);
   });
 
-  testWidgets('NOIR opened: the player slides away, then gives up its region', (
+  testWidgets('MERCURY opened: the player slides away, then gives up its region', (
     tester,
   ) async {
     await pump(tester);
@@ -166,7 +166,7 @@ void main() {
     expect(find.bySemanticsLabel('More'), findsOneWidget);
   });
 
-  testWidgets('the strip sends commands; the artwork and title open NOIR', (
+  testWidgets('the strip sends commands; the artwork and title open MERCURY', (
     tester,
   ) async {
     await pump(tester);

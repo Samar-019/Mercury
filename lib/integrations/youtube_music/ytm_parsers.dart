@@ -1,8 +1,8 @@
 import 'dart:collection';
 
-import 'package:noir/integrations/youtube_music/json_nav.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/integrations/youtube_music/json_nav.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Parsers for YouTube Music InnerTube responses. They skip renderers they
 /// do not know instead of failing; a [FormatException] is thrown only when
@@ -304,7 +304,7 @@ Map<String, YtmQueueEntry> parseQueue(Map<String, Object?> json) {
 
 // --------------------------------------------------------------- items --
 
-/// One shelf/search entry, or null for renderers NOIR does not show
+/// One shelf/search entry, or null for renderers MERCURY does not show
 /// (podcasts, episodes, unknown types).
 YtmItem? parseItem(Object? json) {
   final (name, body) = renderer(json) ?? ('', const <String, Object?>{});

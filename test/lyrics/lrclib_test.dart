@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/lyrics/domain/lyrics.dart';
-import 'package:noir/integrations/lyrics/lrclib_client.dart';
-import 'package:noir/integrations/lyrics/lrclib_source.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/lyrics/domain/lyrics.dart';
+import 'package:mercury/integrations/lyrics/lrclib_client.dart';
+import 'package:mercury/integrations/lyrics/lrclib_source.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/fake_http.dart';
 
@@ -59,7 +59,7 @@ void main() {
         'album_name': 'After Hours',
         'duration': '200',
       });
-      expect(req.options.headers['User-Agent'], startsWith('NOIR/'));
+      expect(req.options.headers['User-Agent'], startsWith('MERCURY/'));
       expect(r!.trackName, 'Blinding Lights');
       expect(r.duration, const Duration(seconds: 200));
       expect(r.syncedLyrics, contains('Yeah'));

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
-import 'package:noir/features/lyrics/domain/lyrics.dart';
-import 'package:noir/features/lyrics/domain/song_guess.dart';
-import 'package:noir/integrations/lyrics/lrclib_client.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/domain/lyrics.dart';
+import 'package:mercury/features/lyrics/domain/song_guess.dart';
+import 'package:mercury/integrations/lyrics/lrclib_client.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Looks a track up on LRCLIB: exact `/get` for the best guesses, then
 /// `/search`, keeping only results within [durationTolerance].

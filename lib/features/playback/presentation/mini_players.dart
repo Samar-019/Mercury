@@ -5,23 +5,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/app_theme.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/liquid_glass.dart';
-import 'package:noir/core/widgets/liquid_press.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/playback_controls.dart';
-import 'package:noir/features/queue/presentation/queue_panel.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
-import 'package:noir/shared/widgets/track_menu.dart';
+import 'package:mercury/app/theme/app_theme.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/liquid_glass.dart';
+import 'package:mercury/core/widgets/liquid_press.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/playback_controls.dart';
+import 'package:mercury/features/queue/presentation/queue_panel.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
+import 'package:mercury/shared/widgets/track_menu.dart';
 
 void openNowPlaying(BuildContext context) => context.push('/now-playing');
 
@@ -75,7 +75,7 @@ class _Subtitle extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: Theme.of(context).textTheme.labelSmall
-          ?.copyWith(color: failed ? context.noir.destructive : null),
+          ?.copyWith(color: failed ? context.mercury.destructive : null),
     );
   }
 }
@@ -134,8 +134,8 @@ class _PlayerIslandState extends ConsumerState<PlayerIsland> {
     _visible = visible;
     if (visible) _last = s;
     final last = _last;
-    final fx = NoirEffects.of(context);
-    final duration = fx.motion(NoirMotion.layout);
+    final fx = MercuryEffects.of(context);
+    final duration = fx.motion(MercuryMotion.layout);
     return ExcludeFocus(
       excluding: !visible,
       child: IgnorePointer(
@@ -143,13 +143,13 @@ class _PlayerIslandState extends ConsumerState<PlayerIsland> {
         child: AnimatedSlide(
           offset: visible ? Offset.zero : const Offset(0, 1),
           duration: duration,
-          curve: visible ? NoirMotion.standard : NoirMotion.exit,
+          curve: visible ? MercuryMotion.standard : MercuryMotion.exit,
           // Opacity rather than AnimatedOpacity: at rest the glass must not
           // sit in a layer of its own, or its lens cannot find the backdrop.
           child: TweenAnimationBuilder<double>(
             tween: Tween(end: visible ? 1 : 0),
             duration: duration,
-            curve: visible ? NoirMotion.standard : NoirMotion.exit,
+            curve: visible ? MercuryMotion.standard : MercuryMotion.exit,
             builder: (context, shown, _) => ValueListenableBuilder<double>(
               valueListenable: NowPlayingTransition.coverage,
               builder: (context, covered, _) {
@@ -199,10 +199,10 @@ class _IslandBar extends ConsumerWidget {
     final artwork = track.artwork;
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-        NoirSpacing.lg,
+        MercurySpacing.lg,
         0,
-        NoirSpacing.lg,
-        NoirSpacing.lg,
+        MercurySpacing.lg,
+        MercurySpacing.lg,
       ),
       child: Center(
         heightFactor: 1,
@@ -217,8 +217,8 @@ class _IslandBar extends ConsumerWidget {
                 ? NetworkImage(artwork)
                 : FileImage(File(artwork)) as ImageProvider,
             padding: const EdgeInsets.symmetric(
-              horizontal: NoirSpacing.md + 2,
-              vertical: NoirSpacing.xxs,
+              horizontal: MercurySpacing.md + 2,
+              vertical: MercurySpacing.xxs,
             ),
             child: LiquidPressScope(
               child: LayoutBuilder(
@@ -227,9 +227,9 @@ class _IslandBar extends ConsumerWidget {
                   return Row(
                     children: [
                       PlaybackControls(showModes: w >= 640),
-                      const SizedBox(width: NoirSpacing.md),
+                      const SizedBox(width: MercurySpacing.md),
                       Expanded(child: _IslandNowPlaying(state)),
-                      const SizedBox(width: NoirSpacing.md),
+                      const SizedBox(width: MercurySpacing.md),
                       if (w >= 520) _FavoriteButton(track),
                       _ToggleButton(
                         icon: Icons.queue_music_rounded,
@@ -238,7 +238,7 @@ class _IslandBar extends ConsumerWidget {
                         onPressed: () => openQueue(context, ref),
                       ),
                       VolumeControl(showSlider: w >= 860),
-                      NoirIconButton(
+                      MercuryIconButton(
                         icon: Icons.open_in_full_rounded,
                         tooltip: 'Open player (Ctrl+P)',
                         size: 18,
@@ -268,12 +268,12 @@ class _FavoriteButton extends ConsumerWidget {
     if (track.source == MediaSource.youtube) return YouTubeSaveButton(track);
     if (track.localId == null) return const SizedBox.shrink();
     return AnimatedSwitcher(
-      duration: NoirEffects.of(context).motion(NoirMotion.fast),
+      duration: MercuryEffects.of(context).motion(MercuryMotion.fast),
       transitionBuilder: (child, animation) => ScaleTransition(
         scale: Tween<double>(begin: 0.6, end: 1).animate(animation),
         child: FadeTransition(opacity: animation, child: child),
       ),
-      child: NoirIconButton(
+      child: MercuryIconButton(
         key: ValueKey(track.isFavorite),
         icon: track.isFavorite
             ? Icons.favorite_rounded
@@ -324,7 +324,7 @@ class _IslandNowPlayingState extends ConsumerState<_IslandNowPlaying> {
   Widget build(BuildContext context) {
     final state = widget.state;
     final id = state.current!.track.id;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final reveal = _hovered || _scrubbing;
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
@@ -354,18 +354,18 @@ class _IslandNowPlayingState extends ConsumerState<_IslandNowPlaying> {
                         tag: 'now-playing-art',
                         child: _CoverSwap(state.current!.track, size: 36),
                       ),
-                      const SizedBox(width: NoirSpacing.sm + 2),
+                      const SizedBox(width: MercurySpacing.sm + 2),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             _Swap(
-                              duration: fx.motion(NoirMotion.medium),
+                              duration: fx.motion(MercuryMotion.medium),
                               child: _Title(state, key: ValueKey(id)),
                             ),
                             _Swap(
-                              duration: fx.motion(NoirMotion.fast),
+                              duration: fx.motion(MercuryMotion.fast),
                               child: reveal
                                   ? _IslandTimes(
                                       _scrub,
@@ -454,9 +454,9 @@ class _CoverSwapState extends State<_CoverSwap> {
   Widget build(BuildContext context) {
     final shown = _shown;
     return AnimatedSwitcher(
-      duration: NoirEffects.of(context).motion(NoirMotion.slow),
-      switchInCurve: NoirMotion.standard,
-      switchOutCurve: NoirMotion.standard,
+      duration: MercuryEffects.of(context).motion(MercuryMotion.slow),
+      switchInCurve: MercuryMotion.standard,
+      switchOutCurve: MercuryMotion.standard,
       // The old cover stays opaque underneath while the new one fades in.
       transitionBuilder: (child, animation) => FadeTransition(
         opacity: child.key == ValueKey(_keyOf(shown))
@@ -520,7 +520,7 @@ class _IslandTimes extends ConsumerWidget {
     final (position, duration) = _progressOf(ref);
     final t = Theme.of(context).textTheme.labelSmall?.copyWith(
       fontFeatures: tabularFigures,
-      color: context.noir.textSecondary,
+      color: context.mercury.textSecondary,
     );
     return ValueListenableBuilder<double?>(
       valueListenable: scrub,
@@ -557,8 +557,8 @@ class _IslandProgress extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     final (position, duration) = _progressOf(ref);
     final canSeek =
         ref.watch(playbackProvider.select((s) => s.capabilities.canSeek)) &&
@@ -620,13 +620,13 @@ class _IslandProgress extends ConsumerWidget {
                   valueListenable: scrub,
                   builder: (context, fraction, _) => AnimatedContainer(
                     key: PlayerIsland.progressKey,
-                    duration: fx.motion(NoirMotion.fast),
-                    curve: NoirMotion.standard,
+                    duration: fx.motion(MercuryMotion.fast),
+                    curve: MercuryMotion.standard,
                     width: double.infinity,
                     height: reveal ? 4 : 2,
                     decoration: BoxDecoration(
                       color: c.textPrimary.withValues(alpha: 0.16),
-                      borderRadius: NoirRadii.pillAll,
+                      borderRadius: MercuryRadii.pillAll,
                     ),
                     child: FractionallySizedBox(
                       alignment: Alignment.centerLeft,
@@ -636,7 +636,7 @@ class _IslandProgress extends ConsumerWidget {
                           color: c.textPrimary.withValues(
                             alpha: reveal ? 0.95 : 0.75,
                           ),
-                          borderRadius: NoirRadii.pillAll,
+                          borderRadius: MercuryRadii.pillAll,
                         ),
                       ),
                     ),
@@ -667,17 +667,17 @@ class _ToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     return Semantics(
       toggled: active,
       child: AnimatedContainer(
-        duration: NoirEffects.of(context).motion(NoirMotion.fast),
-        curve: NoirMotion.standard,
+        duration: MercuryEffects.of(context).motion(MercuryMotion.fast),
+        curve: MercuryMotion.standard,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: active ? c.selected : Colors.transparent,
         ),
-        child: NoirIconButton(
+        child: MercuryIconButton(
           icon: icon,
           tooltip: tooltip,
           active: active,
@@ -738,10 +738,10 @@ class MobileMiniPlayer extends ConsumerWidget {
     final ctrl = ref.read(playbackProvider.notifier);
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-        NoirSpacing.sm,
+        MercurySpacing.sm,
         0,
-        NoirSpacing.sm,
-        NoirSpacing.sm,
+        MercurySpacing.sm,
+        MercurySpacing.sm,
       ),
       child: Semantics(
         label: 'Now playing. Open player',
@@ -757,22 +757,22 @@ class MobileMiniPlayer extends ConsumerWidget {
                       tag: 'now-playing-art',
                       child: _CoverSwap(s.current!.track, size: 40),
                     ),
-                    const SizedBox(width: NoirSpacing.md),
+                    const SizedBox(width: MercurySpacing.md),
                     Expanded(child: _NowPlayingText(s)),
-                    NoirIconButton(
+                    MercuryIconButton(
                       icon: s.isPlaying
                           ? Icons.pause_rounded
                           : Icons.play_arrow_rounded,
                       tooltip: s.isPlaying ? 'Pause' : 'Play',
                       size: 26,
-                      color: context.noir.textPrimary,
+                      color: context.mercury.textPrimary,
                       onPressed: () => unawaited(ctrl.togglePlayPause()),
                     ),
-                    NoirIconButton(
+                    MercuryIconButton(
                       icon: Icons.skip_next_rounded,
                       tooltip: 'Next',
                       size: 24,
-                      color: context.noir.textPrimary,
+                      color: context.mercury.textPrimary,
                       onPressed: s.hasNext
                           ? () => unawaited(ctrl.next())
                           : null,

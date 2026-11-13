@@ -5,20 +5,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/form_factor.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/lyrics/domain/lrc.dart';
-import 'package:noir/features/lyrics/domain/lyrics.dart';
-import 'package:noir/features/lyrics/presentation/karaoke_lyrics.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/form_factor.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/lyrics/domain/lrc.dart';
+import 'package:mercury/features/lyrics/domain/lyrics.dart';
+import 'package:mercury/features/lyrics/presentation/karaoke_lyrics.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Lyrics for [track]: time-synced lines that follow playback (as a list,
 /// or karaoke — see [LyricsMode]), plain text, or a calm state explaining
@@ -52,7 +52,7 @@ class LyricsView extends ConsumerWidget {
     // plain list where they aren't, without a word about it.
     final chosen = ref.watch(settingsProvider.select((s) => s.lyricsMode));
     final mode = FormFactor.touch ? LyricsMode.karaoke : chosen;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
 
     final child = lyrics.when(
       skipLoadingOnRefresh: false,
@@ -107,7 +107,7 @@ class LyricsView extends ConsumerWidget {
       },
     );
     return AnimatedSwitcher(
-      duration: fx.motion(NoirMotion.medium),
+      duration: fx.motion(MercuryMotion.medium),
       layoutBuilder: (current, previous) =>
           Stack(fit: StackFit.expand, children: [...previous, ?current]),
       child: child,
@@ -124,15 +124,15 @@ class _Credit extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(
-      NoirSpacing.sm,
-      NoirSpacing.xl,
-      NoirSpacing.sm,
+      MercurySpacing.sm,
+      MercurySpacing.xl,
+      MercurySpacing.sm,
       0,
     ),
     child: Text(
       'Lyrics from $source',
       style: Theme.of(context).textTheme.labelSmall
-          ?.copyWith(color: context.noir.textTertiary),
+          ?.copyWith(color: context.mercury.textTertiary),
     ),
   );
 }
@@ -196,7 +196,7 @@ class _PlainLyrics extends StatelessWidget {
         ? 24.0
         : fontSize! * 0.65;
     final style = lyricLineStyle(context, size).copyWith(
-      color: context.noir.textPrimary.withValues(alpha: 0.8),
+      color: context.mercury.textPrimary.withValues(alpha: 0.8),
       height: 1.5,
       fontWeight: FontWeight.w600,
     );
@@ -207,17 +207,17 @@ class _PlainLyrics extends StatelessWidget {
         SmoothScroll(
           builder: (context, scroll) => SingleChildScrollView(
             controller: scroll,
-            padding: const EdgeInsets.symmetric(vertical: NoirSpacing.xxxl),
+            padding: const EdgeInsets.symmetric(vertical: MercurySpacing.xxxl),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (note != null)
                   Padding(
-                    padding: const EdgeInsets.only(bottom: NoirSpacing.lg),
+                    padding: const EdgeInsets.only(bottom: MercurySpacing.lg),
                     child: Text(
                       note,
                       style: Theme.of(context).textTheme.labelMedium
-                          ?.copyWith(color: context.noir.textSecondary),
+                          ?.copyWith(color: context.mercury.textSecondary),
                     ),
                   ),
                 Text(text.trim(), style: style),
@@ -305,7 +305,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
         });
   late final Animation<double> _grow = CurvedAnimation(
     parent: _change,
-    curve: NoirMotion.standard,
+    curve: MercuryMotion.standard,
   );
   late final Animation<double> _shrink = ReverseAnimation(_grow);
 
@@ -359,7 +359,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
 
   /// With animations off the fill steps with the engine's ticks.
   void _runClock({required bool playing}) =>
-      _clock.run(smooth: playing && NoirEffects.of(context).animations);
+      _clock.run(smooth: playing && MercuryEffects.of(context).animations);
 
   @override
   void didUpdateWidget(SyncedLyricsList old) {
@@ -396,7 +396,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
 
   /// Karaoke: moves on from the sung line to [index].
   void _moveOn(int index) {
-    final duration = NoirEffects.of(context)
+    final duration = MercuryEffects.of(context)
         .motion(SyncedLyricsList.karaokeChange);
     // Predicted from the layout before anything moves.
     final target = _following && duration > Duration.zero
@@ -495,7 +495,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
     if (offset == null) return;
     final position = _scroll.position;
     final duration = animate
-        ? NoirEffects.of(context).motion(NoirMotion.slow * 2)
+        ? MercuryEffects.of(context).motion(MercuryMotion.slow * 2)
         : Duration.zero;
     if (duration == Duration.zero) {
       position.jumpTo(offset);
@@ -504,7 +504,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
         position.animateTo(
           offset,
           duration: duration,
-          curve: NoirMotion.emphasized,
+          curve: MercuryMotion.emphasized,
         ),
       );
     }
@@ -531,8 +531,8 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     final canSeek = ref.watch(
       playbackProvider.select((s) => s.capabilities.canSeek),
     );
@@ -602,7 +602,7 @@ class _SyncedLyricsListState extends ConsumerState<SyncedLyricsList>
                           style: base,
                           color: c.textPrimary,
                           gap: size * 0.45,
-                          duration: fx.motion(NoirMotion.slow),
+                          duration: fx.motion(MercuryMotion.slow),
                           onTap: canSeek ? () => _seekTo(i) : null,
                           karaoke: karaokeRow(i, base),
                         ),
@@ -664,11 +664,11 @@ class _Line extends StatelessWidget {
       button: onTap != null,
       child: InkWell(
         onTap: onTap,
-        borderRadius: NoirRadii.mdAll,
-        hoverColor: context.noir.hover,
+        borderRadius: MercuryRadii.mdAll,
+        hoverColor: context.mercury.hover,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: NoirSpacing.sm,
+            horizontal: MercurySpacing.sm,
             vertical: gap,
           ),
           child:
@@ -677,10 +677,10 @@ class _Line extends StatelessWidget {
                 scale: active ? 1 : 0.97,
                 alignment: Alignment.centerLeft,
                 duration: duration,
-                curve: NoirMotion.standard,
+                curve: MercuryMotion.standard,
                 child: AnimatedDefaultTextStyle(
                   duration: duration,
-                  curve: NoirMotion.standard,
+                  curve: MercuryMotion.standard,
                   style: style.copyWith(color: color.withValues(alpha: alpha)),
                   child: Text(text.isEmpty ? '♪' : text),
                 ),

@@ -2,28 +2,28 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/home/application/pinned_playlists.dart';
-import 'package:noir/features/home/presentation/pin_button.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_refresh.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/collection_extras.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_filter.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/home/application/pinned_playlists.dart';
+import 'package:mercury/features/home/presentation/pin_button.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_refresh.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/collection_extras.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_filter.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 /// A playlist from the connected YouTube account. Opening it — or coming
-/// back to NOIR while it is open — fetches changes made on YouTube in the
+/// back to MERCURY while it is open — fetches changes made on YouTube in the
 /// background; removing a song removes it on YouTube.
 class YouTubePlaylistScreen extends ConsumerStatefulWidget {
   const YouTubePlaylistScreen({required this.id, super.key});
@@ -250,7 +250,7 @@ class _YouTubeTrackListState extends ConsumerState<_YouTubeTrackList> {
         if (list.isNotEmpty)
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: NoirSpacing.md),
+              padding: const EdgeInsets.only(bottom: MercurySpacing.md),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TrackFilterField(

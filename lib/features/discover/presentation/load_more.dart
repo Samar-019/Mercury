@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
 
 /// Put as the last item of a lazily built list: when it is built (scrolled
 /// near), it asks for the next page and shows [placeholder] meanwhile. If
@@ -46,7 +46,7 @@ class _LoadMoreTriggerState extends State<LoadMoreTrigger> {
   Widget build(BuildContext context) {
     if (!_failed) return widget.placeholder;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: NoirSpacing.lg),
+      padding: const EdgeInsets.symmetric(vertical: MercurySpacing.lg),
       child: Center(
         child: PillButton(
           label: 'Show more',

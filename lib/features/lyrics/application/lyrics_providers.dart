@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/lyrics/domain/lyrics.dart';
-import 'package:noir/integrations/lyrics/lrclib_client.dart';
-import 'package:noir/integrations/lyrics/lrclib_source.dart';
-import 'package:noir/integrations/lyrics/ytm_lyrics_source.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/lyrics/domain/lyrics.dart';
+import 'package:mercury/integrations/lyrics/lrclib_client.dart';
+import 'package:mercury/integrations/lyrics/lrclib_source.dart';
+import 'package:mercury/integrations/lyrics/ytm_lyrics_source.dart';
 
 /// Whether Now Playing shows lyrics. In memory only; off at launch.
 final lyricsVisibleProvider = NotifierProvider<LyricsVisible, bool>(

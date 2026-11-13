@@ -6,14 +6,14 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork_flow.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
-import 'package:noir/features/edge_player/edge_snapshot.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork_flow.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/edge_player/edge_snapshot.dart';
 
 /// Implemented by the Windows runner (windows/runner/edge_player.cpp), on
 /// the edge player's own engine.
-const edgeViewChannel = MethodChannel('noir/edge_view');
+const edgeViewChannel = MethodChannel('mercury/edge_view');
 
 /// Runs the edge player in its own engine; started by the Windows runner.
 void runEdgePlayer() {
@@ -39,7 +39,7 @@ class EdgePlayerApp extends StatelessWidget {
 
 /// How far the player is out.
 enum EdgePhase {
-  /// Behind the screen edge: NOIR is open, or nothing is loaded.
+  /// Behind the screen edge: MERCURY is open, or nothing is loaded.
   away,
 
   /// A thin line at the edge, to point at.
@@ -103,11 +103,11 @@ class EdgeShape {
   final double radius;
 }
 
-/// The player that lives behind the screen edge while NOIR is in the
+/// The player that lives behind the screen edge while MERCURY is in the
 /// background (minimized, or another window active): a
 /// thin line to point at, which brings out a strip with the essentials;
 /// "more" opens a wider player. Clicking the artwork or the title opens
-/// NOIR. Dragged anywhere, the strip docks to the nearest edge where it is
+/// MERCURY. Dragged anywhere, the strip docks to the nearest edge where it is
 /// dropped.
 class EdgePlayerView extends StatefulWidget {
   const EdgePlayerView({this.channel = edgeViewChannel, super.key});
@@ -891,7 +891,7 @@ class _Artwork extends StatelessWidget {
   }
 }
 
-/// Opens NOIR when clicked: the artwork, and the title with the artist.
+/// Opens MERCURY when clicked: the artwork, and the title with the artist.
 class _OpensApp extends StatelessWidget {
   const _OpensApp({required this.onCommand, required this.child});
 
@@ -901,7 +901,7 @@ class _OpensApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: 'Open NOIR',
+    label: 'Open MERCURY',
     child: MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(

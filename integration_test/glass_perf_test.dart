@@ -19,20 +19,20 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/home/presentation/home_screen.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/settings/presentation/settings_screen.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/home/presentation/home_screen.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/settings/presentation/settings_screen.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../test/helpers/fake_engine.dart';
@@ -137,7 +137,7 @@ void main() {
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
       await windowManager.setSize(const Size(1360, 860));
     }
-    final tmp = Directory.systemTemp.createTempSync('noir_perf_');
+    final tmp = Directory.systemTemp.createTempSync('mercury_perf_');
     addTearDown(() => tmp.deleteSync(recursive: true));
     final db = inMemoryDatabase();
     addTearDown(db.close);
@@ -169,7 +169,7 @@ void main() {
     addTearDown(container.dispose);
 
     await tester.pumpWidget(
-      UncontrolledProviderScope(container: container, child: const NoirApp()),
+      UncontrolledProviderScope(container: container, child: const MercuryApp()),
     );
     await _wait(tester, 1500);
 

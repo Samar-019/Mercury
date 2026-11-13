@@ -1,9 +1,9 @@
 import 'package:path/path.dart' as p;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
-/// Points every path_provider directory into one folder, so NOIR can run
+/// Points every path_provider directory into one folder, so MERCURY can run
 /// with a separate, empty profile (demos, screenshots, testing) without
-/// touching the real one. Enabled with `--dart-define=NOIR_PROFILE_DIR=…`.
+/// touching the real one. Enabled with `--dart-define=MERCURY_PROFILE_DIR=…`.
 class ProfilePathProvider extends PathProviderPlatform {
   ProfilePathProvider(this.root);
 

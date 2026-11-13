@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
 
 /// Header for album, artist, favorites and playlist pages: artwork, title,
 /// "32 songs · 2h 14m", and the play / shuffle / extra actions row.
@@ -59,19 +59,19 @@ class CollectionHeader extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(subtitle, style: t.bodySmall),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         Row(
           children: [
             PrimaryPlayButton(playing: false, onPressed: onPlay, size: 44),
-            const SizedBox(width: NoirSpacing.sm),
+            const SizedBox(width: MercurySpacing.sm),
             ...extras,
-            NoirIconButton(
+            MercuryIconButton(
               icon: Icons.shuffle_rounded,
               tooltip: 'Shuffle play',
               onPressed: onShuffle,
             ),
             if (onSurprise != null)
-              NoirIconButton(
+              MercuryIconButton(
                 icon: Icons.auto_awesome_rounded,
                 tooltip: 'Surprise me',
                 onPressed: onSurprise,
@@ -84,17 +84,17 @@ class CollectionHeader extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(
-        top: NoirSpacing.lg,
-        bottom: NoirSpacing.xl,
+        top: MercurySpacing.lg,
+        bottom: MercurySpacing.xl,
       ),
       child: Row(
         children: [
           DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: NoirRadii.lgAll,
+              borderRadius: MercuryRadii.lgAll,
               boxShadow: [
                 BoxShadow(
-                  color: context.noir.shadow.withValues(alpha: 0.35),
+                  color: context.mercury.shadow.withValues(alpha: 0.35),
                   blurRadius: 24,
                   offset: const Offset(0, 10),
                 ),
@@ -102,7 +102,7 @@ class CollectionHeader extends StatelessWidget {
             ),
             child: artwork(art),
           ),
-          const SizedBox(width: NoirSpacing.xl),
+          const SizedBox(width: MercurySpacing.xl),
           Expanded(child: info),
         ],
       ),

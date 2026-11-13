@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/analysis/data/analysis_store.dart';
-import 'package:noir/features/analysis/domain/track_analysis.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/analysis/data/analysis_store.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 import 'package:path/path.dart' as p;
 
 /// Decodes and analyses an audio file off the UI isolate.
@@ -24,7 +24,7 @@ final analysisStoreProvider = Provider<AnalysisStore>(
 );
 
 /// The track analyser. Supplied by an optional module; without one nothing
-/// is analysed and NOIR offers plain crossfades only.
+/// is analysed and MERCURY offers plain crossfades only.
 final analysisRunnerProvider = Provider<AnalysisRunner?>((ref) => null);
 
 /// The audio file to analyse for a track, or null when there is none (yet).

@@ -3,16 +3,16 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/analysis/application/analysis_providers.dart';
-import 'package:noir/features/analysis/data/analysis_store.dart';
-import 'package:noir/features/analysis/domain/track_analysis.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/analysis/application/analysis_providers.dart';
+import 'package:mercury/features/analysis/data/analysis_store.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 
 import '../helpers/fake_engine.dart';
 import '../helpers/test_database.dart';
@@ -83,7 +83,7 @@ void main() {
   )..listen(analysisQueueProvider, (_, _) {});
 
   setUp(() {
-    tmp = Directory.systemTemp.createTempSync('noir_analysis_');
+    tmp = Directory.systemTemp.createTempSync('mercury_analysis_');
     db = inMemoryDatabase();
     analysed = [];
     gates = {};

@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/foundation.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/integrations/local_audio/audio_deck.dart';
-import 'package:noir/integrations/local_audio/just_audio_deck.dart';
-import 'package:noir/integrations/local_audio/mix_runner.dart';
-import 'package:noir/integrations/local_audio/mpv_deck.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/integrations/local_audio/audio_deck.dart';
+import 'package:mercury/integrations/local_audio/just_audio_deck.dart';
+import 'package:mercury/integrations/local_audio/mix_runner.dart';
+import 'package:mercury/integrations/local_audio/mpv_deck.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Plays user-owned local files (and cached audio of other sources) on two
 /// decks — libmpv on Windows/Linux, just_audio elsewhere — so the next

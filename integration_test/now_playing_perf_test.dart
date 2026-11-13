@@ -1,8 +1,8 @@
 // Frame timings of the island → Now Playing morph on a real engine:
 //
 //   flutter test integration_test/now_playing_perf_test.dart -d windows \
-//     --profile [--dart-define=NOIR_TRACE_DIR=<folder for timeline JSON>]
-//     [--dart-define=NOIR_SHOT_DIR=<folder for screenshots>]
+//     --profile [--dart-define=MERCURY_TRACE_DIR=<folder for timeline JSON>]
+//     [--dart-define=MERCURY_SHOT_DIR=<folder for screenshots>]
 //
 // Opens and closes Now Playing several times (lyrics off, then on) and
 // prints worst / 90th percentile build and raster times per phase. Debug
@@ -19,22 +19,22 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:noir/app/app.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/lyrics/application/lyrics_providers.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playback/application/transition_status.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/features/playback/presentation/now_playing_screen.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/app/app.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/lyrics/application/lyrics_providers.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playback/application/transition_status.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/features/playback/presentation/now_playing_screen.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
 import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 
@@ -43,8 +43,8 @@ import '../test/helpers/fake_http.dart';
 import '../test/helpers/fake_innertube_client.dart';
 import '../test/helpers/test_database.dart';
 
-const _traceDir = String.fromEnvironment('NOIR_TRACE_DIR');
-const _shotDir = String.fromEnvironment('NOIR_SHOT_DIR');
+const _traceDir = String.fromEnvironment('MERCURY_TRACE_DIR');
+const _shotDir = String.fromEnvironment('MERCURY_SHOT_DIR');
 
 final GlobalKey<State<StatefulWidget>> _shotKey = GlobalKey();
 
@@ -120,7 +120,7 @@ void main() {
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
       await windowManager.setSize(const Size(1360, 860));
     }
-    final tmp = Directory.systemTemp.createTempSync('noir_perf_');
+    final tmp = Directory.systemTemp.createTempSync('mercury_perf_');
     addTearDown(() => tmp.deleteSync(recursive: true));
     final covers = [
       await _cover(
@@ -190,7 +190,7 @@ void main() {
         key: _shotKey,
         child: UncontrolledProviderScope(
           container: container,
-          child: const NoirApp(),
+          child: const MercuryApp(),
         ),
       ),
     );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/app/router.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/search/presentation/music_results.dart';
-import 'package:noir/features/search/presentation/search_screen.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/app/router.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/search/presentation/music_results.dart';
+import 'package:mercury/features/search/presentation/search_screen.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
 
 import '../helpers/fake_innertube_client.dart';
 import '../helpers/pump_app.dart';

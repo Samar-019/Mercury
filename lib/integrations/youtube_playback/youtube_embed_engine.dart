@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/integrations/youtube_playback/embedded_player.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/integrations/youtube_playback/embedded_player.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 import 'package:path/path.dart' as p;
 import 'package:webview_windows/webview_windows.dart';
 
 /// Plays YouTube videos through the official IFrame Player API inside
 /// WebView2 (Windows).
 ///
-/// The player page is served from `https://app.noir.player/` via WebView2
+/// The player page is served from `https://app.mercury.player/` via WebView2
 /// virtual-host mapping, so the embed carries a real origin/Referer
 /// (required since 2025; otherwise Error 153). See docs/spikes/yt-embed.md.
 ///
@@ -24,7 +24,7 @@ import 'package:webview_windows/webview_windows.dart';
 class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
   YouTubeEmbedEngine({required this._pageDir});
 
-  static const host = 'app.noir.player';
+  static const host = 'app.mercury.player';
 
   static const _caps = PlaybackCapabilities(
     canSeek: true,
@@ -51,7 +51,7 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
   StreamSubscription<dynamic>? _messages;
   StreamSubscription<String>? _urls;
 
-  /// The page the WebView shows. Messages count only while it is NOIR's
+  /// The page the WebView shows. Messages count only while it is MERCURY's
   /// own player page, not a page the embed may have navigated to.
   String? _pageUrl;
 
@@ -85,7 +85,7 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
   Future<void> _init(Completer<void> done) async {
     try {
       try {
-        // Playback starts from NOIR's own buttons, which are outside the
+        // Playback starts from MERCURY's own buttons, which are outside the
         // web page, so WebView2 would otherwise treat it as autoplay.
         await WebviewController.initializeEnvironment(
           additionalArguments: '--autoplay-policy=no-user-gesture-required',
@@ -180,7 +180,7 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
           'Open it in YouTube Music instead.',
     100 => 'This video is no longer available.',
     2 => "This video link isn't valid.",
-    153 => "YouTube didn't accept NOIR's player identification.",
+    153 => "YouTube didn't accept MERCURY's player identification.",
     _ => "This video can't be played right now (YouTube error $code).",
   };
 
@@ -215,33 +215,33 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
     _currentDuration = track.duration;
     // Only video ids from the YouTube API reach here; encode defensively.
     await _js(
-      'noir.cue(${jsonEncode(track.uri)}, ${start.inMilliseconds / 1000})',
+      'mercury.cue(${jsonEncode(track.uri)}, ${start.inMilliseconds / 1000})',
     );
-    await _js('noir.volume(${(_volume * 100).round()})');
+    await _js('mercury.volume(${(_volume * 100).round()})');
     return true;
   }
 
   @override
-  Future<void> play() => _js('noir.play()');
+  Future<void> play() => _js('mercury.play()');
 
   @override
   Future<void> pause() async {
-    if (ready.value) await _js('noir.pause()');
+    if (ready.value) await _js('mercury.pause()');
   }
 
   @override
   Future<void> seek(Duration position) =>
-      _js('noir.seek(${position.inMilliseconds / 1000})');
+      _js('mercury.seek(${position.inMilliseconds / 1000})');
 
   @override
   Future<void> stop() async {
-    if (ready.value) await _js('noir.stop()');
+    if (ready.value) await _js('mercury.stop()');
   }
 
   @override
   Future<void> setVolume(double volume) async {
     _volume = volume.clamp(0, 1);
-    if (ready.value) await _js('noir.volume(${(_volume * 100).round()})');
+    if (ready.value) await _js('mercury.volume(${(_volume * 100).round()})');
   }
 
   /// Not supported: two YouTube players at once are against the RMF.
@@ -288,7 +288,7 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
     player = new YT.Player('player', {
       width: '100%', height: '100%',
       playerVars: { playsinline: 1, controls: 0, rel: 0,
-                    origin: 'https://app.noir.player' },
+                    origin: 'https://app.mercury.player' },
       events: {
         onReady: function(){ send({event:'ready'}); },
         onStateChange: function(e){
@@ -303,7 +303,7 @@ class YouTubeEmbedEngine implements EmbeddedYouTubePlayer {
       }
     });
   }
-  window.noir = {
+  window.mercury = {
     cue: function(id, s){
       wantPlay = false; cued = {videoId: id, startSeconds: s};
       player.cueVideoById(cued);

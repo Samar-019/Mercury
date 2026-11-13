@@ -1,4 +1,4 @@
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// One player of the local engine. The engine keeps two so the next track
 /// can be mixed in while the current one plays out.

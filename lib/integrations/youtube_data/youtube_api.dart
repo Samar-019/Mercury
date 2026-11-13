@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:noir/integrations/google_auth/desktop_oauth_flow.dart';
+import 'package:mercury/integrations/google_auth/desktop_oauth_flow.dart';
 
 class YtPlaylist {
   const YtPlaylist({
@@ -362,7 +362,7 @@ class YouTubeApi {
         (reason == 'quotaExceeded' || reason == 'rateLimitExceeded')) {
       return const YouTubeApiException(
         YouTubeErrorKind.quota,
-        "NOIR has used today's YouTube allowance. Syncing resumes tomorrow; "
+        "MERCURY has used today's YouTube allowance. Syncing resumes tomorrow; "
         'everything already synced stays available.',
       );
     }
@@ -371,7 +371,7 @@ class YouTubeApi {
             reason == 'ACCESS_TOKEN_SCOPE_INSUFFICIENT')) {
       return const YouTubeApiException(
         YouTubeErrorKind.permission,
-        'NOIR needs permission to change your YouTube playlists.',
+        'MERCURY needs permission to change your YouTube playlists.',
       );
     }
     if (status == 401) {

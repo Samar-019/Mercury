@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
 import 'package:path/path.dart' as p;
 
 /// What smart transitions decided and why, for diagnosing them on a user's

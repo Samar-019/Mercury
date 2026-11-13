@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Indexes of [tracks] whose title, artist or album contain every word of
 /// [query] (case-insensitive). All of them when [query] is blank.
@@ -39,10 +39,10 @@ class _TrackFilterFieldState extends State<TrackFilterField> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     return GlassSurface(
-      borderRadius: NoirRadii.pillAll,
+      borderRadius: MercuryRadii.pillAll,
       blur: 0,
       child: SizedBox(
         width: 260,
@@ -69,7 +69,7 @@ class _TrackFilterFieldState extends State<TrackFilterField> {
               valueListenable: _controller,
               builder: (context, value, _) => value.text.isEmpty
                   ? const SizedBox(width: 14)
-                  : NoirIconButton(
+                  : MercuryIconButton(
                       icon: Icons.close_rounded,
                       tooltip: 'Clear',
                       size: 16,

@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Optional extension point: supplies a local audio file for a track that
 /// otherwise plays through a remote player, so it can play on the local
 /// engine instead (full seek, crossfade, background playback).
 ///
-/// NOIR ships with [NoAudioFiles], which never supplies anything.
+/// MERCURY ships with [NoAudioFiles], which never supplies anything.
 abstract interface class AudioFileProvider {
   /// A playable local file for [track], or null when there is none right
   /// now. Consulted on every load, so it must answer quickly.

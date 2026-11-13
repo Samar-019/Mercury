@@ -28,13 +28,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1360, 860);
-  if (!window.Create(L"NOIR", origin, size)) {
+  if (!window.Create(L"MERCURY", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);
 
   // Seamless frame on Windows 11: rounded corners and a border that blends
-  // with NOIR's near-black background instead of the system accent line.
+  // with MERCURY's near-black background instead of the system accent line.
   // Older Windows versions ignore these attributes.
   {
     HWND hwnd = window.GetHandle();

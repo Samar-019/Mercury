@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/features/analysis/application/analysis_providers.dart';
-import 'package:noir/features/analysis/domain/track_analysis.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/features/analysis/application/analysis_providers.dart';
+import 'package:mercury/features/analysis/domain/track_analysis.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Debug view of a track's stored analysis (tempo, key, loudness, mix
 /// points), with a button to analyse it now.
@@ -48,7 +48,7 @@ class _TrackAnalysisViewState extends ConsumerState<_TrackAnalysisView> {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final analysis = ref.watch(trackAnalysisProvider(widget.track.id));
     final path = ref.read(analysisPathResolverProvider)(widget.track);
     final a = analysis.value;
@@ -64,7 +64,7 @@ class _TrackAnalysisViewState extends ConsumerState<_TrackAnalysisView> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         if (a != null)
           ..._rows(a).map(
             (r) => Padding(
@@ -95,18 +95,18 @@ class _TrackAnalysisViewState extends ConsumerState<_TrackAnalysisView> {
           ),
         if (_failed)
           Padding(
-            padding: const EdgeInsets.only(top: NoirSpacing.sm),
+            padding: const EdgeInsets.only(top: MercurySpacing.sm),
             child: Text(
               'This file could not be analysed.',
               style: t.bodySmall?.copyWith(color: c.destructive),
             ),
           ),
-        const SizedBox(height: NoirSpacing.xl),
+        const SizedBox(height: MercurySpacing.xl),
         Wrap(
           alignment: WrapAlignment.end,
           crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: NoirSpacing.sm,
-          runSpacing: NoirSpacing.sm,
+          spacing: MercurySpacing.sm,
+          runSpacing: MercurySpacing.sm,
           children: [
             if (path != null)
               PillButton(

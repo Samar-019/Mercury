@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/artwork.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/artwork.dart';
 
 /// The canvas behind every screen: near-black with soft light falloff, and —
 /// when Liquid Glass is on in Balanced mode — a faint monochrome wash of the
@@ -11,8 +11,8 @@ import 'package:noir/core/widgets/artwork.dart';
 ///
 /// The artwork is decoded at 24 px and upscaled; bilinear filtering produces
 /// the blur for free instead of running a full-screen blur filter.
-class NoirBackdrop extends StatelessWidget {
-  const NoirBackdrop({this.artworkPath, super.key});
+class MercuryBackdrop extends StatelessWidget {
+  const MercuryBackdrop({this.artworkPath, super.key});
 
   final String? artworkPath;
 
@@ -25,8 +25,8 @@ class NoirBackdrop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
-    final fx = NoirEffects.of(context);
+    final c = context.mercury;
+    final fx = MercuryEffects.of(context);
     final dark = Theme.of(context).brightness == Brightness.dark;
     return RepaintBoundary(
       child: Stack(
@@ -50,7 +50,7 @@ class NoirBackdrop extends StatelessWidget {
             ),
           if (fx.ambient && artworkPath != null)
             AnimatedSwitcher(
-              duration: fx.motion(NoirMotion.slow * 2),
+              duration: fx.motion(MercuryMotion.slow * 2),
               // The switcher lays its children out loosely: without this
               // the 24 px image would sit small in the middle.
               layoutBuilder: (current, previous) => Stack(

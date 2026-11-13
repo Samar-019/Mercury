@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/library/application/library_scan_controller.dart';
+import 'package:mercury/features/library/application/library_scan_controller.dart';
 import 'package:path/path.dart' as p;
 
 // Imported copies are named after whatever the serving app calls the file,
@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 void main() {
   late Directory dir;
 
-  setUp(() => dir = Directory.systemTemp.createTempSync('noir_import'));
+  setUp(() => dir = Directory.systemTemp.createTempSync('mercury_import'));
   tearDown(() => dir.deleteSync(recursive: true));
 
   String name(String raw) => LibraryScanController.freeName(dir.path, raw);
@@ -27,7 +27,7 @@ void main() {
     for (final raw in [
       '../Song.mp3',
       '../../files/Song.mp3',
-      '/data/user/0/app.noir.player/files/Song.mp3',
+      '/data/user/0/app.mercury.player/files/Song.mp3',
       // A backslash only separates directories on Windows.
       if (Platform.isWindows) r'C:\Users\x\Song.mp3',
       'sub/dir/Song.mp3',

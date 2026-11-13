@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/shelf_row.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/shelf_row.dart';
 
 /// Square artwork with title and subtitle, as in "Recently played".
 class MediaTile extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MediaTileState extends State<MediaTile> {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     return Semantics(
       button: true,
       label: '${widget.title}, ${widget.subtitle}',
@@ -61,16 +61,16 @@ class _MediaTileState extends State<MediaTile> {
                 children: [
                   AnimatedSlide(
                     offset: Offset(0, _hovered && fx.animations ? -0.02 : 0),
-                    duration: fx.motion(NoirMotion.medium),
-                    curve: NoirMotion.standard,
+                    duration: fx.motion(MercuryMotion.medium),
+                    curve: MercuryMotion.standard,
                     child: AnimatedScale(
                       scale: _hovered && fx.animations ? 1.02 : 1,
-                      duration: fx.motion(NoirMotion.medium),
-                      curve: NoirMotion.standard,
+                      duration: fx.motion(MercuryMotion.medium),
+                      curve: MercuryMotion.standard,
                       child: widget.artwork(widget.width),
                     ),
                   ),
-                  const SizedBox(height: NoirSpacing.sm + 2),
+                  const SizedBox(height: MercurySpacing.sm + 2),
                   Text(
                     widget.title,
                     maxLines: 1,
@@ -83,7 +83,7 @@ class _MediaTileState extends State<MediaTile> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: t.labelSmall?.copyWith(
-                      color: context.noir.textSecondary,
+                      color: context.mercury.textSecondary,
                     ),
                   ),
                 ],
@@ -120,7 +120,7 @@ class TileRow extends StatelessWidget {
     return ShelfRow(
       // Title + subtitle grow with the user's text size.
       height: tileWidth + 16 + MediaQuery.textScalerOf(context).scale(38),
-      itemExtent: tileWidth + NoirSpacing.lg,
+      itemExtent: tileWidth + MercurySpacing.lg,
       arrowCenter: tileWidth / 2,
       title: title,
       eyebrow: eyebrow,
@@ -149,21 +149,21 @@ class CollectionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     return InkWell(
       onTap: onTap,
-      borderRadius: NoirRadii.mdAll,
+      borderRadius: MercuryRadii.mdAll,
       hoverColor: c.hover,
-      hoverDuration: NoirEffects.of(context).motion(NoirMotion.fast),
+      hoverDuration: MercuryEffects.of(context).motion(MercuryMotion.fast),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: NoirSpacing.sm,
-          vertical: NoirSpacing.sm - 2,
+          horizontal: MercurySpacing.sm,
+          vertical: MercurySpacing.sm - 2,
         ),
         child: Row(
           children: [
             leading,
-            const SizedBox(width: NoirSpacing.md),
+            const SizedBox(width: MercurySpacing.md),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

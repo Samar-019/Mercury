@@ -3,14 +3,14 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/application/dislikes.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
-import 'package:noir/integrations/youtube_music/innertube_client.dart';
-import 'package:noir/integrations/youtube_music/ytm_models.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/application/dislikes.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/integrations/youtube_music/innertube_client.dart';
+import 'package:mercury/integrations/youtube_music/ytm_models.dart';
+import 'package:mercury/shared/models/media.dart';
 
 // ------------------------------------------------------------- play log --
 
@@ -18,7 +18,7 @@ final youTubePlayLogProvider = Provider<YouTubePlayLog>(
   (ref) => YouTubePlayLog(ref.watch(settingsRepositoryProvider)),
 );
 
-/// One YouTube song played in NOIR.
+/// One YouTube song played in MERCURY.
 @immutable
 class YouTubePlay {
   const YouTubePlay(this.track, this.at);
@@ -27,7 +27,7 @@ class YouTubePlay {
   final DateTime at;
 }
 
-/// The YouTube songs played in NOIR, newest first, for "For you". Kept on
+/// The YouTube songs played in MERCURY, newest first, for "For you". Kept on
 /// this device only (like the local listening history) and never sent
 /// anywhere: recommendations ask YouTube Music anonymously about single
 /// songs.
@@ -88,7 +88,7 @@ class YouTubePlayLog {
 // --------------------------------------------------------- listen again --
 
 /// Home's first shelf, like YouTube Music's "Listen again": the YouTube
-/// songs the user played most (and most recently) in NOIR. Local files are
+/// songs the user played most (and most recently) in MERCURY. Local files are
 /// left out: Home is about YouTube Music. Rebuilt after each play.
 final listenAgainProvider = FutureProvider<List<Track>>((ref) async {
   final plays = await ref.read(youTubePlayLogProvider).read();
@@ -258,7 +258,7 @@ final forYouProvider = AsyncNotifierProvider<ForYouController, ForYouFeed>(
 );
 
 /// Recommendations from the user's own taste without their account:
-/// seeds come from local data (plays in NOIR, the synced likes and
+/// seeds come from local data (plays in MERCURY, the synced likes and
 /// playlists), and YouTube Music is asked anonymously for each seed's
 /// radio. The seeds change once a day.
 class ForYouController extends AsyncNotifier<ForYouFeed> {

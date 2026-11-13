@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/integrations/google_auth/desktop_oauth_flow.dart';
-import 'package:noir/integrations/google_auth/google_oauth_config.dart';
-import 'package:noir/integrations/google_auth/token_store.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/integrations/google_auth/desktop_oauth_flow.dart';
+import 'package:mercury/integrations/google_auth/google_oauth_config.dart';
+import 'package:mercury/integrations/google_auth/token_store.dart';
 
 import '../helpers/fake_http.dart';
 

@@ -167,7 +167,7 @@ struct SmtcBridge::Impl {
 
 SmtcBridge::SmtcBridge(flutter::BinaryMessenger* messenger, HWND window)
     : channel_(std::make_unique<flutter::MethodChannel<EncodableValue>>(
-          messenger, "noir/smtc",
+          messenger, "mercury/smtc",
           &flutter::StandardMethodCodec::GetInstance())),
       taskbar_(window),
       impl_(std::make_shared<Impl>(window)) {

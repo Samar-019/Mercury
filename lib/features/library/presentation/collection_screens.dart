@@ -2,21 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/formatters.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/states.dart';
-import 'package:noir/features/home/application/pinned_playlists.dart';
-import 'package:noir/features/home/presentation/pin_button.dart';
-import 'package:noir/features/library/application/library_providers.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/playlists/presentation/add_to_playlist.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/widgets/collection_header.dart';
-import 'package:noir/shared/widgets/media_tiles.dart';
-import 'package:noir/shared/widgets/page_scaffold.dart';
-import 'package:noir/shared/widgets/track_row.dart';
+import 'package:mercury/core/formatters.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/states.dart';
+import 'package:mercury/features/home/application/pinned_playlists.dart';
+import 'package:mercury/features/home/presentation/pin_button.dart';
+import 'package:mercury/features/library/application/library_providers.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/playlists/presentation/add_to_playlist.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/widgets/collection_header.dart';
+import 'package:mercury/shared/widgets/media_tiles.dart';
+import 'package:mercury/shared/widgets/page_scaffold.dart';
+import 'package:mercury/shared/widgets/track_row.dart';
 
 final _albumTracksProvider = FutureProvider.family<List<Track>, Album>((
   ref,
@@ -96,14 +96,14 @@ List<Widget> _addAllAction(
   WidgetRef ref,
   List<Track> t,
 ) => [
-  NoirIconButton(
+  MercuryIconButton(
     icon: Icons.playlist_add_rounded,
     tooltip: 'Add all to playlist',
     onPressed: t.isEmpty
         ? null
         : () => unawaited(addToPlaylist(context, ref, t)),
   ),
-  NoirIconButton(
+  MercuryIconButton(
     icon: Icons.queue_music_rounded,
     tooltip: 'Add all to queue',
     onPressed: t.isEmpty

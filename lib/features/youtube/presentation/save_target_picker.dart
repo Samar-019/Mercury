@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/features/youtube/presentation/save_button.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/features/youtube/presentation/save_button.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
 
 /// Name offered for a new playlist.
-const defaultSavePlaylistName = 'NOIR Likes';
+const defaultSavePlaylistName = 'MERCURY Likes';
 
 /// Lets the user choose the playlist hearted songs go to (or create one),
-/// then makes sure NOIR may edit it. Returns the target once usable, or
+/// then makes sure MERCURY may edit it. Returns the target once usable, or
 /// null when the user backed out or declined the permission (a chosen
 /// playlist is remembered anyway).
 Future<SaveTarget?> pickSaveTarget(BuildContext context, WidgetRef ref) async {
@@ -56,7 +56,7 @@ Future<SaveTarget?> pickSaveTarget(BuildContext context, WidgetRef ref) async {
       showToast(
         context,
         e.kind == YouTubeErrorKind.permission
-            ? 'YouTube refused: NOIR may not create playlists. Allow access '
+            ? 'YouTube refused: MERCURY may not create playlists. Allow access '
                   'and try again.'
             : "Couldn't create the playlist. ${e.message}",
       );
@@ -80,7 +80,7 @@ class _PickerBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final playlists = ref.watch(youTubePlaylistsProvider).value ?? const [];
     final current = ref.watch(saveTargetProvider)?.id;
 
@@ -92,18 +92,18 @@ class _PickerBody extends ConsumerWidget {
       bool selected = false,
     }) => InkWell(
       onTap: onTap,
-      borderRadius: NoirRadii.mdAll,
+      borderRadius: MercuryRadii.mdAll,
       hoverColor: c.hover,
       focusColor: c.selected,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: NoirSpacing.sm,
-          vertical: NoirSpacing.sm,
+          horizontal: MercurySpacing.sm,
+          vertical: MercurySpacing.sm,
         ),
         child: Row(
           children: [
             Icon(icon, size: 18, color: c.textSecondary),
-            const SizedBox(width: NoirSpacing.md),
+            const SizedBox(width: MercurySpacing.md),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,13 +130,13 @@ class _PickerBody extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Save hearted songs to', style: t.titleMedium),
-        const SizedBox(height: NoirSpacing.sm),
+        const SizedBox(height: MercurySpacing.sm),
         Text(
           'The heart on a YouTube song adds it to this playlist on your '
           'YouTube account. With Liked music it likes the song on YouTube.',
           style: t.bodySmall,
         ),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 280),
           child: ListView(
@@ -168,7 +168,7 @@ class _PickerBody extends ConsumerWidget {
           subtitle: 'Private',
           onTap: () => Navigator.of(context).pop(const _Choice(null)),
         ),
-        const SizedBox(height: NoirSpacing.lg),
+        const SizedBox(height: MercurySpacing.lg),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
@@ -189,7 +189,7 @@ class SaveTargetSetting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Theme.of(context).textTheme;
-    final c = context.noir;
+    final c = context.mercury;
     final title = ref.watch(saveTargetTitleProvider);
     final authorizing = ref.watch(
       youTubeSaveProvider.select((s) => s.authorizing),
@@ -206,14 +206,14 @@ class SaveTargetSetting extends ConsumerWidget {
           authorizing
               ? 'Waiting for your browser…'
               : title ??
-                    'Not chosen yet — NOIR asks the first time you heart a '
+                    'Not chosen yet — MERCURY asks the first time you heart a '
                         'YouTube song.',
           style: t.bodySmall,
         ),
-        const SizedBox(height: NoirSpacing.sm),
+        const SizedBox(height: MercurySpacing.sm),
         Wrap(
-          spacing: NoirSpacing.sm,
-          runSpacing: NoirSpacing.sm,
+          spacing: MercurySpacing.sm,
+          runSpacing: MercurySpacing.sm,
           children: [
             if (authorizing)
               PillButton(

@@ -1,15 +1,15 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/edge_player/edge_player_bridge.dart';
-import 'package:noir/features/edge_player/edge_snapshot.dart';
-import 'package:noir/features/library/data/library_repository.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/domain/app_settings.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/edge_player/edge_player_bridge.dart';
+import 'package:mercury/features/edge_player/edge_snapshot.dart';
+import 'package:mercury/features/library/data/library_repository.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/domain/app_settings.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/shared/models/media.dart';
 
 import '../helpers/fake_engine.dart';
 import '../helpers/test_database.dart';
@@ -93,7 +93,7 @@ void main() {
     expect(s.canLike, isTrue);
   });
 
-  test('shows only while NOIR is in the background', () async {
+  test('shows only while MERCURY is in the background', () async {
     await controller().playTracks(tracks);
     await pumpEventQueue();
     expect(sent.last.visible, isTrue);

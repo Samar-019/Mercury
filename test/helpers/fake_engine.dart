@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:noir/features/playback/domain/playback_engine.dart';
-import 'package:noir/features/playback/domain/transition_plan.dart';
-import 'package:noir/shared/models/media.dart';
-import 'package:noir/shared/models/playback.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/transition_plan.dart';
+import 'package:mercury/shared/models/media.dart';
+import 'package:mercury/shared/models/playback.dart';
 
 /// Scriptable engine: records calls and lets tests emit events.
 class FakeEngine implements PlaybackEngine, MixingEngine {

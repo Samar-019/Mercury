@@ -1,11 +1,11 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/core/database/app_database.dart';
-import 'package:noir/core/database/database_provider.dart';
-import 'package:noir/features/youtube/domain/music_filter.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/core/database/app_database.dart';
+import 'package:mercury/core/database/database_provider.dart';
+import 'package:mercury/features/youtube/domain/music_filter.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final youTubeRepositoryProvider = Provider<YouTubeRepository>(
   (ref) => YouTubeRepository(ref.watch(databaseProvider)),
@@ -184,7 +184,7 @@ class YouTubeRepository {
         ),
       );
 
-  /// Playlist id → etag of the items NOIR already has.
+  /// Playlist id → etag of the items MERCURY already has.
   Future<Map<String, String?>> itemEtags() async {
     final rows = await _db.select(_db.ytPlaylists).get();
     return {for (final r in rows) r.id: r.itemsEtag};
@@ -276,7 +276,7 @@ class YouTubeRepository {
       )..where((l) => l.videoId.equals(videoId))).getSingleOrNull() !=
       null;
 
-  /// Puts a video NOIR just liked on YouTube first in the likes.
+  /// Puts a video MERCURY just liked on YouTube first in the likes.
   Future<void> addLike(Track track) => _db.transaction(() async {
     final min = _db.ytLikes.position.min();
     final first = await (_db.selectOnly(
@@ -321,7 +321,7 @@ class YouTubeRepository {
     for (final r in await _itemsOf(playlistId, videoId).get()) ?r.itemId,
   ];
 
-  /// Appends a video NOIR just added on YouTube. [track] supplies the video
+  /// Appends a video MERCURY just added on YouTube. [track] supplies the video
   /// details when they are not cached yet (the next sync completes them).
   Future<void> addPlaylistItem(String playlistId, String itemId, Track track) =>
       _db.transaction(() async {
@@ -392,7 +392,7 @@ class YouTubeRepository {
         b.insertAll(_db.ytPlaylistItems, rows, mode: InsertMode.insertOrIgnore),
   );
 
-  /// Adds a playlist NOIR just created on YouTube, after the known ones
+  /// Adds a playlist MERCURY just created on YouTube, after the known ones
   /// (the next sync puts it where YouTube lists it).
   Future<void> addPlaylist(YtPlaylist p) => _db.transaction(() async {
     final max = _db.ytPlaylists.position.max();

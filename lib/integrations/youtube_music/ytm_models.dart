@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart' show immutable;
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Something YouTube Music shows on a shelf or in search results.
 @immutable

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/shell/adaptive_shell.dart';
-import 'package:noir/app/shell/navigation.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/widgets/noir_backdrop.dart';
-import 'package:noir/features/discover/application/discover_providers.dart';
-import 'package:noir/features/discover/presentation/ytm_artist_screen.dart';
-import 'package:noir/features/discover/presentation/ytm_collection_screen.dart';
-import 'package:noir/features/home/presentation/home_screen.dart';
-import 'package:noir/features/library/presentation/collection_screens.dart';
-import 'package:noir/features/library/presentation/library_screen.dart';
-import 'package:noir/features/playback/presentation/now_playing_route.dart';
-import 'package:noir/features/playback/presentation/now_playing_screen.dart';
-import 'package:noir/features/playlists/presentation/playlist_screen.dart';
-import 'package:noir/features/queue/presentation/queue_panel.dart';
-import 'package:noir/features/search/presentation/search_screen.dart';
-import 'package:noir/features/settings/presentation/settings_screen.dart';
-import 'package:noir/features/youtube/presentation/youtube_playlist_screen.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/app/shell/adaptive_shell.dart';
+import 'package:mercury/app/shell/navigation.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/widgets/mercury_backdrop.dart';
+import 'package:mercury/features/discover/application/discover_providers.dart';
+import 'package:mercury/features/discover/presentation/ytm_artist_screen.dart';
+import 'package:mercury/features/discover/presentation/ytm_collection_screen.dart';
+import 'package:mercury/features/home/presentation/home_screen.dart';
+import 'package:mercury/features/library/presentation/collection_screens.dart';
+import 'package:mercury/features/library/presentation/library_screen.dart';
+import 'package:mercury/features/playback/presentation/now_playing_route.dart';
+import 'package:mercury/features/playback/presentation/now_playing_screen.dart';
+import 'package:mercury/features/playlists/presentation/playlist_screen.dart';
+import 'package:mercury/features/queue/presentation/queue_panel.dart';
+import 'package:mercury/features/search/presentation/search_screen.dart';
+import 'package:mercury/features/settings/presentation/settings_screen.dart';
+import 'package:mercury/features/youtube/presentation/youtube_playlist_screen.dart';
+import 'package:mercury/shared/models/media.dart';
 
 final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -162,7 +162,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: _rootKey,
         builder: (_, _) => const Stack(
           fit: StackFit.expand,
-          children: [NoirBackdrop(), QueueScreen()],
+          children: [MercuryBackdrop(), QueueScreen()],
         ),
       ),
     ],
@@ -204,12 +204,12 @@ GoRoute _ytmArtistRoute(String path, {required String base}) => GoRoute(
 /// Pages inside the shell branches: the same fade-through as branch
 /// switches, instead of the platform default slide.
 Page<void> _page(BuildContext context, GoRouterState state, Widget child) {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   return CustomTransitionPage<void>(
     key: state.pageKey,
     child: child,
-    transitionDuration: fx.motion(NoirMotion.layout),
-    reverseTransitionDuration: fx.motion(NoirMotion.layout),
+    transitionDuration: fx.motion(MercuryMotion.layout),
+    reverseTransitionDuration: fx.motion(MercuryMotion.layout),
     transitionsBuilder: (context, animation, secondaryAnimation, child) =>
         AnimatedBuilder(
           animation: Listenable.merge([animation, secondaryAnimation]),

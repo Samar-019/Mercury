@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:noir/core/database/tables.dart';
+import 'package:mercury/core/database/tables.dart';
 import 'package:path_provider/path_provider.dart';
 
 export 'tables.dart';
@@ -30,7 +30,7 @@ class AppDatabase extends _$AppDatabase {
   /// Documents folder, which is drift_flutter's default).
   factory AppDatabase.open() => AppDatabase(
     driftDatabase(
-      name: 'noir',
+      name: 'mercury',
       native: const DriftNativeOptions(
         databaseDirectory: getApplicationSupportDirectory,
       ),

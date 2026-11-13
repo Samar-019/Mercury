@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:noir/features/playback/domain/playback_engine.dart';
+import 'package:mercury/features/playback/domain/playback_engine.dart';
 
 /// The official YouTube player (IFrame Player API) running in a web view,
 /// as the video layer needs it on any platform.

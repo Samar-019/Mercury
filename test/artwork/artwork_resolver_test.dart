@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/artwork/application/artwork_resolver.dart';
-import 'package:noir/features/artwork/data/artwork_cache_store.dart';
-import 'package:noir/features/artwork/domain/resolved_art.dart';
+import 'package:mercury/features/artwork/application/artwork_resolver.dart';
+import 'package:mercury/features/artwork/data/artwork_cache_store.dart';
+import 'package:mercury/features/artwork/domain/resolved_art.dart';
 
 import 'artwork_fakes.dart';
 
@@ -203,7 +203,7 @@ void main() {
 
   group('persistence', () {
     test('answers survive a restart (JSON file round trip)', () async {
-      final dir = Directory.systemTemp.createTempSync('noir_art_');
+      final dir = Directory.systemTemp.createTempSync('mercury_art_');
       addTearDown(() => _deleteQuietly(dir));
       final file = File('${dir.path}/youtube_artwork.json');
       ArtworkCacheStore store() => JsonFileArtworkCacheStore(() async => file);
@@ -242,7 +242,7 @@ void main() {
     });
 
     test('a broken file is ignored', () async {
-      final dir = Directory.systemTemp.createTempSync('noir_art_');
+      final dir = Directory.systemTemp.createTempSync('mercury_art_');
       addTearDown(() => dir.deleteSync(recursive: true));
       final file = File('${dir.path}/youtube_artwork.json')
         ..writeAsStringSync('{not json');

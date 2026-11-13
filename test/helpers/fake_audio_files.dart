@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:noir/features/playback/domain/audio_source_provider.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/playback/domain/audio_source_provider.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// Scriptable [AudioFileProvider]: answers from [files] (keyed by track
 /// uri) and records prefetch hints.

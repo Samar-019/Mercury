@@ -3,9 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/form_factor.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/form_factor.dart';
 
 /// The container transform between the player island and Now Playing: the
 /// page grows out of the island's capsule — rect and corners morphing to
@@ -42,7 +42,7 @@ abstract final class NowPlayingTransition {
   /// shape then stays there while it cross-fades into the island.
   static CurvedAnimation curve(Animation<double> animation) => CurvedAnimation(
     parent: animation,
-    curve: NoirMotion.emphasized,
+    curve: MercuryMotion.emphasized,
     reverseCurve: const _ShrinkThenLand(),
   );
 
@@ -108,7 +108,7 @@ class _ContentIn extends Curve {
 
   @override
   double transformInternal(double t) =>
-      const Interval(0.2, 0.75).transform(NoirMotion.emphasized.transform(t));
+      const Interval(0.2, 0.75).transform(MercuryMotion.emphasized.transform(t));
 }
 
 /// Closing (route progress falling from 1): the morph eases from the full
@@ -132,16 +132,16 @@ Page<void> nowPlayingPage(
   GoRouterState state,
   Widget child,
 ) {
-  final fx = NoirEffects.of(context);
+  final fx = MercuryEffects.of(context);
   // Phones slide it like the queue sheet; the island morph takes longer.
   final touch = FormFactor.touch;
   return _NowPlayingPage(
     key: state.pageKey,
     duration: fx.motion(
-      touch ? NoirMotion.slow : NowPlayingTransition.openDuration,
+      touch ? MercuryMotion.slow : NowPlayingTransition.openDuration,
     ),
     reverseDuration: fx.motion(
-      touch ? NoirMotion.slow : NowPlayingTransition.closeDuration,
+      touch ? MercuryMotion.slow : NowPlayingTransition.closeDuration,
     ),
     child: child,
   );
@@ -388,7 +388,7 @@ class _MorphState extends State<_Morph> {
               ? route.value
               : (route.status == AnimationStatus.reverse
                         ? Curves.easeInCubic
-                        : NoirMotion.emphasized)
+                        : MercuryMotion.emphasized)
                     .transform(route.value);
           // Clipped while it moves: the flowing backdrop paints a little
           // past its bounds, which would show above the page's top edge.

@@ -3,12 +3,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/features/artwork/application/artwork_providers.dart';
-import 'package:noir/features/artwork/domain/art_urls.dart';
-import 'package:noir/features/youtube/presentation/youtube_cover.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/features/artwork/application/artwork_providers.dart';
+import 'package:mercury/features/artwork/domain/art_urls.dart';
+import 'package:mercury/features/youtube/presentation/youtube_cover.dart';
 
-export 'package:noir/features/artwork/domain/art_urls.dart' show isRemoteImage;
+export 'package:mercury/features/artwork/domain/art_urls.dart' show isRemoteImage;
 
 /// Square artwork decoded at display size × device pixel ratio
 /// (`cacheWidth`) to keep memory and decode time proportional to what is on
@@ -22,7 +22,7 @@ class Artwork extends StatelessWidget {
   const Artwork({
     required this.path,
     required this.size,
-    this.radius = NoirRadii.sm,
+    this.radius = MercuryRadii.sm,
     this.icon = Icons.music_note_rounded,
     this.semanticLabel,
     super.key,
@@ -141,7 +141,7 @@ class ArtworkCollage extends StatelessWidget {
   const ArtworkCollage({
     required this.paths,
     required this.size,
-    this.radius = NoirRadii.sm,
+    this.radius = MercuryRadii.sm,
     super.key,
   });
 
@@ -183,7 +183,7 @@ class _Placeholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(

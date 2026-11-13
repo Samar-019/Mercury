@@ -27,7 +27,7 @@ enum LyricsMode {
   karaoke,
 }
 
-/// How one track hands over to the next on NOIR's own player.
+/// How one track hands over to the next on MERCURY's own player.
 enum TransitionMode {
   /// Each track plays to its end, then the next starts.
   off,
@@ -45,7 +45,7 @@ enum TransitionMode {
 }
 
 /// Where the edge player docks on Windows: a small player that comes out
-/// from behind the screen edge while NOIR is in the background.
+/// from behind the screen edge while MERCURY is in the background.
 enum EdgePlayerSide { left, right, top, bottom }
 
 @freezed
@@ -61,7 +61,7 @@ abstract class AppSettings with _$AppSettings {
     @Default(Density.comfortable) Density density,
     @Default(PerformanceMode.balanced) PerformanceMode performanceMode,
 
-    /// Transitions apply to tracks played through NOIR's own player
+    /// Transitions apply to tracks played through MERCURY's own player
     /// (local files and cached audio).
     @JsonKey(unknownEnumValue: TransitionMode.off)
     @Default(TransitionMode.off)

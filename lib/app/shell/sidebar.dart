@@ -4,21 +4,21 @@ import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noir/app/shell/navigation.dart';
-import 'package:noir/app/shell/sidebar_hidden.dart';
-import 'package:noir/app/theme/design_tokens.dart';
-import 'package:noir/app/theme/glass_theme.dart';
-import 'package:noir/core/platform/window_controls.dart';
-import 'package:noir/core/widgets/artwork.dart';
-import 'package:noir/core/widgets/buttons.dart';
-import 'package:noir/core/widgets/dialogs.dart';
-import 'package:noir/core/widgets/glass_surface.dart';
-import 'package:noir/core/widgets/menus.dart';
-import 'package:noir/core/widgets/smooth_scroll.dart';
-import 'package:noir/features/playlists/application/playlist_providers.dart';
-import 'package:noir/features/playlists/presentation/add_to_playlist.dart';
-import 'package:noir/features/settings/presentation/settings_controller.dart';
-import 'package:noir/features/youtube/application/youtube_providers.dart';
+import 'package:mercury/app/shell/navigation.dart';
+import 'package:mercury/app/shell/sidebar_hidden.dart';
+import 'package:mercury/app/theme/design_tokens.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
+import 'package:mercury/core/platform/window_controls.dart';
+import 'package:mercury/core/widgets/artwork.dart';
+import 'package:mercury/core/widgets/buttons.dart';
+import 'package:mercury/core/widgets/dialogs.dart';
+import 'package:mercury/core/widgets/glass_surface.dart';
+import 'package:mercury/core/widgets/menus.dart';
+import 'package:mercury/core/widgets/smooth_scroll.dart';
+import 'package:mercury/features/playlists/application/playlist_providers.dart';
+import 'package:mercury/features/playlists/presentation/add_to_playlist.dart';
+import 'package:mercury/features/settings/presentation/settings_controller.dart';
+import 'package:mercury/features/youtube/application/youtube_providers.dart';
 
 const List<Branch> _primaryBranches = [
   Branch.home,
@@ -59,8 +59,8 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
       tween: Tween(end: collapsed ? 0 : 1),
-      duration: NoirEffects.of(context).motion(NoirMotion.layout),
-      curve: NoirMotion.emphasized,
+      duration: MercuryEffects.of(context).motion(MercuryMotion.layout),
+      curve: MercuryMotion.emphasized,
       builder: (context, t, _) => SizedBox(
         width: lerpDouble(_collapsedWidth, _expandedWidth, t),
         child: GlassSurface(
@@ -105,7 +105,7 @@ class _SidebarBody extends ConsumerWidget {
             padding: const EdgeInsets.only(left: 21),
             child: Transform.rotate(
               angle: (1 - t) * math.pi,
-              child: NoirIconButton(
+              child: MercuryIconButton(
                 icon: Icons.keyboard_double_arrow_left_rounded,
                 tooltip: collapsed ? 'Expand sidebar' : 'Collapse sidebar',
                 size: 18,
@@ -131,7 +131,7 @@ class _SidebarBody extends ConsumerWidget {
         ),
         if (reservesWindowControlsSpace && toggle != null)
           Row(children: [toggle]),
-        const SizedBox(height: NoirSpacing.sm),
+        const SizedBox(height: MercurySpacing.sm),
         for (final b in _primaryBranches)
           _NavItem(
             label: b.label,
@@ -199,11 +199,11 @@ class _Collections extends ConsumerWidget {
         selected: location == route,
         onTap: () => context.go(route),
         onContextMenu: (position) async {
-          final action = await showNoirMenu<String>(
+          final action = await showMercuryMenu<String>(
             context,
             anchor: position & Size.zero,
             items: const [
-              NoirMenuItem(
+              MercuryMenuItem(
                 'hide',
                 'Hide from sidebar',
                 icon: Icons.visibility_off_outlined,
@@ -241,8 +241,8 @@ class _Collections extends ConsumerWidget {
             builder: (context, scroll) => ListView(
               controller: scroll,
               padding: const EdgeInsets.only(
-                top: NoirSpacing.sm,
-                bottom: NoirSpacing.md,
+                top: MercurySpacing.sm,
+                bottom: MercurySpacing.md,
               ),
               children: [
                 item(
@@ -383,9 +383,9 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
-    final fx = NoirEffects.of(context);
+    final fx = MercuryEffects.of(context);
     final color = selected ? c.textPrimary : c.textSecondary;
     final cover = leading;
     return Padding(
@@ -408,12 +408,12 @@ class _NavItem extends StatelessWidget {
                       box.localToGlobal(box.size.center(Offset.zero)),
                     );
                   },
-            borderRadius: NoirRadii.mdAll,
+            borderRadius: MercuryRadii.mdAll,
             hoverColor: c.hover,
-            hoverDuration: fx.motion(NoirMotion.fast),
+            hoverDuration: fx.motion(MercuryMotion.fast),
             child: AnimatedContainer(
-              duration: fx.motion(NoirMotion.fast),
-              curve: NoirMotion.standard,
+              duration: fx.motion(MercuryMotion.fast),
+              curve: MercuryMotion.standard,
               height: cover == null ? 42 : 48,
               // With the 1 px glass border and 12 px inset, 17 puts the
               // icon's center at 40: the rail's center. Same for the
@@ -421,7 +421,7 @@ class _NavItem extends StatelessWidget {
               padding: EdgeInsets.only(left: cover == null ? 17 : 7),
               decoration: BoxDecoration(
                 color: selected ? c.selected : Colors.transparent,
-                borderRadius: NoirRadii.mdAll,
+                borderRadius: MercuryRadii.mdAll,
               ),
               child: Row(
                 children: [
@@ -447,7 +447,7 @@ class _NavItem extends StatelessWidget {
                           child: Opacity(
                             opacity: labelOpacity,
                             child: AnimatedDefaultTextStyle(
-                              duration: fx.motion(NoirMotion.fast),
+                              duration: fx.motion(MercuryMotion.fast),
                               style:
                                   (cover == null
                                           ? t.labelLarge
@@ -482,7 +482,7 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.noir;
+    final c = context.mercury;
     final t = Theme.of(context).textTheme;
     return GlassSurface(
       borderRadius: BorderRadius.zero,

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noir/features/youtube/domain/music_filter.dart';
+import 'package:mercury/features/youtube/domain/music_filter.dart';
 
 void main() {
   bool music(String? category, String channel) =>

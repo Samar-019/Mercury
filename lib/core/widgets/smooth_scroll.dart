@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:noir/app/theme/glass_theme.dart';
+import 'package:mercury/app/theme/glass_theme.dart';
 
 /// Scroll controller whose mouse-wheel steps glide instead of jumping.
 ///
@@ -100,7 +100,7 @@ class _SmoothScrollState extends State<SmoothScroll> {
 
   @override
   Widget build(BuildContext context) {
-    _controller.smooth = NoirEffects.of(context).animations;
+    _controller.smooth = MercuryEffects.of(context).animations;
     return widget.builder(context, _controller);
   }
 }

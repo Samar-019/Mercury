@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noir/features/accounts/domain/account_connection.dart';
-import 'package:noir/features/playback/application/playback_controller.dart';
-import 'package:noir/features/settings/data/settings_repository.dart';
-import 'package:noir/features/youtube/application/youtube_pending_edits.dart';
-import 'package:noir/features/youtube/application/youtube_save.dart';
-import 'package:noir/features/youtube/application/youtube_sync.dart';
-import 'package:noir/features/youtube/data/youtube_repository.dart';
-import 'package:noir/integrations/youtube_data/youtube_api.dart';
-import 'package:noir/shared/models/media.dart';
+import 'package:mercury/features/accounts/domain/account_connection.dart';
+import 'package:mercury/features/playback/application/playback_controller.dart';
+import 'package:mercury/features/settings/data/settings_repository.dart';
+import 'package:mercury/features/youtube/application/youtube_pending_edits.dart';
+import 'package:mercury/features/youtube/application/youtube_save.dart';
+import 'package:mercury/features/youtube/application/youtube_sync.dart';
+import 'package:mercury/features/youtube/data/youtube_repository.dart';
+import 'package:mercury/integrations/youtube_data/youtube_api.dart';
+import 'package:mercury/shared/models/media.dart';
 
 /// A YouTube song the user does not want recommended.
 @immutable
@@ -77,7 +77,7 @@ final dislikesProvider = NotifierProvider<DislikesController, Dislikes>(
 
 /// Stores [Dislikes] on this device. A disliked song is also disliked on
 /// YouTube when the account allows it (the same permission as playlist
-/// edits); without an account it stays a NOIR-only choice.
+/// edits); without an account it stays a MERCURY-only choice.
 class DislikesController extends Notifier<Dislikes> {
   static const storageKey = 'dislikes';
 
@@ -145,7 +145,7 @@ class DislikesController extends Notifier<Dislikes> {
   }
 
   /// Sends [rating] when the account may rate; failures stay quiet (the
-  /// NOIR side already applies).
+  /// MERCURY side already applies).
   Future<bool> _rate(String videoId, YtRating rating) async {
     final account = ref.read(accountServiceProvider).current;
     if (!account.isConnected || !account.canSaveToPlaylists) return false;
