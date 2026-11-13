@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignore mock YouTube Music test fixtures"
+paths = [
+  '''test/youtube_music/fixtures/.*'''
+]
