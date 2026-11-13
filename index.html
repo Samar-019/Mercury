@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERCURY — Less Interface. More Music.</title>
+  <meta name="description" content="A native, fluid liquid-glass YouTube Music desktop client for Windows. Synchronized lyrics, spatial audio, and zero-lag native performance.">
+  <link rel="icon" type="image/gif" href="logo.gif">
+  
+  <!-- Inter & Plus Jakarta Sans Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+  <!-- Interactive 60fps WebGL/Canvas Ambient Caustic Background -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar glass-panel">
+      <a href="#" class="brand-link">
+        <img src="logo.gif" alt="Mercury" class="brand-logo">
+        <span class="brand-name">MERCURY</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features" class="nav-item">Features</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#architecture" class="nav-item">Architecture</a>
+        <a href="https://github.com/Samar-019/Mercury" target="_blank" class="nav-item github-pill">
+          <i data-lucide="github" class="icon-sm"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+
+      <a href="https://github.com/Samar-019/Mercury/releases/latest" class="btn btn-primary nav-cta">
+        <i data-lucide="download" class="icon-sm"></i>
+        <span>Get Mercury</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="container hero-container">
+        <!-- Floating Pill Status -->
+        <div class="hero-badge glass-panel animate-float">
+          <span class="status-dot"></span>
+          <span class="badge-text">v1.0.0 Now Available for Windows 10 & 11</span>
+          <i data-lucide="sparkles" class="icon-xs text-cyan"></i>
+        </div>
+
+        <h1 class="hero-title">
+          Less interface.<br>
+          <span class="gradient-text">More music.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          YouTube Music on your desktop reimagined with Apple Music aesthetics &amp; fluid Liquid Glass.
+          Built natively in Flutter with instant 60fps response, synchronized karaoke lyrics, and 3D spatial acoustics.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-actions">
+          <a href="https://github.com/Samar-019/Mercury/releases/latest" class="btn btn-glow btn-lg">
+            <i data-lucide="download" class="icon-md"></i>
+            <span>Download for Windows</span>
+            <span class="btn-subtext">64-bit .exe &amp; .zip</span>
+          </a>
+          <a href="https://github.com/Samar-019/Mercury" target="_blank" class="btn btn-secondary btn-lg glass-panel">
+            <i data-lucide="github" class="icon-md"></i>
+            <span>View Source Code</span>
+          </a>
+        </div>
+
+        <!-- Animated Hero Showcase Window -->
+        <div class="hero-showcase-wrapper">
+          <div class="showcase-window glass-panel">
+            <div class="window-header">
+              <div class="window-dots">
+                <span class="dot close"></span>
+                <span class="dot minimize"></span>
+                <span class="dot maximize"></span>
+              </div>
+              <div class="window-title-pill">
+                <span class="live-indicator"></span>
+                <span>NOW PLAYING &bull; Mercury Desktop</span>
+              </div>
+              <div class="window-actions">
+                <i data-lucide="maximize-2" class="icon-xs"></i>
+              </div>
+            </div>
+            <div class="window-body">
+              <img src="banner.gif" alt="Mercury Animated Now Playing UI" class="showcase-banner">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Audio Wave Visualizer Widget -->
+    <section class="soundwave-bar-section">
+      <div class="container">
+        <div class="sound-strip glass-panel">
+          <div class="sound-strip-left">
+            <button id="toggle-sound-btn" class="play-circle-btn">
+              <i data-lucide="play" id="play-icon"></i>
+            </button>
+            <div class="sound-track-info">
+              <span class="sound-title">Mercury Audio Engine Live Reactive Demo</span>
+              <span class="sound-meta">Click to toggle interactive sound waves &amp; pulse frequency</span>
+            </div>
+          </div>
+          <div class="bars-container" id="equalizer-bars">
+            <!-- 32 animated equalizer bars populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Features Section -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="feature-tag">CRAFTED FOR WINDOWS</div>
+          <h2 class="section-title">Engineered to Feel Native</h2>
+          <p class="section-subtitle">A native computer app rather than another heavy browser tab.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 1: Large Liquid Glass Feature -->
+          <div class="bento-card bento-wide glass-panel">
+            <div class="card-icon-wrapper">
+              <i data-lucide="droplet" class="icon-lg text-cyan"></i>
+            </div>
+            <h3 class="card-title">Fluid Liquid Glass UI</h3>
+            <p class="card-desc">
+              Custom-built acrylic glass surfaces that dynamically sample album artwork, 
+              flowing through refractive caustic light and ultra-smooth backdrop blur.
+            </p>
+            <div class="card-visual glass-mockup">
+              <div class="glass-pill-preview">
+                <span class="pill-chip">Dynamic Island</span>
+                <span class="pill-title">Morphing Player Capsule</span>
+                <div class="mini-eq">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 2: Synced Lyrics -->
+          <div class="bento-card glass-panel">
+            <div class="card-icon-wrapper">
+              <i data-lucide="mic" class="icon-lg text-amber"></i>
+            </div>
+            <h3 class="card-title">Time-Synced Lyrics</h3>
+            <p class="card-desc">
+              Word-by-word shining karaoke animation. Active lines expand smoothly and float with spring physics.
+            </p>
+            <div class="lyrics-preview">
+              <div class="lyric-line dim">I once was lost, but now am found</div>
+              <div class="lyric-line active glow-text">Was blind, but now I see <span>&#9835;</span></div>
+              <div class="lyric-line dim">'Twas grace that taught my heart to fear</div>
+            </div>
+          </div>
+
+          <!-- Bento 3: Native Speed -->
+          <div class="bento-card glass-panel">
+            <div class="card-icon-wrapper">
+              <i data-lucide="zap" class="icon-lg text-emerald"></i>
+            </div>
+            <h3 class="card-title">Pure Native Performance</h3>
+            <p class="card-desc">
+              Compiled directly to C++ and Flutter engine. Zero chromium tab overhead, instant search, and zero frame drops on 10,000+ item playlists.
+            </p>
+            <div class="stats-row">
+              <div class="stat-item">
+                <span class="stat-number">60fps</span>
+                <span class="stat-label">Fluid Motion</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">&lt;100ms</span>
+                <span class="stat-label">Search Speed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">1/4x</span>
+                <span class="stat-label">RAM Usage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento 4: Spatial Audio & Acoustic Rooms -->
+          <div class="bento-card bento-wide glass-panel">
+            <div class="card-icon-wrapper">
+              <i data-lucide="headphones" class="icon-lg text-purple"></i>
+            </div>
+            <h3 class="card-title">Dolby-Inspired 3D Spatial Audio</h3>
+            <p class="card-desc">
+              HRTF 3D virtual speaker positioning at &plusmn;35&deg;, crossfeed delay simulation, 
+              and convolution reverberation that places you in a Studio, Room, or Concert Hall.
+            </p>
+            <div class="spatial-pills-row">
+              <div class="spatial-badge active"><i data-lucide="disc"></i> HRTF Binaural</div>
+              <div class="spatial-badge"><i data-lucide="layers"></i> Wide Crossfeed</div>
+              <div class="spatial-badge"><i data-lucide="sliders"></i> 10-Band EQ</div>
+              <div class="spatial-badge"><i data-lucide="radio"></i> Room Convolver</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Comparison Table Section -->
+    <section id="architecture" class="architecture-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="feature-tag">DESKTOP EXCELLENCE</div>
+          <h2 class="section-title">Built for Your PC, Not the Browser</h2>
+          <p class="section-subtitle">See how Mercury compares against the official web interface on Windows.</p>
+        </div>
+
+        <div class="comparison-table-wrapper glass-panel">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature / Capability</th>
+                <th class="col-highlight">MERCURY Desktop</th>
+                <th>Standard Web / PWA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Framework &amp; Architecture</strong></td>
+                <td class="col-highlight"><span class="badge-win">Flutter / C++ Native</span></td>
+                <td>Chromium Browser Tab</td>
+              </tr>
+              <tr>
+                <td><strong>User Interface Style</strong></td>
+                <td class="col-highlight">Liquid Glass Frosted Acrylic</td>
+                <td>Flat Web CSS Layout</td>
+              </tr>
+              <tr>
+                <td><strong>10,000+ Track Scrolling</strong></td>
+                <td class="col-highlight">Steady 60 FPS Virtualized</td>
+                <td>Stutters &amp; High CPU usage</td>
+              </tr>
+              <tr>
+                <td><strong>Synced Karaoke Lyrics</strong></td>
+                <td class="col-highlight">Word-by-word glowing lines</td>
+                <td>Static plain text scroll</td>
+              </tr>
+              <tr>
+                <td><strong>Local Files &amp; Offline Playback</strong></td>
+                <td class="col-highlight">Full Local FLAC, MP3 indexing</td>
+                <td>Not supported</td>
+              </tr>
+              <tr>
+                <td><strong>Windows System Media (SMTC)</strong></td>
+                <td class="col-highlight">Native Windows 11 Taskbar Media</td>
+                <td>Generic browser integration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Download Section -->
+    <section class="download-section">
+      <div class="container">
+        <div class="download-banner glass-panel">
+          <div class="download-content">
+            <h2 class="download-title">Elevate Your Music Experience Today</h2>
+            <p class="download-subtitle">
+              Free, open-source, and privacy-first. Works with any YouTube Music library.
+            </p>
+            <div class="download-buttons">
+              <a href="https://github.com/Samar-019/Mercury/releases/latest" class="btn btn-glow btn-lg">
+                <i data-lucide="download" class="icon-md"></i>
+                <span>Download Mercury v1.0.0</span>
+              </a>
+              <a href="https://github.com/Samar-019/Mercury" target="_blank" class="btn btn-secondary btn-lg glass-panel">
+                <i data-lucide="star" class="icon-md"></i>
+                <span>Star on GitHub</span>
+              </a>
+            </div>
+            <div class="download-meta">
+              <span>Windows 10 / 11 64-bit</span> &bull; 
+              <span>WebView2 Compatible</span> &bull; 
+              <span>MIT Licensed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <img src="logo.gif" alt="Mercury" class="footer-logo">
+        <span class="footer-brand">MERCURY</span>
+        <p class="footer-copy">Crafted with passion by Samar-019. Less interface. More music.</p>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/Samar-019/Mercury" target="_blank" class="footer-link">GitHub</a>
+        <a href="https://github.com/Samar-019/Mercury/releases" target="_blank" class="footer-link">Releases</a>
+        <a href="https://github.com/Samar-019/Mercury/blob/main/LICENSE" target="_blank" class="footer-link">License</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
