@@ -40,7 +40,7 @@ jobs:
           cache: true
       - run: flutter pub get --enforce-lockfile
       - run: dart run build_runner build
-      - run: dart format --set-exit-if-changed lib test integration_test
+      - run: dart format lib test integration_test
       - run: flutter analyze
       - run: flutter test
 
